@@ -1,0 +1,77 @@
+# yii console commands
+/yii
+/yii_test
+/yii_test.bat
+
+# phpstorm project files
+.idea
+
+# vscode project files
+/.vscode/
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+Desktop.ini
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+# Mac DS_Store Files
+.DS_Store
+
+# local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# logs, caches and temporary files
+*.log
+*.cache
+*.tmp
+*.temp
+*.pid
+*.swp
+*.swo
+*~
+/.phpunit.cache/
+/.phpunit.result.cache
+/.php_cs.cache
+/.php-cs-fixer.cache
+
+# local database dumps and backups
+*.sql
+*.dump
+*.bak
+*.backup
+*.sqlite
+*.sqlite3
+
+# The course submission database script is intentionally versioned.
+!/data/install.sql
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+# vagrant runtime
+/.vagrant
+
+# ignore generated files
+/frontend/web/index.php
+/frontend/web/index-test.php
+/frontend/web/robots.txt
+/backend/web/index.php
+/backend/web/index-test.php
+/backend/web/robots.txt
