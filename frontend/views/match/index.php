@@ -17,6 +17,8 @@ $this->title = '世界杯赛程与比分';
 
 <?= GridView::widget([
     'dataProvider' => $provider,
+    'formatter' => ['class' => \yii\i18n\Formatter::class, 'nullDisplay' => '暂无资料'],
+    'summary' => '第 {begin}–{end} 条，共 {totalCount} 条',
     'emptyText' => '暂无赛程',
     'columns' => [
         ['attribute' => 'match_time', 'label' => '开球时间（北京时间）', 'value' => 'shanghaiKickoff'],

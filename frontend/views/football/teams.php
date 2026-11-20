@@ -17,6 +17,8 @@ $this->title = '世界杯球队';
 
 <?= GridView::widget([
     'dataProvider' => $provider,
+    'formatter' => ['class' => \yii\i18n\Formatter::class, 'nullDisplay' => '暂无资料'],
+    'summary' => '第 {begin}–{end} 条，共 {totalCount} 条',
     'emptyText' => '暂无球队资料',
     'columns' => [
         [

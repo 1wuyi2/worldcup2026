@@ -18,6 +18,8 @@ $this->title = $sectionTitle;
 
 <?= GridView::widget([
     'dataProvider' => $provider,
+    'formatter' => ['class' => \yii\i18n\Formatter::class, 'nullDisplay' => '暂无资料'],
+    'summary' => '第 {begin}–{end} 条，共 {totalCount} 条',
     'emptyText' => '暂无记录',
     'tableOptions' => ['class' => 'table table-striped table-bordered'],
     'columns' => array_merge($columns, [[
