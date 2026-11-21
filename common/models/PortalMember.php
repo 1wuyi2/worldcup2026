@@ -9,6 +9,7 @@
 
 namespace common\models;
 
+use common\validators\FrontendImagePathValidator;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -30,7 +31,7 @@ class PortalMember extends ActiveRecord
     {
         return [
             [['team_id', 'name'], 'required'],
-            [['name', 'student_no', 'role'], 'trim'],
+            [['name', 'student_no', 'role', 'avatar_path'], 'trim'],
             [['team_id'], 'integer', 'min' => 1],
             [['sort_order'], 'integer'],
             [['sort_order'], 'default', 'value' => 0],
@@ -38,6 +39,7 @@ class PortalMember extends ActiveRecord
             [['name', 'role'], 'string', 'max' => 60],
             [['student_no'], 'string', 'max' => 20],
             [['avatar_path'], 'string', 'max' => 255],
+            [['avatar_path'], FrontendImagePathValidator::className(), 'skipOnEmpty' => true],
             [
                 ['team_id'],
                 'exist',

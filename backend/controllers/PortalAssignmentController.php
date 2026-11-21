@@ -250,13 +250,15 @@ class PortalAssignmentController extends Controller
         $extension = strtolower($form->uploadFile->extension);
         $fileName = date('YmdHis') . '-' . Yii::$app->security->generateRandomString(16) . '.' . $extension;
         $absolutePath = $targetDirectory . DIRECTORY_SEPARATOR . $fileName;
+        $relativePath = 'data/' . $categoryDirectory . '/' . $fileName;
         if (!$form->uploadFile->saveAs($absolutePath, false)) {
+            $this->removeNewUpload($relativePath);
             $form->addError('uploadFile', '文件保存失败，请稍后重试。');
             Yii::$app->session->setFlash('error', '文件上传失败。');
             return null;
         }
 
-        return 'data/' . $categoryDirectory . '/' . $fileName;
+        return $relativePath;
     }
 
     private function removeNewUpload($relativePath)
@@ -269,7 +271,28 @@ class PortalAssignmentController extends Controller
         $absolutePath = $projectRoot . DIRECTORY_SEPARATOR
             . str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
         if (is_file($absolutePath)) {
-            @unlink($absolutePath);
+            $pathFingerprint = hash('sha256', $relativePath);
+            try {
+                if (!@unlink($absolutePath)) {
+                    $this->logCleanupWarning(
+                        'New assignment upload cleanup failed. Path fingerprint: ' . $pathFingerprint,
+                    );
+                }
+            } catch (\Throwable $exception) {
+                $this->logCleanupWarning(
+                    'New assignment upload cleanup raised ' . get_class($exception)
+                    . '. Path fingerprint: ' . $pathFingerprint,
+                );
+            }
+        }
+    }
+
+    private function logCleanupWarning($message)
+    {
+        try {
+            Yii::warning($message, __METHOD__);
+        } catch (\Throwable $ignoredException) {
+            // Cleanup logging must not mask the original save failure.
         }
     }
 }

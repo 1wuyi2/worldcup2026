@@ -9,6 +9,7 @@
 
 namespace common\models;
 
+use common\validators\FrontendImagePathValidator;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -29,11 +30,12 @@ class PortalTeam extends ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'trim'],
+            [['name', 'logo_path'], 'trim'],
             [['name'], 'required'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 100],
             [['logo_path'], 'string', 'max' => 255],
+            [['logo_path'], FrontendImagePathValidator::className(), 'skipOnEmpty' => true],
         ];
     }
 
