@@ -36,8 +36,33 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => '后台首页', 'url' => ['/site/index']],
     ];
+    // 只向具有对应 RBAC 权限的已登录账号展示管理入口。
+    // Controller 本身仍负责最终的权限校验，菜单隐藏不是授权机制。
+    if (!Yii::$app->user->isGuest && Yii::$app->user->can('managePortal')) {
+        $menuItems[] = [
+            'label' => '团队管理',
+            'items' => [
+                ['label' => '团队资料', 'url' => ['/portal-team/index']],
+                ['label' => '成员管理', 'url' => ['/portal-member/index']],
+                ['label' => '留言审核', 'url' => ['/portal-guestbook/index']],
+                ['label' => '作业资料', 'url' => ['/portal-assignment/index']],
+            ],
+        ];
+    }
+    if (!Yii::$app->user->isGuest && Yii::$app->user->can('manageFootball')) {
+        $menuItems[] = [
+            'label' => '赛事管理',
+            'items' => [
+                ['label' => '球队', 'url' => ['/football-team/index']],
+                ['label' => '球员', 'url' => ['/football-player/index']],
+                ['label' => '场馆', 'url' => ['/stadium/index']],
+                ['label' => '比赛', 'url' => ['/match/index']],
+                ['label' => '进球', 'url' => ['/match-goal/index']],
+            ],
+        ];
+    }
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
