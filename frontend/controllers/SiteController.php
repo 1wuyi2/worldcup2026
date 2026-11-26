@@ -14,6 +14,11 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\FootballMatch;
+use common\models\FootballTeam;
+use common\models\FootballPlayer;
+use common\models\FootballStadium;
+use common\models\NewsArticle;
 
 /**
  * Site controller
@@ -73,9 +78,71 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
-        return $this->render('index');
+{
+    // 1. 首页赛事精选
+    $featuredMatches = FootballMatch::find()
+        ->with(['homeTeam', 'awayTeam', 'stadium'])
+        ->where(['status' => 2])
+        ->orderBy([
+            'match_time' => SORT_DESC,
+            'id' => SORT_DESC,
+        ])
+        ->limit(4)
+        ->all();
+
+    // 2. 世界杯数据统计
+    $worldCupStats = [
+        'teams' => FootballTeam::find()->count(),
+        'players' => FootballPlayer::find()->count(),
+        'stadiums' => FootballStadium::find()->count(),
+    ];
+
+    // 3. 首页精选球队
+    // 按小组和名称排序，每个小组选取一支球队。
+    $allTeams = FootballTeam::find()
+        ->orderBy([
+            'group_name' => SORT_ASC,
+            'name' => SORT_ASC,
+            'id' => SORT_ASC,
+        ])
+        ->all();
+
+    $featuredTeams = [];
+    $selectedGroups = [];
+
+    foreach ($allTeams as $team) {
+        $group = $team->group_name ?: '未分组';
+
+        if (isset($selectedGroups[$group])) {
+            continue;
+        }
+
+        $featuredTeams[] = $team;
+        $selectedGroups[$group] = true;
+
+        if (count($featuredTeams) >= 8) {
+            break;
+        }
     }
+
+    // 4. 首页最新新闻
+    // 复用新闻模块的公开查询规则。
+    $latestNews = NewsArticle::publishedQuery()
+        ->with('category')
+        ->orderBy([
+            'article.published_at' => SORT_DESC,
+            'article.id' => SORT_DESC,
+        ])
+        ->limit(3)
+        ->all();
+
+    return $this->render('index', [
+        'featuredMatches' => $featuredMatches,
+        'featuredTeams' => $featuredTeams,
+        'worldCupStats' => $worldCupStats,
+        'latestNews' => $latestNews,
+    ]);
+}
 
     /**
      * Logs in a user.
