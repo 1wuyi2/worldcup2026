@@ -38,6 +38,7 @@ class PortalAssignment extends ActiveRecord
             [['title', 'category', 'relative_path'], 'trim'],
             [['title', 'category', 'relative_path'], 'required'],
             [['description'], 'string'],
+            [['member_id'], 'integer', 'min' => 1],
             [['title'], 'string', 'max' => 150],
             [['category'], 'string', 'max' => 20],
             [['owner_label'], 'string', 'max' => 60],
@@ -46,6 +47,15 @@ class PortalAssignment extends ActiveRecord
             [['status'], 'integer'],
             [['status'], 'default', 'value' => self::STATUS_UNPUBLISHED],
             [['status'], 'in', 'range' => [self::STATUS_UNPUBLISHED, self::STATUS_PUBLISHED]],
+            [['member_id'], 'validateMemberAssociation', 'skipOnEmpty' => false],
+            [
+                ['member_id'],
+                'exist',
+                'skipOnEmpty' => true,
+                'skipOnError' => true,
+                'targetClass' => PortalMember::className(),
+                'targetAttribute' => ['member_id' => 'id'],
+            ],
             [['relative_path'], 'validateRelativePath'],
         ];
     }
@@ -56,6 +66,7 @@ class PortalAssignment extends ActiveRecord
             'id' => '资料编号',
             'title' => '文件标题',
             'category' => '资料分类',
+            'member_id' => '所属成员',
             'owner_label' => '所属团队或个人',
             'relative_path' => '文件相对路径',
             'description' => '文件说明',
@@ -86,6 +97,20 @@ class PortalAssignment extends ActiveRecord
 
         if (strpos($normalizedPath, $allowedPrefix) !== 0) {
             $this->addError($attribute, '文件路径必须位于当前分类对应的 data/team/ 或 data/personal/ 目录中。');
+        }
+    }
+
+    public function validateMemberAssociation($attribute)
+    {
+        $memberIdIsEmpty = $this->$attribute === null || $this->$attribute === '';
+
+        if ($this->category === self::CATEGORY_PERSONAL && $memberIdIsEmpty) {
+            $this->addError($attribute, '个人作业必须关联有效的团队成员。');
+            return;
+        }
+
+        if ($this->category === self::CATEGORY_TEAM && !$memberIdIsEmpty) {
+            $this->addError($attribute, '团队作业不能关联个人成员。');
         }
     }
 
@@ -122,5 +147,10 @@ class PortalAssignment extends ActiveRecord
     public function isPublished()
     {
         return (int) $this->status === self::STATUS_PUBLISHED;
+    }
+
+    public function getMember()
+    {
+        return $this->hasOne(PortalMember::className(), ['id' => 'member_id']);
     }
 }

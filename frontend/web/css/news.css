@@ -1,0 +1,1911 @@
+/* ==================================================
+   WorldCup2026 - Newsroom
+
+   新闻编辑部主题
+   ================================================== */
+
+
+/* ==========================================
+   1. 新闻主题变量
+   ========================================== */
+
+.newsroom {
+
+    --nr-paper: #ffffff;
+
+    --nr-surface: #eef1f5;
+
+    --nr-text: #172435;
+
+    --nr-muted: #687585;
+
+    --nr-red: #b53d42;
+
+    --nr-line: #d7dde5;
+
+    --nr-dark-line: #172435;
+
+
+    min-height: 70vh;
+
+    color: var(--nr-text);
+
+    background: var(--nr-paper);
+}
+
+.newsroom a {
+    text-decoration: none;
+}
+
+.newsroom a:focus-visible {
+    outline: 2px solid var(--nr-red);
+
+    outline-offset: 4px;
+}
+
+
+/* ==========================================
+   2. 公共栏目小标题
+   ========================================== */
+
+.nr-eyebrow {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: var(--nr-red);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* ==========================================
+   3. 新闻编辑部页头
+   ========================================== */
+
+.nr-masthead {
+    padding: 58px 0 0;
+
+    background: var(--nr-paper);
+}
+
+.nr-masthead__inner {
+    display: flex;
+
+    padding-bottom: 36px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 32px;
+
+    border-bottom: 3px solid var(--nr-dark-line);
+}
+
+.site-main .nr-masthead__title {
+    margin: 0 0 18px;
+
+    color: var(--nr-text);
+
+    font-size: clamp(48px, 6vw, 86px);
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.055em;
+}
+
+.nr-masthead__title > span {
+    color: var(--nr-red);
+}
+
+.site-main .nr-masthead__identity > p {
+    margin: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* 右侧世界杯年份 */
+
+.nr-masthead__edition {
+    display: flex;
+
+    padding-bottom: 4px;
+
+    align-items: flex-end;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.site-main .nr-masthead__edition strong {
+    color: var(--nr-text);
+
+    font-size: clamp(32px, 4vw, 54px);
+    font-weight: 850;
+
+    line-height: 1;
+
+    letter-spacing: -0.045em;
+}
+
+.nr-masthead__edition span {
+    color: var(--nr-muted);
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: 0.13em;
+}
+
+
+/* ==========================================
+   4. 新闻分类导航
+   ========================================== */
+
+.nr-navigation {
+    background: var(--nr-paper);
+}
+
+.nr-category-nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    overflow-x: auto;
+
+    border-bottom: 1px solid var(--nr-line);
+
+    scrollbar-width: thin;
+}
+
+.site-main .nr-category-nav__link {
+    position: relative;
+
+    display: inline-flex;
+
+    min-height: 57px;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: color 180ms ease;
+}
+
+.site-main .nr-category-nav__link:hover,
+.site-main .nr-category-nav__link:focus,
+.site-main .nr-category-nav__link.is-active {
+    color: var(--nr-red);
+
+    text-decoration: none;
+}
+
+.nr-category-nav__link.is-active::after {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 3px;
+
+    background: var(--nr-red);
+
+    content: "";
+}
+
+
+/* ==========================================
+   5. 搜索与标签筛选
+   ========================================== */
+
+.nr-search {
+    padding: 26px 0;
+}
+
+.nr-search__form {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(180px, 1fr)
+        auto;
+
+    align-items: end;
+
+    gap: 20px;
+}
+
+.nr-search__field {
+    display: flex;
+
+    min-width: 0;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.site-main .nr-search__field label {
+    margin: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nr-search__input,
+.nr-search__select {
+    width: 100%;
+    min-width: 0;
+    height: 45px;
+
+    padding: 10px 14px;
+
+    color: var(--nr-text);
+
+    border: 1px solid var(--nr-line);
+
+    border-radius: 0;
+
+    outline: none;
+
+    background: var(--nr-paper);
+
+    font-size: 14px;
+
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.nr-search__input::placeholder {
+    color: #8b95a2;
+}
+
+.nr-search__input:focus,
+.nr-search__select:focus {
+    border-color: var(--nr-red);
+
+    box-shadow:
+        0 0 0 2px rgba(181, 61, 66, 0.08);
+}
+
+.nr-search__actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.nr-search__submit {
+    min-height: 45px;
+
+    padding: 0 24px;
+
+    color: #ffffff;
+
+    border: 1px solid var(--nr-text);
+
+    border-radius: 0;
+
+    background: var(--nr-text);
+
+    font-size: 13px;
+    font-weight: 750;
+
+    white-space: nowrap;
+
+    transition:
+        background 180ms ease,
+        border-color 180ms ease;
+}
+
+.nr-search__submit:hover,
+.nr-search__submit:focus {
+    border-color: var(--nr-red);
+
+    background: var(--nr-red);
+}
+
+.site-main .nr-search__reset {
+    color: var(--nr-muted);
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+.site-main .nr-search__reset:hover {
+    color: var(--nr-red);
+}
+
+
+/* ==========================================
+   6. 当前筛选条件
+   ========================================== */
+
+.nr-filter-context {
+    padding: 0 0 20px;
+}
+
+.nr-filter-context__inner {
+    display: flex;
+
+    padding: 13px 0;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px 20px;
+
+    border-top: 1px solid var(--nr-line);
+
+    border-bottom: 1px solid var(--nr-line);
+
+    color: var(--nr-muted);
+
+    font-size: 12px;
+}
+
+.nr-filter-context__item {
+    display: inline-flex;
+
+    max-width: 100%;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--nr-text);
+
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .nr-filter-context__item a {
+    color: var(--nr-red);
+
+    font-size: 18px;
+
+    line-height: 1;
+}
+
+
+/* ==========================================
+   7. 焦点报道与最新动态
+   ========================================== */
+
+.nr-editorial {
+    padding: 12px 0 48px;
+}
+
+.nr-editorial__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(0, 1fr);
+
+    gap: 42px;
+
+    align-items: stretch;
+}
+
+.nr-editorial__layout--single {
+    grid-template-columns:
+        minmax(0, 1fr);
+}
+
+
+/* ==========================================
+   8. 焦点报道
+   ========================================== */
+
+.nr-featured {
+    position: relative;
+
+    display: flex;
+
+    min-height: 350px;
+
+    padding: 36px;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: var(--nr-surface);
+}
+
+
+/* 右上角短装饰线 */
+
+.nr-featured::before {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 72px;
+    height: 5px;
+
+    background: var(--nr-red);
+
+    content: "";
+}
+
+.nr-featured__heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: var(--nr-red);
+
+    font-size: 11px;
+    font-weight: 850;
+
+    letter-spacing: 0.1em;
+}
+
+.nr-featured__line {
+    display: inline-block;
+
+    width: 24px;
+    height: 3px;
+
+    background: var(--nr-red);
+}
+
+.nr-featured__content {
+    padding: 32px 0 36px;
+}
+
+.nr-featured__category {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: var(--nr-muted);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.site-main .nr-featured__content h2 {
+    margin: 0 0 20px;
+
+    color: var(--nr-text);
+
+    font-size: clamp(30px, 3.6vw, 48px);
+    font-weight: 850;
+
+    line-height: 1.35;
+
+    letter-spacing: -0.035em;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .nr-featured__content h2 a {
+    color: var(--nr-text);
+}
+
+.site-main .nr-featured__content h2 a:hover {
+    color: var(--nr-red);
+}
+
+.site-main .nr-featured__content p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+.nr-featured__footer {
+    display: flex;
+
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    border-top: 1px solid var(--nr-line);
+}
+
+.nr-featured__footer > span {
+    color: var(--nr-muted);
+
+    font-size: 12px;
+}
+
+.site-main .nr-featured__more {
+    color: var(--nr-text);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.site-main .nr-featured__more:hover {
+    color: var(--nr-red);
+}
+
+
+/* ==========================================
+   9. 最新动态
+   ========================================== */
+
+.nr-latest {
+    display: flex;
+
+    min-width: 0;
+
+    flex-direction: column;
+}
+
+.nr-latest__heading {
+    display: flex;
+
+    padding-bottom: 18px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    border-bottom: 2px solid var(--nr-dark-line);
+}
+
+.site-main .nr-latest__heading h2 {
+    margin: 0;
+
+    color: var(--nr-text);
+
+    font-size: 23px;
+    font-weight: 850;
+}
+
+.nr-latest__heading > span {
+    color: var(--nr-muted);
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.12em;
+}
+
+.nr-latest__item {
+    display: grid;
+
+    grid-template-columns:
+        35px minmax(0, 1fr);
+
+    padding: 22px 0;
+
+    gap: 14px;
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+.nr-latest__number {
+    color: var(--nr-red);
+
+    font-size: 21px;
+    font-weight: 850;
+
+    line-height: 1.3;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.nr-latest__category {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--nr-red);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.site-main .nr-latest__item h3 {
+    margin: 0 0 10px;
+
+    color: var(--nr-text);
+
+    font-size: 19px;
+    font-weight: 800;
+
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .nr-latest__item h3 a {
+    color: var(--nr-text);
+}
+
+.site-main .nr-latest__item h3 a:hover {
+    color: var(--nr-red);
+}
+
+.nr-latest__item time {
+    color: var(--nr-muted);
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   10. 新闻名录
+   ========================================== */
+
+.nr-directory {
+    padding: 0 0 80px;
+
+    scroll-margin-top: 30px;
+}
+
+.nr-directory__header {
+    display: flex;
+
+    padding: 30px 0 24px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top: 3px solid var(--nr-dark-line);
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+.nr-directory__header .nr-eyebrow {
+    margin-bottom: 10px;
+}
+
+.site-main .nr-directory__header h2 {
+    margin: 0;
+
+    color: var(--nr-text);
+
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 850;
+
+    line-height: 1.25;
+}
+
+.nr-directory__count {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 8px;
+
+    white-space: nowrap;
+}
+
+.site-main .nr-directory__count strong {
+    color: var(--nr-text);
+
+    font-size: 28px;
+    font-weight: 850;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.nr-directory__count span {
+    color: var(--nr-muted);
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   11. 新闻条目布局
+   ========================================== */
+
+.nr-article {
+    display: grid;
+
+    grid-template-columns:
+        105px
+        minmax(0, 1fr)
+        40px;
+
+    padding: 32px 0;
+
+    align-items: start;
+
+    gap: 30px;
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+
+/* 新闻日期 */
+
+.nr-article__date {
+    padding-top: 4px;
+}
+
+.nr-article__date time {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.site-main .nr-article__date strong {
+    color: var(--nr-text);
+
+    font-size: 42px;
+    font-weight: 850;
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.nr-article__date span {
+    color: var(--nr-muted);
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+/* 新闻内容 */
+
+.nr-article__content {
+    min-width: 0;
+}
+
+.nr-article__meta {
+    display: flex;
+
+    margin-bottom: 10px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px 14px;
+
+    color: var(--nr-muted);
+
+    font-size: 11px;
+}
+
+.site-main .nr-article__category {
+    color: var(--nr-red);
+
+    font-weight: 800;
+}
+
+.nr-article__time {
+    font-variant-numeric: tabular-nums;
+}
+
+.site-main .nr-article__title {
+    margin: 0 0 12px;
+
+    color: var(--nr-text);
+
+    font-size: clamp(22px, 2.2vw, 29px);
+    font-weight: 800;
+
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .nr-article__title a {
+    color: var(--nr-text);
+
+    transition: color 160ms ease;
+}
+
+.site-main .nr-article__title a:hover,
+.site-main .nr-article__title a:focus {
+    color: var(--nr-red);
+}
+
+.site-main .nr-article__summary {
+    max-width: 850px;
+
+    margin: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 14px;
+
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 新闻标签 */
+
+.nr-article__tags {
+    display: flex;
+
+    margin-top: 16px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px 16px;
+}
+
+.site-main .nr-article__tag {
+    color: var(--nr-muted);
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.site-main .nr-article__tag:hover,
+.site-main .nr-article__category:hover {
+    color: var(--nr-red);
+
+    text-decoration: underline;
+
+    text-underline-offset: 4px;
+}
+
+
+/* 新闻阅读箭头 */
+
+.site-main .nr-article__arrow {
+    display: inline-flex;
+
+    width: 40px;
+    height: 40px;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--nr-text);
+
+    border: 1px solid var(--nr-line);
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    transition:
+        color 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease;
+}
+
+.site-main .nr-article__arrow:hover,
+.site-main .nr-article__arrow:focus {
+    color: #ffffff;
+
+    border-color: var(--nr-red);
+
+    background: var(--nr-red);
+}
+
+
+/* ==========================================
+   12. 新闻分页
+   ========================================== */
+
+.nr-pagination {
+    display: flex;
+
+    margin-top: 32px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+
+.site-main .nr-pagination > p {
+    margin: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 12px;
+}
+
+.nr-pagination__links.pagination {
+    display: flex;
+
+    margin: 0;
+
+    flex-wrap: wrap;
+
+    gap: 4px;
+}
+
+.site-main .nr-pagination__links > li > a,
+.site-main .nr-pagination__links > li > span {
+    display: flex;
+
+    min-width: 36px;
+    height: 36px;
+
+    margin: 0;
+
+    padding: 6px 10px;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--nr-text);
+
+    border: 1px solid var(--nr-line);
+
+    border-radius: 0;
+
+    background: var(--nr-paper);
+
+    font-size: 12px;
+}
+
+.site-main .nr-pagination__links > .active > a,
+.site-main .nr-pagination__links > .active > span {
+    color: #ffffff;
+
+    border-color: var(--nr-text);
+
+    background: var(--nr-text);
+}
+
+.site-main .nr-pagination__links > li > a:hover {
+    color: #ffffff;
+
+    border-color: var(--nr-red);
+
+    background: var(--nr-red);
+}
+
+.site-main .nr-pagination__links > .disabled > span {
+    color: #a5acb5;
+}
+
+
+/* ==========================================
+   13. 新闻空数据状态
+   ========================================== */
+
+.nr-empty {
+    display: flex;
+
+    min-height: 290px;
+
+    padding: 52px 20px;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+.nr-empty__symbol {
+    margin-bottom: 18px;
+
+    color: #c7cfd9;
+
+    font-size: 60px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -0.06em;
+}
+
+.site-main .nr-empty h3 {
+    margin: 0 0 12px;
+
+    color: var(--nr-text);
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.site-main .nr-empty p {
+    margin: 0;
+
+    color: var(--nr-muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+.site-main .nr-empty__link {
+    margin-top: 20px;
+
+    color: var(--nr-red);
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+
+/* ==========================================
+   14. 平板端响应式布局
+   ========================================== */
+
+@media (max-width: 991px) {
+
+    .nr-editorial__layout {
+        gap: 26px;
+    }
+
+    .nr-featured {
+        padding: 28px;
+    }
+
+    .nr-search__form {
+        gap: 14px;
+    }
+
+    .nr-search__submit {
+        padding: 0 16px;
+    }
+
+    .nr-article {
+        grid-template-columns:
+            80px
+            minmax(0, 1fr)
+            36px;
+
+        gap: 22px;
+    }
+
+}
+
+
+/* ==========================================
+   15. 手机端响应式布局
+   ========================================== */
+
+@media (max-width: 767px) {
+
+    .nr-masthead {
+        padding-top: 38px;
+    }
+
+    .nr-masthead__inner {
+        padding-bottom: 26px;
+
+        gap: 16px;
+    }
+
+    .site-main .nr-masthead__title {
+        font-size: 46px;
+    }
+
+    .nr-masthead__edition {
+        display: none;
+    }
+
+    .site-main .nr-masthead__identity > p {
+        font-size: 13px;
+    }
+
+    .nr-category-nav {
+        gap: 24px;
+    }
+
+    .site-main .nr-category-nav__link {
+        min-height: 50px;
+
+        font-size: 13px;
+    }
+
+    .nr-search__form {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .nr-search__actions {
+        gap: 20px;
+    }
+
+    .nr-editorial {
+        padding-bottom: 32px;
+    }
+
+    .nr-editorial__layout {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap: 28px;
+    }
+
+    .nr-featured {
+        min-height: 290px;
+
+        padding: 26px 22px;
+    }
+
+    .nr-featured__content {
+        padding: 26px 0;
+    }
+
+    .site-main .nr-featured__content h2 {
+        font-size: 30px;
+    }
+
+    .nr-directory {
+        padding-bottom: 48px;
+    }
+
+    .nr-directory__header {
+        padding: 24px 0 18px;
+    }
+
+    .nr-article {
+        grid-template-columns:
+            54px
+            minmax(0, 1fr)
+            25px;
+
+        padding: 24px 0;
+
+        gap: 12px;
+    }
+
+    .site-main .nr-article__date strong {
+        font-size: 30px;
+    }
+
+    .nr-article__date span {
+        font-size: 9px;
+    }
+
+    .site-main .nr-article__title {
+        font-size: 21px;
+    }
+
+    .site-main .nr-article__summary {
+        font-size: 13px;
+    }
+
+    .site-main .nr-article__arrow {
+        width: 25px;
+        height: 30px;
+
+        border: 0;
+
+        font-size: 20px;
+    }
+
+    .nr-pagination {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+/* ==========================================
+   16. 减少动画偏好
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .newsroom *,
+    .newsroom *::before,
+    .newsroom *::after {
+        transition: none !important;
+    }
+
+}
+/* 取消公共主题的标题装饰线 */
+
+.site-main .nr-masthead__title::after {
+    display: none;
+}
+/* ==================================================
+   WorldCup2026 - News Detail
+
+   新闻正文阅读与文章信息
+   ================================================== */
+
+
+/* ==========================================
+   1. 新闻详情基础设置
+   ========================================== */
+
+.news-detail {
+    min-height: 75vh;
+}
+
+.site-main .nr-masthead__title::after,
+.site-main .nd-heading__title::after {
+    display: none;
+}
+
+
+/* ==========================================
+   2. 文章顶部导航
+   ========================================== */
+
+.nd-navigation {
+    padding-top: 24px;
+}
+
+.nd-navigation__inner {
+    display: flex;
+
+    padding: 16px 0 22px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 12px 20px;
+
+    border-bottom: 2px solid var(--nr-dark-line);
+}
+
+.site-main .nd-navigation__back {
+    color: var(--nr-muted);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.site-main .nd-navigation__back:hover {
+    color: var(--nr-red);
+}
+
+.nd-navigation__inner > span {
+    color: var(--nr-red);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+}
+
+
+/* ==========================================
+   3. 新闻标题区域
+   ========================================== */
+
+.nd-heading {
+    padding: 52px 0 0;
+}
+
+.nd-heading__inner {
+    max-width: 1000px;
+
+    margin: 0 auto;
+    padding-bottom: 38px;
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+
+/* 新闻分类 */
+
+.nd-heading__category {
+    display: flex;
+
+    margin-bottom: 24px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    color: var(--nr-red);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.site-main .nd-heading__category a {
+    color: var(--nr-red);
+}
+
+.site-main .nd-heading__category a:hover {
+    text-decoration: underline;
+
+    text-underline-offset: 4px;
+}
+
+.nd-heading__category > span {
+    padding-left: 12px;
+
+    color: var(--nr-muted);
+
+    border-left: 1px solid var(--nr-line);
+
+    font-size: 10px;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* 新闻主标题 */
+
+.site-main .nd-heading__title {
+    max-width: 1000px;
+
+    margin: 0 0 26px;
+
+    color: var(--nr-text);
+
+    font-size: clamp(36px, 4.5vw, 64px);
+    font-weight: 850;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.045em;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 新闻摘要 */
+
+.site-main .nd-heading__summary {
+    max-width: 850px;
+
+    margin: 0 0 28px;
+    padding-left: 20px;
+
+    color: var(--nr-muted);
+
+    border-left: 3px solid var(--nr-red);
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 新闻发布时间及来源 */
+
+.nd-heading__meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px 14px;
+
+    color: var(--nr-muted);
+
+    font-size: 12px;
+}
+
+.site-main .nd-heading__meta strong {
+    color: var(--nr-text);
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.nd-heading__separator {
+    display: inline-block;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: var(--nr-red);
+}
+
+
+/* ==========================================
+   4. 正文与侧栏布局
+   ========================================== */
+
+.nd-reading {
+    padding: 44px 0 64px;
+}
+
+.nd-reading__layout {
+    display: grid;
+
+    max-width: 1048px;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(200px, 240px);
+
+    align-items: start;
+
+    gap: 64px;
+}
+
+
+/* ==========================================
+   5. 新闻正文
+   ========================================== */
+
+.nd-article {
+    min-width: 0;
+}
+
+.site-main .nd-article__body {
+    color: #303d4c;
+
+    font-size: 17px;
+    font-weight: 400;
+
+    line-height: 2.1;
+
+    letter-spacing: 0.015em;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================
+   6. 文章资料来源
+   ========================================== */
+
+.nd-source {
+    margin-top: 42px;
+
+    padding: 26px 0;
+
+    border-top: 1px solid var(--nr-line);
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+.nd-source .nr-eyebrow {
+    margin-bottom: 10px;
+}
+
+.site-main .nd-source h2 {
+    margin: 0 0 14px;
+
+    color: var(--nr-text);
+
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.site-main .nd-source p {
+    margin: 0 0 12px;
+
+    color: var(--nr-muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+.site-main .nd-source__link {
+    color: var(--nr-red);
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.site-main .nd-source__link:hover {
+    text-decoration: underline;
+
+    text-underline-offset: 4px;
+}
+
+
+/* ==========================================
+   7. 新闻标签
+   ========================================== */
+
+.nd-tags {
+    display: flex;
+
+    margin-top: 30px;
+
+    align-items: baseline;
+
+    flex-wrap: wrap;
+
+    gap: 12px 22px;
+}
+
+.nd-tags__label {
+    color: var(--nr-muted);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nd-tags__list {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px 16px;
+}
+
+.site-main .nd-tags__link {
+    color: var(--nr-text);
+
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.site-main .nd-tags__link:hover,
+.site-main .nd-tags__link:focus {
+    color: var(--nr-red);
+
+    text-decoration: underline;
+
+    text-underline-offset: 4px;
+}
+
+
+/* ==========================================
+   8. 文章信息侧栏
+   ========================================== */
+
+.nd-sidebar {
+    min-width: 0;
+
+    padding-left: 26px;
+
+    border-left: 1px solid var(--nr-line);
+}
+
+.nd-sidebar__heading {
+    padding-bottom: 20px;
+
+    border-bottom: 2px solid var(--nr-dark-line);
+}
+
+.nd-sidebar__heading .nr-eyebrow {
+    margin-bottom: 10px;
+
+    font-size: 10px;
+}
+
+.site-main .nd-sidebar__heading h2 {
+    margin: 0;
+
+    color: var(--nr-text);
+
+    font-size: 24px;
+    font-weight: 850;
+}
+
+
+/* ==========================================
+   9. 文章资料条目
+   ========================================== */
+
+.nd-facts {
+    margin: 0;
+}
+
+.nd-facts__item {
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--nr-line);
+}
+
+.site-main .nd-facts__item dt {
+    margin-bottom: 8px;
+
+    color: var(--nr-muted);
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.site-main .nd-facts__item dd {
+    margin: 0;
+
+    color: var(--nr-text);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .nd-facts__item dd a {
+    color: var(--nr-text);
+}
+
+.site-main .nd-facts__item dd a:hover {
+    color: var(--nr-red);
+}
+
+.nd-facts__item dd small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--nr-muted);
+
+    font-size: 11px;
+    font-weight: 400;
+}
+
+
+/* ==========================================
+   10. 侧栏关联入口
+   ========================================== */
+
+.nd-sidebar__links {
+    display: flex;
+
+    padding: 24px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 14px;
+}
+
+.site-main .nd-sidebar__links a {
+    color: var(--nr-text);
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.site-main .nd-sidebar__links a:hover {
+    color: var(--nr-red);
+
+    text-decoration: underline;
+
+    text-underline-offset: 4px;
+}
+
+
+/* 侧栏编辑部标识 */
+
+.nd-sidebar__edition {
+    display: flex;
+
+    margin-top: 30px;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.site-main .nd-sidebar__edition strong {
+    color: #d7dde5;
+
+    font-size: 52px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -0.06em;
+}
+
+.nd-sidebar__edition > span {
+    color: var(--nr-muted);
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* ==========================================
+   11. 页面底部导航
+   ========================================== */
+
+.nd-bottom {
+    padding-bottom: 56px;
+}
+
+.nd-bottom__inner {
+    display: flex;
+
+    padding: 24px 0;
+
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    border-top: 2px solid var(--nr-dark-line);
+}
+
+.site-main .nd-bottom__link {
+    color: var(--nr-text);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.site-main .nd-bottom__top {
+    color: var(--nr-muted);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.site-main .nd-bottom__link:hover,
+.site-main .nd-bottom__top:hover {
+    color: var(--nr-red);
+}
+
+
+/* ==========================================
+   12. 平板端响应式
+   ========================================== */
+
+@media (max-width: 991px) {
+
+    .nd-reading__layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(180px, 210px);
+
+        gap: 36px;
+    }
+
+    .nd-sidebar {
+        padding-left: 20px;
+    }
+
+    .site-main .nd-heading__title {
+        font-size: 44px;
+    }
+
+}
+
+
+/* ==========================================
+   13. 手机端响应式
+   ========================================== */
+
+@media (max-width: 767px) {
+
+    .nd-navigation {
+        padding-top: 12px;
+    }
+
+    .nd-navigation__inner {
+        padding-bottom: 16px;
+    }
+
+    .nd-navigation__inner > span {
+        font-size: 9px;
+    }
+
+    .nd-heading {
+        padding-top: 32px;
+    }
+
+    .nd-heading__inner {
+        padding-bottom: 28px;
+    }
+
+    .nd-heading__category {
+        margin-bottom: 18px;
+    }
+
+    .site-main .nd-heading__title {
+        margin-bottom: 20px;
+
+        font-size: 34px;
+
+        line-height: 1.35;
+    }
+
+    .site-main .nd-heading__summary {
+        padding-left: 14px;
+
+        font-size: 15px;
+    }
+
+    .nd-reading {
+        padding: 30px 0 40px;
+    }
+
+    .nd-reading__layout {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap: 36px;
+    }
+
+    .site-main .nd-article__body {
+        font-size: 16px;
+
+        line-height: 2;
+    }
+
+    .nd-sidebar {
+        padding: 24px 0 0;
+
+        border-left: 0;
+
+        border-top: 1px solid var(--nr-line);
+    }
+
+    .nd-sidebar__edition {
+        display: none;
+    }
+
+    .nd-source {
+        margin-top: 30px;
+    }
+
+    .nd-bottom {
+        padding-bottom: 30px;
+    }
+
+}

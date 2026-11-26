@@ -10,6 +10,7 @@
 namespace backend\models;
 
 use common\models\PortalAssignment;
+use common\models\PortalMember;
 use yii\base\Model;
 
 class PortalAssignmentForm extends Model
@@ -18,6 +19,7 @@ class PortalAssignmentForm extends Model
 
     public $title;
     public $category;
+    public $member_id;
     public $owner_label;
     public $relative_path;
     public $description;
@@ -33,6 +35,7 @@ class PortalAssignmentForm extends Model
         if ($assignment !== null) {
             $this->title = $assignment->title;
             $this->category = $assignment->category;
+            $this->member_id = $assignment->member_id;
             $this->owner_label = $assignment->owner_label;
             $this->relative_path = $assignment->relative_path;
             $this->description = $assignment->description;
@@ -51,6 +54,7 @@ class PortalAssignmentForm extends Model
             [['title', 'category', 'owner_label', 'relative_path'], 'trim'],
             [['title', 'category'], 'required'],
             [['description'], 'string'],
+            [['member_id'], 'integer', 'min' => 1],
             [['title'], 'string', 'max' => 150],
             [['category'], 'string', 'max' => 20],
             [['owner_label'], 'string', 'max' => 60],
@@ -64,6 +68,7 @@ class PortalAssignmentForm extends Model
                 PortalAssignment::STATUS_UNPUBLISHED,
                 PortalAssignment::STATUS_PUBLISHED,
             ]],
+            [['member_id'], 'validateMemberAssociation', 'skipOnEmpty' => false],
             [['relative_path'], 'validateRelativePath'],
             [['uploadFile'], 'file',
                 'skipOnEmpty' => true,
@@ -90,6 +95,7 @@ class PortalAssignmentForm extends Model
         return [
             'title' => '文件标题',
             'category' => '资料分类',
+            'member_id' => '所属成员',
             'owner_label' => '所属团队或个人',
             'relative_path' => '已有文件相对路径',
             'description' => '文件说明',
@@ -111,6 +117,29 @@ class PortalAssignmentForm extends Model
 
         foreach ($assignment->getErrors('relative_path') as $error) {
             $this->addError($attribute, $error);
+        }
+    }
+
+    public function validateMemberAssociation($attribute)
+    {
+        $memberIdIsEmpty = $this->$attribute === null || $this->$attribute === '';
+
+        if ($this->category === PortalAssignment::CATEGORY_TEAM) {
+            if (!$memberIdIsEmpty) {
+                $this->addError($attribute, '团队作业不需要选择成员。');
+            }
+            return;
+        }
+
+        if ($this->category === PortalAssignment::CATEGORY_PERSONAL) {
+            if ($memberIdIsEmpty) {
+                $this->addError($attribute, '个人作业必须选择所属成员。');
+                return;
+            }
+
+            if (PortalMember::findOne($this->$attribute) === null) {
+                $this->addError($attribute, '所选团队成员不存在。');
+            }
         }
     }
 

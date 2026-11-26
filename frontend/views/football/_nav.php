@@ -1,25 +1,38 @@
 <?php
 
-/**
- * 赛事前台栏目导航。
- * @author lzs
- * @date 2026-11-20
- */
-
 use yii\helpers\Html;
 
+$currentAction = Yii::$app->controller->action->id;
+
 $sections = [
-    'football/teams' => '球队',
-    'football/players' => '球员',
-    'football/stadiums' => '场馆',
-    'match/index' => '赛程与比分',
+    'teams' => '国家队',
+    'players' => '球员',
+    'stadiums' => '场馆',
 ];
-$route = Yii::$app->controller->route;
+
 ?>
-<nav aria-label="世界杯赛事" class="btn-group" style="margin-bottom: 1em">
-    <?php foreach ($sections as $section => $label): ?>
-        <?= Html::a($label, ['/' . $section], [
-            'class' => 'btn ' . ($section === $route ? 'btn-primary' : 'btn-default'),
-        ]) ?>
+
+<nav
+    class="football-subnav"
+    aria-label="探索世界杯栏目"
+>
+
+    <?php foreach ($sections as $action => $label): ?>
+
+        <?php $isActive = $currentAction === $action; ?>
+
+        <?= Html::a(
+            Html::encode($label),
+            ['/football/' . $action],
+            [
+                'class' => 'football-subnav__link'
+                    . ($isActive ? ' is-active' : ''),
+                'aria-current' => $isActive
+                    ? 'page'
+                    : null,
+            ]
+        ) ?>
+
     <?php endforeach; ?>
+
 </nav>

@@ -9,143 +9,142 @@
 
 namespace frontend\controllers;
 
+use common\models\PortalMember;
 use common\models\PortalMessage;
+use common\models\PortalTeam;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class GuestbookController extends Controller
 {
-    const RATE_LIMIT_WINDOW = 600;
-    const RATE_LIMIT_MAX_SUBMISSIONS = 5;
-    const RATE_LIMIT_COOLDOWN = 20;
-    const DUPLICATE_TTL = 600;
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'index' => ['get'],
+                ],
+            ],
+        ];
+    }
 
     public function actionIndex()
     {
-        $model = new PortalMessage();
-        $model->setScenario(PortalMessage::SCENARIO_PUBLIC_CREATE);
+        $identity = Yii::$app->request->get('identity', '');
+        if (!in_array($identity, ['', 'team', 'member'], true)) {
+            throw new BadRequestHttpException('无效的留言身份筛选参数。');
+        }
 
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $model->status = PortalMessage::STATUS_PENDING;
+        $selectedMember = null;
+$memberId = Yii::$app->request->get('member_id', '');
 
-            if ($model->validate() && $this->validatePublicLength($model)) {
-                $rateLimitError = $this->getRateLimitError($model);
-                if ($rateLimitError === null) {
-                    try {
-                        if ($model->save()) {
-                            $this->recordSubmission($model);
-                            Yii::$app->session->setFlash('success', '留言提交成功，审核通过后将在前台显示。');
-                            return $this->redirect(['index']);
-                        }
-                    } catch (\Throwable $exception) {
-                        Yii::error('Guestbook message save failed: ' . get_class($exception), __METHOD__);
-                    }
+if ($memberId !== '') {
+    if (
+        (!is_string($memberId) && !is_int($memberId))
+        || !ctype_digit((string) $memberId)
+        || (int) $memberId < 1
+    ) {
+        throw new BadRequestHttpException(
+            '无效的成员筛选参数。'
+        );
+    }
 
-                    Yii::$app->session->setFlash('error', '留言提交失败，请检查内容后重试。');
-                } else {
-                    $model->addError('content', $rateLimitError);
-                }
-            }
+    $selectedMember = PortalMember::findOne([
+        'id' => (string) $memberId,
+    ]);
+
+    if ($selectedMember === null) {
+        throw new NotFoundHttpException(
+            '未找到指定的团队成员。'
+        );
+    }
+
+    // 指定成员时，统一进入个人留言筛选状态。
+    $identity = 'member';
+    $memberId = $selectedMember->id;
+}
+
+        $query = PortalMessage::findPublishedAdmin()
+            ->with('member')
+            ->orderBy(['created_at' => SORT_DESC, 'id' => SORT_DESC]);
+        if ($identity === 'team') {
+            $query->andWhere(['member_id' => null]);
+        } elseif ($identity === 'member') {
+            $query->andWhere(['not', ['member_id' => null]]);
+        }
+        if ($selectedMember !== null) {
+            $query->andWhere(['member_id' => $selectedMember->id]);
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => PortalMessage::find()
-                ->with('reply')
-                ->where(['status' => PortalMessage::STATUS_PUBLISHED])
-                ->orderBy(['created_at' => SORT_DESC, 'id' => SORT_DESC]),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
+    'query' => $query,
+    'pagination' => [
+        'pageSize' => 10,
+    ],
+    'sort' => false,
+]);
+
+        $team = PortalTeam::find()->orderBy(['id' => SORT_ASC])->one();
+        $teamLogoUrl = $team === null ? null : $this->resolveLocalImageUrl($team->logo_path);
+        $memberOptions = [];
+        $memberAvatarUrls = [];
+        foreach (PortalMember::find()->orderBy(['sort_order' => SORT_ASC, 'id' => SORT_ASC])->all() as $member) {
+            $memberOptions[$member->id] = $member->name;
+            $memberAvatarUrls[(string) $member->id] = $this->resolveLocalImageUrl($member->avatar_path);
+        }
 
         return $this->render('index', [
-            'model' => $model,
             'dataProvider' => $dataProvider,
+            'team' => $team,
+            'teamLogoUrl' => $teamLogoUrl,
+            'memberAvatarUrls' => $memberAvatarUrls,
+            'identity' => $identity,
+            'memberId' => $memberId,
+            'memberOptions' => $memberOptions,
         ]);
     }
 
-    private function getRateLimitError(PortalMessage $model)
+    private function resolveLocalImageUrl($path)
     {
-        $now = time();
-        $keys = $this->getRateLimitKeys($model);
-        $state = Yii::$app->cache->get($keys['window']);
-
-        if (!is_array($state) || !isset($state['started_at'], $state['last_at'], $state['count'])) {
-            $state = [
-                'started_at' => $now,
-                'last_at' => 0,
-                'count' => 0,
-            ];
+        if (!is_string($path) || trim($path) === '') {
+            return null;
         }
 
-        if ($state['started_at'] <= $now - self::RATE_LIMIT_WINDOW) {
-            $state = [
-                'started_at' => $now,
-                'last_at' => 0,
-                'count' => 0,
-            ];
-        }
-
-        if ($state['last_at'] > $now - self::RATE_LIMIT_COOLDOWN) {
-            return '提交过于频繁，请稍后再试。';
-        }
-        if ($state['count'] >= self::RATE_LIMIT_MAX_SUBMISSIONS) {
-            return '短时间内提交次数过多，请稍后再试。';
-        }
-        if (Yii::$app->cache->get($keys['duplicate']) !== false) {
-            return '相同留言已经提交，请勿重复发送。';
-        }
-
-        return null;
-    }
-
-    private function validatePublicLength(PortalMessage $model)
-    {
-        if (mb_strlen($model->content, 'UTF-8') > 2000) {
-            $model->addError('content', '留言内容不能超过 2000 个字符。');
-            return false;
-        }
-
-        return true;
-    }
-
-    private function recordSubmission(PortalMessage $model)
-    {
-        $now = time();
-        $keys = $this->getRateLimitKeys($model);
-        $state = Yii::$app->cache->get($keys['window']);
-
-        if (!is_array($state) || !isset($state['started_at'], $state['count'])
-            || $state['started_at'] <= $now - self::RATE_LIMIT_WINDOW
+        $normalizedPath = str_replace('\\', '/', trim($path));
+        $segments = explode('/', $normalizedPath);
+        if (
+            strpos($normalizedPath, "\0") !== false
+            || strpos($normalizedPath, '/') === 0
+            || strpos($normalizedPath, ':') !== false
+            || strpos($normalizedPath, '?') !== false
+            || strpos($normalizedPath, '#') !== false
+            || in_array('..', $segments, true)
+            || in_array('.', $segments, true)
         ) {
-            $state = [
-                'started_at' => $now,
-                'count' => 0,
-            ];
+            return null;
         }
 
-        $state['last_at'] = $now;
-        ++$state['count'];
-
-        $remainingWindow = max(1, self::RATE_LIMIT_WINDOW - ($now - $state['started_at']));
-        Yii::$app->cache->set($keys['window'], $state, $remainingWindow);
-        Yii::$app->cache->set($keys['duplicate'], true, self::DUPLICATE_TTL);
-    }
-
-    private function getRateLimitKeys(PortalMessage $model)
-    {
-        $clientAddress = Yii::$app->request->userIP;
-        if (!is_string($clientAddress) || $clientAddress === '') {
-            $clientAddress = 'unknown';
+        $webRoot = realpath(Yii::getAlias('@frontend/web'));
+        if ($webRoot === false) {
+            return null;
         }
 
-        $clientHash = hash('sha256', $clientAddress);
-        $contentHash = hash('sha256', $clientAddress . "\n" . $model->display_name . "\n" . $model->content);
+        $absoluteFile = realpath($webRoot . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $normalizedPath));
+        if ($absoluteFile === false || !is_file($absoluteFile)) {
+            return null;
+        }
 
-        return [
-            'window' => 'portal-guestbook-window-' . $clientHash,
-            'duplicate' => 'portal-guestbook-duplicate-' . $contentHash,
-        ];
+        $webRootPrefix = rtrim($webRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (strncasecmp($absoluteFile, $webRootPrefix, strlen($webRootPrefix)) !== 0) {
+            return null;
+        }
+
+        return Yii::$app->request->baseUrl . '/' . implode('/', array_map('rawurlencode', $segments));
     }
 }

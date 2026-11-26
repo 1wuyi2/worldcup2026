@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\PortalAssignmentForm */
+/* @var $memberOptions array */
 
 $phpUploadLimit = ini_get('upload_max_filesize');
 $phpPostLimit = ini_get('post_max_size');
@@ -22,7 +23,12 @@ $phpPostLimit = ini_get('post_max_size');
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'category')->dropDownList(PortalAssignment::getCategoryOptions()) ?>
-    <?= $form->field($model, 'owner_label')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'member_id')->dropDownList($memberOptions, [
+        'prompt' => '团队作业无需选择；个人作业请选择成员',
+    ])->hint('个人作业必须关联真实成员；团队作业保存时会由服务器清空该字段。') ?>
+    <?= $form->field($model, 'owner_label')
+        ->textInput(['maxlength' => true])
+        ->hint('个人作业保存时会自动使用关联成员姓名覆盖此快照；团队作业可保留兼容显示文字。') ?>
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'relative_path')
         ->textInput(['maxlength' => true])

@@ -12,6 +12,7 @@ namespace backend\controllers;
 use backend\models\PortalAssignmentForm;
 use common\components\PortalAssignmentFile;
 use common\models\PortalAssignment;
+use common\models\PortalMember;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -42,45 +43,115 @@ class PortalAssignmentController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'publish' => ['post'],
-                    'unpublish' => ['post'],
-                    'delete' => ['post'],
-                ],
+    'index' => ['get'],
+    'view' => ['get'],
+    'create' => ['get', 'post'],
+    'update' => ['get', 'post'],
+    'publish' => ['post'],
+    'unpublish' => ['post'],
+    'delete' => ['post'],
+],
             ],
         ];
     }
 
-    public function actionIndex()
-    {
-        $query = PortalAssignment::find()->orderBy(['created_at' => SORT_DESC, 'id' => SORT_DESC]);
-
-        $category = Yii::$app->request->get('category', '');
-        if (array_key_exists($category, PortalAssignment::getCategoryOptions())) {
-            $query->andWhere(['category' => $category]);
-        } else {
-            $category = '';
-        }
-
-        $status = Yii::$app->request->get('status', '');
-        $allowedStatuses = array_map('strval', array_keys(PortalAssignment::getStatusOptions()));
-        if ($status !== '' && in_array((string) $status, $allowedStatuses, true)) {
-            $query->andWhere(['status' => (int) $status]);
-        } else {
-            $status = '';
-        }
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => ['pageSize' => 20],
+   public function actionIndex()
+{
+    $query = PortalAssignment::find()
+        ->with('member')
+        ->orderBy([
+            'created_at' => SORT_DESC,
+            'id' => SORT_DESC,
         ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'category' => $category,
-            'status' => $status,
+    // 1. 读取并校验作业分类。
+    $category = Yii::$app->request->get('category', '');
+
+    if (
+        !is_string($category)
+        || !array_key_exists(
+            $category,
+            PortalAssignment::getCategoryOptions()
+        )
+    ) {
+        $category = '';
+    }
+
+    // 2. 读取并校验发布状态。
+    $status = Yii::$app->request->get('status', '');
+
+    $allowedStatuses = array_map(
+        'strval',
+        array_keys(PortalAssignment::getStatusOptions())
+    );
+
+    if (
+        (!is_string($status) && !is_int($status))
+        || !in_array((string) $status, $allowedStatuses, true)
+    ) {
+        $status = '';
+    } else {
+        $status = (string) $status;
+    }
+
+    // 3. 读取并校验成员编号。
+    $memberId = Yii::$app->request->get('member_id', '');
+
+    $selectedMember = null;
+
+    if (
+        (is_string($memberId) || is_int($memberId))
+        && ctype_digit((string) $memberId)
+        && (int) $memberId > 0
+    ) {
+        $selectedMember = PortalMember::findOne([
+            'id' => (string) $memberId,
         ]);
     }
 
+    if ($selectedMember !== null) {
+        $memberId = $selectedMember->id;
+
+        // 指定具体成员时，统一筛选个人作业。
+        $category = PortalAssignment::CATEGORY_PERSONAL;
+    } else {
+        $memberId = '';
+    }
+
+    // 4. 所有筛选条件校验完成后，再构造数据库查询。
+    if ($category !== '') {
+        $query->andWhere([
+            'category' => $category,
+        ]);
+    }
+
+    if ($status !== '') {
+        $query->andWhere([
+            'status' => (int) $status,
+        ]);
+    }
+
+    if ($memberId !== '') {
+        $query->andWhere([
+            'member_id' => $memberId,
+        ]);
+    }
+
+    $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+        'pagination' => [
+            'pageSize' => 20,
+        ],
+    ]);
+
+    return $this->render('index', [
+        'dataProvider' => $dataProvider,
+        'category' => $category,
+        'status' => $status,
+        'memberId' => $memberId,
+        'memberOptions' => $this->getMemberOptions(),
+    ]);
+}
     public function actionView($id)
     {
         return $this->render('view', ['model' => $this->findModel($id)]);
@@ -96,7 +167,10 @@ class PortalAssignmentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', ['model' => $form]);
+        return $this->render('create', [
+            'model' => $form,
+            'memberOptions' => $this->getMemberOptions(),
+        ]);
     }
 
     public function actionUpdate($id)
@@ -112,12 +186,17 @@ class PortalAssignmentController extends Controller
         return $this->render('update', [
             'model' => $form,
             'assignment' => $assignment,
+            'memberOptions' => $this->getMemberOptions(),
         ]);
     }
 
     public function actionPublish($id)
     {
         $model = $this->findModel($id);
+        if ($model->category === PortalAssignment::CATEGORY_PERSONAL && $model->member_id === null) {
+            Yii::$app->session->setFlash('error', '发布失败：历史个人作业必须先编辑并补充所属成员。');
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
         if (PortalAssignmentFile::resolve($model) === null) {
             Yii::$app->session->setFlash('error', '发布失败：文件不存在、路径不合法或文件不在允许目录内。');
             return $this->redirect(['view', 'id' => $model->id]);
@@ -141,9 +220,12 @@ class PortalAssignmentController extends Controller
     public function actionUnpublish($id)
     {
         $model = $this->findModel($id);
-        $model->status = PortalAssignment::STATUS_UNPUBLISHED;
         try {
-            if ($model->save()) {
+            $updatedRows = $model->updateAttributes([
+                'status' => PortalAssignment::STATUS_UNPUBLISHED,
+                'updated_at' => time(),
+            ]);
+            if ($updatedRows > 0 || (int) $model->status === PortalAssignment::STATUS_UNPUBLISHED) {
                 Yii::$app->session->setFlash('success', '课程资料已取消发布。');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -174,19 +256,38 @@ class PortalAssignmentController extends Controller
     }
 
     protected function findModel($id)
-    {
-        $model = PortalAssignment::findOne($id);
-        if ($model !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('未找到指定的课程资料。');
+{
+    if (
+        (!is_string($id) && !is_int($id))
+        || !ctype_digit((string) $id)
+        || (int) $id < 1
+    ) {
+        throw new \yii\web\BadRequestHttpException(
+            '无效的课程资料编号。'
+        );
     }
+
+    $model = PortalAssignment::findOne([
+        'id' => (string) $id,
+    ]);
+
+    if ($model !== null) {
+        return $model;
+    }
+
+    throw new NotFoundHttpException(
+        '未找到指定的课程资料。'
+    );
+}
 
     private function loadAndSave(PortalAssignmentForm $form, PortalAssignment $assignment)
     {
         if (!$form->load(Yii::$app->request->post())) {
             return false;
+        }
+
+        if ($form->category === PortalAssignment::CATEGORY_TEAM) {
+            $form->member_id = null;
         }
 
         $form->uploadFile = UploadedFile::getInstance($form, 'uploadFile');
@@ -206,9 +307,20 @@ class PortalAssignmentController extends Controller
             }
         }
 
+        $member = null;
+        if ($form->category === PortalAssignment::CATEGORY_PERSONAL) {
+            $member = PortalMember::findOne($form->member_id);
+            if ($member === null) {
+                $form->addError('member_id', '所选团队成员不存在。');
+                $this->removeNewUpload($newFilePath);
+                return false;
+            }
+        }
+
         $assignment->title = $form->title;
         $assignment->category = $form->category;
-        $assignment->owner_label = $form->owner_label;
+        $assignment->member_id = $member === null ? null : $member->id;
+        $assignment->owner_label = $member === null ? $form->owner_label : $member->name;
         $assignment->relative_path = $newFilePath !== null ? $newFilePath : $form->relative_path;
         $assignment->description = $form->description;
         $assignment->status = $form->status;
@@ -294,5 +406,18 @@ class PortalAssignmentController extends Controller
         } catch (\Throwable $ignoredException) {
             // Cleanup logging must not mask the original save failure.
         }
+    }
+
+    private function getMemberOptions()
+    {
+        $options = [];
+        $members = PortalMember::find()
+            ->orderBy(['sort_order' => SORT_ASC, 'id' => SORT_ASC])
+            ->all();
+        foreach ($members as $member) {
+            $options[$member->id] = $member->name;
+        }
+
+        return $options;
     }
 }

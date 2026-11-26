@@ -12,6 +12,8 @@ namespace backend\controllers;
 use common\models\PortalTeam;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -29,9 +31,20 @@ class PortalTeamController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function () {
-                            return Yii::$app->user->can(self::PERMISSION_MANAGE_PORTAL);
+                            return Yii::$app->user->can(
+                                self::PERMISSION_MANAGE_PORTAL
+                            );
                         },
                     ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'index' => ['get'],
+                    'view' => ['get'],
+                    'create' => ['get', 'post'],
+                    'update' => ['get', 'post'],
                 ],
             ],
         ];
@@ -39,7 +52,9 @@ class PortalTeamController extends Controller
 
     public function actionIndex()
     {
-        $model = PortalTeam::find()->orderBy(['id' => SORT_ASC])->one();
+        $model = PortalTeam::find()
+            ->orderBy(['id' => SORT_ASC])
+            ->one();
 
         return $this->render('index', [
             'model' => $model,
@@ -55,20 +70,41 @@ class PortalTeamController extends Controller
 
     public function actionCreate()
     {
-        $existingModel = PortalTeam::find()->orderBy(['id' => SORT_ASC])->one();
+        $existingModel = PortalTeam::find()
+            ->orderBy(['id' => SORT_ASC])
+            ->one();
+
         if ($existingModel !== null) {
-            Yii::$app->session->setFlash('warning', '团队资料已经存在，请直接修改现有记录。');
-            return $this->redirect(['update', 'id' => $existingModel->id]);
+            Yii::$app->session->setFlash(
+                'warning',
+                '团队资料已经存在，请直接修改现有记录。'
+            );
+
+            return $this->redirect([
+                'update',
+                'id' => $existingModel->id,
+            ]);
         }
 
         $model = new PortalTeam();
+
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', '团队资料创建成功。');
-                return $this->redirect(['view', 'id' => $model->id]);
+                Yii::$app->session->setFlash(
+                    'success',
+                    '团队资料创建成功。'
+                );
+
+                return $this->redirect([
+                    'view',
+                    'id' => $model->id,
+                ]);
             }
 
-            Yii::$app->session->setFlash('error', '团队资料保存失败，请检查表单内容。');
+            Yii::$app->session->setFlash(
+                'error',
+                '团队资料保存失败，请检查表单内容。'
+            );
         }
 
         return $this->render('create', [
@@ -79,13 +115,24 @@ class PortalTeamController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', '团队资料更新成功。');
-                return $this->redirect(['view', 'id' => $model->id]);
+                Yii::$app->session->setFlash(
+                    'success',
+                    '团队资料更新成功。'
+                );
+
+                return $this->redirect([
+                    'view',
+                    'id' => $model->id,
+                ]);
             }
 
-            Yii::$app->session->setFlash('error', '团队资料保存失败，请检查表单内容。');
+            Yii::$app->session->setFlash(
+                'error',
+                '团队资料保存失败，请检查表单内容。'
+            );
         }
 
         return $this->render('update', [
@@ -95,11 +142,26 @@ class PortalTeamController extends Controller
 
     protected function findModel($id)
     {
-        $model = PortalTeam::findOne($id);
+        if (
+            (!is_string($id) && !is_int($id))
+            || !ctype_digit((string) $id)
+            || (int) $id < 1
+        ) {
+            throw new BadRequestHttpException(
+                '无效的团队资料编号。'
+            );
+        }
+
+        $model = PortalTeam::findOne([
+            'id' => (string) $id,
+        ]);
+
         if ($model !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('未找到指定的团队资料。');
+        throw new NotFoundHttpException(
+            '未找到指定的团队资料。'
+        );
     }
 }

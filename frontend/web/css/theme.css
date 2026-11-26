@@ -934,3 +934,98 @@ textarea.form-control {
         animation-iteration-count: 1 !important;
     }
 }
+/* ==================================================
+   Football Sub Navigation
+   探索世界杯公共栏目导航
+   ================================================== */
+
+.football-subnav {
+    display: flex;
+
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    gap: 36px;
+
+    margin: 0 0 28px;
+
+    border-bottom: 1px solid var(--wc-border);
+}
+
+.football-subnav__link {
+    position: relative;
+
+    display: inline-flex;
+
+    min-height: 48px;
+
+    padding: 12px 0 16px;
+
+    align-items: center;
+
+    color: var(--wc-text-muted);
+
+    font-size: 15px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: color 180ms ease;
+}
+
+.football-subnav__link:hover,
+.football-subnav__link:focus {
+    color: var(--wc-text);
+
+    text-decoration: none;
+}
+
+.football-subnav__link.is-active {
+    color: var(--wc-accent);
+
+    font-weight: 800;
+}
+
+.football-subnav__link.is-active::after {
+    position: absolute;
+
+    right: 0;
+    bottom: -1px;
+    left: 0;
+
+    height: 3px;
+
+    background: var(--wc-accent);
+
+    content: "";
+}
+
+.football-subnav__link:focus-visible {
+    outline: 2px solid var(--wc-accent);
+
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+
+    .football-subnav {
+        gap: 26px;
+
+        margin-bottom: 22px;
+    }
+
+    .football-subnav__link {
+        font-size: 14px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .football-subnav__link {
+        transition: none;
+    }
+
+}

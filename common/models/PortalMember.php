@@ -68,6 +68,58 @@ class PortalMember extends ActiveRecord
 
     public function getTeam()
     {
-        return $this->hasOne(PortalTeam::className(), ['id' => 'team_id']);
+        return $this->hasOne(
+            PortalTeam::className(),
+            ['id' => 'team_id']
+        );
+    }
+
+    public function getPersonalAssignments()
+    {
+        return $this->hasMany(
+            PortalAssignment::className(),
+            ['member_id' => 'id']
+        )
+            ->andWhere([
+                'category' => PortalAssignment::CATEGORY_PERSONAL
+            ])
+            ->orderBy([
+                'created_at' => SORT_DESC,
+                'id' => SORT_DESC
+            ]);
+    }
+
+    /**
+     * 获取该成员已发布的个人作业。
+     */
+    public function getPublishedPersonalAssignments()
+    {
+        return $this->getPersonalAssignments()
+            ->andWhere([
+                'status' => PortalAssignment::STATUS_PUBLISHED
+            ]);
+    }
+
+    public function getMessages()
+    {
+        return $this->hasMany(
+            PortalMessage::className(),
+            ['member_id' => 'id']
+        )
+            ->andWhere([
+                'source_type' => PortalMessage::SOURCE_ADMIN
+            ])
+            ->orderBy([
+                'created_at' => SORT_DESC,
+                'id' => SORT_DESC
+            ]);
+    }
+
+    public function getPublishedMessages()
+    {
+        return $this->getMessages()
+            ->andWhere([
+                'status' => PortalMessage::STATUS_PUBLISHED
+            ]);
     }
 }

@@ -51,6 +51,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'category',
                 'value' => $model->getCategoryLabel(),
             ],
+            [
+                'attribute' => 'member_id',
+                'value' => $model->category === \common\models\PortalAssignment::CATEGORY_TEAM
+                    ? '团队作业无需成员'
+                    : ($model->member !== null ? $model->member->name : '历史记录：成员关联待补充'),
+            ],
             'owner_label',
             'relative_path',
             'description:ntext',

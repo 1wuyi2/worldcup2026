@@ -1,0 +1,3364 @@
+/* ==================================================
+   WorldCup2026 - Match Centre
+
+   赛事中心：
+   摄影页头、暖白色内容区、开放式赛事列表
+   ================================================== */
+
+.match-centre {
+    --mc-paper: #f2f1eb;
+    --mc-paper-light: #fbfaf6;
+    --mc-text: #172820;
+    --mc-muted: #647269;
+    --mc-green: #24543e;
+    --mc-line: #cdd3c9;
+    --mc-line-light: #dce0d7;
+
+    min-width: 0;
+
+    color: var(--mc-text);
+    background: var(--mc-paper);
+}
+
+
+/*
+ * 仅在赛事中心页面取消公共 main 的底部留白，
+ * 避免浅色内容与深色页脚之间出现空隙。
+ */
+
+.site-main:has(> .match-centre) {
+    padding-bottom: 0;
+}
+
+
+/* ==================================================
+   1. 摄影页头
+   ================================================== */
+
+.mc-hero {
+    position: relative;
+
+    display: flex;
+    min-height: 350px;
+
+    align-items: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background: #13251e;
+}
+
+.mc-hero__image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center 59%;
+}
+
+.mc-hero__shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 13, 22, 0.96) 0%,
+            rgba(8, 13, 22, 0.84) 25%,
+            rgba(8, 13, 22, 0.42) 60%,
+            rgba(8, 13, 22, 0.25) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(8, 13, 22, 0.45),
+            transparent 60%
+        );
+}
+
+.mc-hero__inner {
+    display: flex;
+
+    padding-top: 56px;
+    padding-bottom: 56px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+.mc-hero__copy {
+    min-width: 0;
+}
+
+.mc-hero__eyebrow {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: var(--wc-accent);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+}
+
+.site-main .mc-hero__title {
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size: clamp(44px, 5vw, 76px);
+    font-weight: 900;
+    line-height: 1.1;
+
+    letter-spacing: -0.045em;
+}
+
+
+/* 去掉全站默认 h1 绿色下划线 */
+
+.site-main .mc-hero__title::after {
+    display: none;
+}
+
+.site-main .mc-hero__description {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.84);
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* 摄影页头右侧赛事数量 */
+
+.mc-hero__stat {
+    display: flex;
+
+    flex-shrink: 0;
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    padding-bottom: 4px;
+
+    color: #ffffff;
+}
+
+.site-main .mc-hero__stat strong {
+    color: #ffffff;
+
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 800;
+
+    line-height: 1;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.mc-hero__stat > span {
+    margin-top: 12px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* ==================================================
+   2. 足球栏目导航
+   ================================================== */
+
+.mc-navigation {
+    background: var(--mc-paper-light);
+
+    border-bottom: 1px solid var(--mc-line);
+}
+
+.mc-navigation__links {
+    display: flex;
+
+    min-height: 64px;
+
+    align-items: stretch;
+
+    gap: 42px;
+}
+
+.mc-navigation__link {
+    position: relative;
+
+    display: flex;
+
+    padding: 20px 0;
+
+    align-items: center;
+
+    color: var(--mc-muted);
+
+    font-size: 14px;
+    font-weight: 650;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.mc-navigation__link.is-active {
+    color: var(--mc-green);
+
+    font-weight: 800;
+}
+
+.mc-navigation__link.is-active::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 3px;
+
+    background: var(--mc-green);
+
+    content: "";
+}
+
+.mc-navigation__link:hover,
+.mc-navigation__link:focus {
+    color: var(--mc-green);
+
+    text-decoration: none;
+}
+
+
+/* ==================================================
+   3. 赛事内容区
+   ================================================== */
+
+.mc-content {
+    padding: 54px 0 96px;
+
+    background: var(--mc-paper);
+}
+
+.mc-content__header {
+    display: flex;
+
+    margin-bottom: 30px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.site-main .mc-content__header h2 {
+    margin: 0 0 10px;
+
+    color: var(--mc-text);
+
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 850;
+
+    line-height: 1.2;
+}
+
+.site-main .mc-content__header p {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+.mc-content__count {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 8px;
+
+    white-space: nowrap;
+}
+
+.site-main .mc-content__count strong {
+    color: var(--mc-text);
+
+    font-size: 28px;
+    font-weight: 800;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.mc-content__count > span {
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   4. 赛事筛选
+   ================================================== */
+
+.mc-filters {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr))
+        auto;
+
+    align-items: end;
+
+    gap: 16px;
+
+    margin: 0 0 42px;
+    padding-bottom: 24px;
+
+    border-bottom: 1px solid var(--mc-line);
+}
+
+.mc-filters__field {
+    display: flex;
+    min-width: 0;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.mc-filters__field label {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.mc-filters__select {
+    display: block;
+
+    width: 100%;
+    height: 44px;
+
+    padding: 0 12px;
+
+    color: var(--mc-text);
+
+    border: 1px solid var(--mc-line);
+    border-radius: 3px;
+
+    background: var(--mc-paper-light);
+
+    font-size: 14px;
+}
+
+.mc-filters__select:hover,
+.mc-filters__select:focus {
+    border-color: var(--mc-green);
+}
+
+.mc-filters__actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+.mc-filters__submit {
+    height: 44px;
+
+    padding: 0 22px;
+
+    color: #ffffff;
+
+    border: 1px solid var(--mc-green);
+    border-radius: 3px;
+
+    background: var(--mc-green);
+
+    font-size: 13px;
+    font-weight: 750;
+
+    white-space: nowrap;
+}
+
+.mc-filters__submit:hover,
+.mc-filters__submit:focus {
+    background: #193f2d;
+}
+
+.mc-filters__reset {
+    color: var(--mc-muted);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    white-space: nowrap;
+}
+
+.mc-filters__reset:hover,
+.mc-filters__reset:focus {
+    color: var(--mc-green);
+}
+
+
+/* ==================================================
+   5. 日期分组
+   ================================================== */
+
+.mc-date-group {
+    margin-bottom: 34px;
+}
+
+.mc-date-heading {
+    display: flex;
+
+    padding: 0 0 12px;
+
+    align-items: baseline;
+
+    gap: 13px;
+
+    border-bottom: 2px solid var(--mc-green);
+}
+
+.site-main .mc-date-heading h3 {
+    margin: 0;
+
+    color: var(--mc-text);
+
+    font-size: 24px;
+    font-weight: 850;
+}
+
+.mc-date-heading > span {
+    color: var(--mc-muted);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mc-date-heading > time {
+    margin-left: auto;
+
+    color: var(--mc-muted);
+
+    font-size: 12px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==================================================
+   6. 单场比赛
+   ================================================== */
+
+.mc-match {
+    display: grid;
+
+    grid-template-columns:
+        122px
+        minmax(0, 1fr)
+        168px
+        20px;
+
+    min-height: 108px;
+
+    padding: 20px 10px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    color: var(--mc-text);
+
+    border-bottom: 1px solid var(--mc-line);
+
+    text-decoration: none;
+
+    transition:
+        background-color 180ms ease;
+}
+
+.mc-match:hover,
+.mc-match:focus {
+    color: var(--mc-text);
+
+    background: rgba(36, 84, 62, 0.045);
+
+    text-decoration: none;
+}
+
+
+/* 比赛时间及阶段 */
+
+.mc-match__meta {
+    display: flex;
+    min-width: 0;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.mc-match__time {
+    color: var(--mc-text);
+
+    font-size: 17px;
+    font-weight: 750;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.mc-match__stage {
+    color: var(--mc-muted);
+
+    font-size: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================
+   对阵区域
+   ========================================== */
+
+.mc-match__fixture {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        112px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.mc-match__team {
+    display: flex;
+    min-width: 0;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.mc-match__team--home {
+    justify-content: flex-end;
+
+    text-align: right;
+}
+
+.mc-match__team--away {
+    justify-content: flex-start;
+
+    text-align: left;
+}
+
+.mc-match__team-name {
+    min-width: 0;
+
+    color: var(--mc-text);
+
+    font-size: 17px;
+    font-weight: 750;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 国家队国旗 */
+
+.mc-match__flag {
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 33px;
+
+    object-fit: cover;
+
+    border-radius: 2px;
+
+    box-shadow: 0 0 0 1px rgba(23, 40, 32, 0.08);
+}
+
+.mc-match__flag-fallback {
+    display: flex;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 33px;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--mc-muted);
+
+    background: var(--mc-line-light);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   比分及状态
+   ========================================== */
+
+.mc-match__result {
+    display: flex;
+
+    min-width: 0;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 5px;
+}
+
+.site-main .mc-match__score {
+    color: var(--mc-text);
+
+    font-size: 30px;
+    font-weight: 900;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.04em;
+
+    font-variant-numeric: tabular-nums;
+
+    white-space: nowrap;
+}
+
+.mc-match__status {
+    color: var(--mc-muted);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.mc-match__status--0 {
+    color: #647269;
+}
+
+.mc-match__status--1 {
+    color: #a64a24;
+}
+
+.mc-match__status--2 {
+    color: var(--mc-green);
+}
+
+.mc-match__status--3 {
+    color: #9b4540;
+}
+
+
+/* 场馆及详情箭头 */
+
+.mc-match__venue {
+    color: var(--mc-muted);
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+.mc-match__arrow {
+    color: var(--mc-green);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    transition: transform 180ms ease;
+}
+
+.mc-match:hover .mc-match__arrow,
+.mc-match:focus .mc-match__arrow {
+    transform: translateX(4px);
+}
+
+
+/* ==================================================
+   7. 分页
+   ================================================== */
+
+.mc-pagination {
+    display: flex;
+
+    padding-top: 12px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.site-main .mc-pagination__summary {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+.mc-pagination__links {
+    display: flex;
+
+    margin: 0;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+.mc-pagination__links > li > a,
+.mc-pagination__links > li > span {
+    display: flex;
+
+    min-width: 38px;
+    height: 38px;
+
+    margin: 0;
+    padding: 0 10px;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--mc-text);
+
+    border: 0;
+    border-radius: 2px;
+
+    background: transparent;
+
+    font-weight: 650;
+}
+
+.mc-pagination__links > li > a:hover,
+.mc-pagination__links > li > a:focus {
+    color: var(--mc-green);
+
+    background: var(--mc-line-light);
+}
+
+.mc-pagination__links > .active > a,
+.mc-pagination__links > .active > a:hover,
+.mc-pagination__links > .active > a:focus {
+    color: #ffffff;
+
+    border: 0;
+
+    background: var(--mc-green);
+}
+
+.mc-pagination__links > .disabled > span,
+.mc-pagination__links > .disabled > span:hover {
+    color: #909b92;
+
+    border: 0;
+
+    background: transparent;
+}
+
+
+/* ==================================================
+   8. 空状态
+   ================================================== */
+
+.mc-empty {
+    padding: 64px 20px 88px;
+
+    text-align: center;
+}
+
+.mc-empty__symbol {
+    display: block;
+
+    margin-bottom: 16px;
+
+    color: var(--mc-green);
+
+    font-size: 48px;
+}
+
+.site-main .mc-empty h3 {
+    margin-bottom: 14px;
+
+    color: var(--mc-text);
+
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.site-main .mc-empty p {
+    margin-bottom: 24px;
+
+    color: var(--mc-muted);
+
+    font-size: 14px;
+}
+
+.mc-empty__link {
+    color: var(--mc-green);
+
+    font-weight: 750;
+
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.mc-empty__link:hover,
+.mc-empty__link:focus {
+    color: var(--mc-text);
+}
+
+
+/* ==================================================
+   9. 键盘操作
+   ================================================== */
+
+.match-centre a:focus-visible,
+.match-centre button:focus-visible,
+.match-centre select:focus-visible {
+    outline: 2px solid #47865f;
+
+    outline-offset: 3px;
+}
+
+
+/* ==================================================
+   10. 平板端响应式
+   ================================================== */
+
+@media (max-width: 1100px) {
+
+    .mc-filters {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+
+    .mc-filters__actions {
+        grid-column: 1 / -1;
+    }
+
+    .mc-match {
+        grid-template-columns:
+            95px
+            minmax(0, 1fr)
+            130px
+            18px;
+
+        gap: 14px;
+    }
+
+    .mc-match__fixture {
+        grid-template-columns:
+            minmax(0, 1fr)
+            94px
+            minmax(0, 1fr);
+
+        gap: 9px;
+    }
+
+    .mc-match__team {
+        gap: 9px;
+    }
+
+    .mc-match__team-name {
+        font-size: 15px;
+    }
+
+    .mc-match__flag,
+    .mc-match__flag-fallback {
+        width: 36px;
+        height: 27px;
+    }
+
+}
+
+
+/* ==================================================
+   11. 手机端响应式
+   ================================================== */
+
+@media (max-width: 767px) {
+
+    .mc-hero {
+        min-height: 280px;
+    }
+
+    .mc-hero__inner {
+        padding-top: 38px;
+        padding-bottom: 38px;
+
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 24px;
+    }
+
+    .mc-hero__eyebrow {
+        margin-bottom: 15px;
+
+        font-size: 9px;
+    }
+
+    .site-main .mc-hero__title {
+        margin-bottom: 14px;
+
+        font-size: clamp(36px, 8vw, 52px);
+    }
+
+    .site-main .mc-hero__description {
+        font-size: 13px;
+    }
+
+    .mc-hero__stat {
+        flex-direction: row;
+
+        align-items: baseline;
+
+        gap: 10px;
+    }
+
+    .site-main .mc-hero__stat strong {
+        font-size: 34px;
+    }
+
+    .mc-hero__stat > span {
+        margin: 0;
+    }
+
+    .mc-navigation__links {
+        min-height: 54px;
+
+        justify-content: space-between;
+
+        gap: 8px;
+    }
+
+    .mc-navigation__link {
+        padding: 15px 0;
+
+        font-size: 12px;
+    }
+
+    .mc-content {
+        padding: 34px 0 56px;
+    }
+
+    .mc-content__header {
+        margin-bottom: 24px;
+
+        gap: 12px;
+    }
+
+    .mc-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+
+        margin-bottom: 30px;
+    }
+
+    .mc-filters__select {
+        font-size: 13px;
+    }
+
+    .mc-filters__actions {
+        grid-column: 1 / -1;
+    }
+
+    .mc-filters__submit {
+        flex: 1;
+    }
+
+    .mc-date-heading {
+        gap: 8px;
+    }
+
+    .site-main .mc-date-heading h3 {
+        font-size: 20px;
+    }
+
+    .mc-date-heading > span,
+    .mc-date-heading > time {
+        font-size: 11px;
+    }
+
+    .mc-match {
+        grid-template-columns: minmax(0, 1fr) 18px;
+
+        min-height: 0;
+
+        padding: 16px 2px;
+
+        gap: 12px;
+    }
+
+    .mc-match__meta {
+        grid-column: 1 / 2;
+
+        flex-direction: row;
+        align-items: center;
+
+        gap: 10px;
+    }
+
+    .mc-match__time {
+        font-size: 13px;
+    }
+
+    .mc-match__stage {
+        font-size: 11px;
+    }
+
+    .mc-match__fixture {
+        grid-column: 1 / -1;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            78px
+            minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    .mc-match__team {
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+
+        gap: 9px;
+    }
+
+    .mc-match__team--home .mc-match__flag,
+    .mc-match__team--home .mc-match__flag-fallback {
+        order: -1;
+    }
+
+    .mc-match__team-name {
+        font-size: 14px;
+    }
+
+    .mc-match__flag,
+    .mc-match__flag-fallback {
+        width: 36px;
+        height: 27px;
+    }
+
+    .site-main .mc-match__score {
+        font-size: 26px;
+    }
+
+    .mc-match__venue {
+        grid-column: 1 / -1;
+
+        font-size: 11px;
+
+        text-align: center;
+    }
+
+    .mc-match__arrow {
+        grid-column: 2;
+        grid-row: 1;
+
+        font-size: 18px;
+    }
+
+    .mc-pagination {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+}
+
+
+/* ==================================================
+   12. 减少动态效果
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .mc-match,
+    .mc-match__arrow {
+        transition: none;
+    }
+
+    .mc-match:hover .mc-match__arrow,
+    .mc-match:focus .mc-match__arrow {
+        transform: none;
+    }
+
+}
+/* ==================================================
+   Match Centre Refinement
+   赛事阶段导航及视觉细节优化
+   ================================================== */
+
+
+/* ==========================================
+   1. 优化摄影遮罩
+   ========================================== */
+
+.mc-hero__shade {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 13, 22, 0.94) 0%,
+            rgba(8, 13, 22, 0.68) 30%,
+            rgba(8, 13, 22, 0.20) 65%,
+            rgba(8, 13, 22, 0.22) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(8, 13, 22, 0.35),
+            transparent 60%
+        );
+}
+
+.mc-hero__stat {
+    text-shadow: 0 2px 12px rgba(8, 13, 22, 0.65);
+}
+
+
+/* ==========================================
+   2. 优化主体区域标题
+   ========================================== */
+
+.mc-content {
+    padding-top: 42px;
+}
+
+.mc-content__header {
+    margin-bottom: 24px;
+}
+
+.site-main .mc-content__count strong {
+    font-size: 20px;
+}
+
+.mc-content__count > span {
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   3. 一级赛事阶段导航
+   ========================================== */
+
+.mc-phase-nav {
+    display: flex;
+
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    column-gap: 34px;
+    row-gap: 0;
+
+    margin-bottom: 26px;
+
+    border-bottom: 1px solid var(--mc-line);
+}
+
+.mc-phase-nav__link {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 48px;
+    padding: 12px 0 15px;
+
+    color: var(--mc-muted);
+
+    font-size: 15px;
+    font-weight: 650;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: color 180ms ease;
+}
+
+.mc-phase-nav__link:hover,
+.mc-phase-nav__link:focus {
+    color: var(--mc-green);
+    text-decoration: none;
+}
+
+.mc-phase-nav__link.is-active {
+    color: var(--mc-green);
+
+    font-weight: 850;
+}
+
+.mc-phase-nav__link.is-active::after {
+    position: absolute;
+
+    right: 0;
+    bottom: -1px;
+    left: 0;
+
+    height: 3px;
+
+    background: var(--mc-green);
+
+    content: "";
+}
+
+
+/* ==========================================
+   4. 小组赛二级导航
+   ========================================== */
+
+.mc-group-nav {
+    display: flex;
+
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px 18px;
+
+    margin: -8px 0 26px;
+
+    padding: 5px 0;
+}
+
+.mc-group-nav__link {
+    display: inline-flex;
+
+    min-height: 34px;
+
+    padding: 6px 12px;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.mc-group-nav__link:hover,
+.mc-group-nav__link:focus {
+    color: var(--mc-green);
+    text-decoration: none;
+}
+
+.mc-group-nav__link.is-active {
+    color: #ffffff;
+
+    background: var(--mc-green);
+
+    border-radius: 2px;
+}
+
+
+/* ==========================================
+   5. 辅助筛选
+   ========================================== */
+
+.mc-filters.mc-filters--refined {
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        auto;
+
+    gap: 18px;
+
+    padding-bottom: 20px;
+    margin-bottom: 34px;
+}
+
+.mc-filters--refined .mc-filters__field {
+    gap: 6px;
+}
+
+.mc-filters--refined .mc-filters__select {
+    height: 42px;
+
+    background: transparent;
+}
+
+.mc-filters--refined .mc-filters__submit {
+    height: 42px;
+
+    padding: 0 24px;
+}
+
+
+/* ==========================================
+   6. 赛事列表细节
+   ========================================== */
+
+.mc-match {
+    padding-top: 18px;
+    padding-bottom: 18px;
+
+    min-height: 100px;
+}
+
+.mc-match__venue {
+    color: #59695f;
+}
+
+.mc-date-heading > time {
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   7. 平板端
+   ========================================== */
+
+@media (max-width: 1100px) {
+
+    .mc-phase-nav {
+        column-gap: 22px;
+    }
+
+    .mc-filters.mc-filters--refined {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .mc-filters--refined .mc-filters__actions {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* ==========================================
+   8. 手机端
+   ========================================== */
+
+@media (max-width: 767px) {
+
+    .mc-content {
+        padding-top: 30px;
+    }
+
+    .mc-content__header {
+        margin-bottom: 18px;
+    }
+
+    .mc-hero__shade {
+        background: linear-gradient(
+            90deg,
+            rgba(8, 13, 22, 0.88),
+            rgba(8, 13, 22, 0.38)
+        );
+    }
+
+    .mc-phase-nav {
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        column-gap: 24px;
+
+        margin-bottom: 22px;
+
+        scrollbar-width: thin;
+    }
+
+    .mc-phase-nav__link {
+        flex-shrink: 0;
+
+        font-size: 13px;
+    }
+
+    .mc-group-nav {
+        gap: 4px;
+
+        margin-bottom: 20px;
+    }
+
+    .mc-group-nav__link {
+        padding: 6px 10px;
+
+        font-size: 12px;
+    }
+
+    .mc-filters.mc-filters--refined {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+
+        margin-bottom: 26px;
+    }
+
+    .mc-filters--refined .mc-filters__field:first-of-type {
+        grid-column: 1 / -1;
+    }
+
+    .mc-filters--refined .mc-filters__actions {
+        grid-column: 1 / -1;
+    }
+
+    .mc-match {
+        min-height: 0;
+
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+}
+
+
+/* ==========================================
+   9. 减少动态效果
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .mc-phase-nav__link {
+        transition: none;
+    }
+
+}
+/* ==================================================
+   World Cup Knockout Bracket
+   世界杯淘汰赛晋级图
+   ================================================== */
+
+
+/* ==========================================
+   1. 赛事中心晋级图快捷入口
+   ========================================== */
+
+.mc-phase-nav__bracket {
+    display: inline-flex;
+
+    margin-left: auto;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    color: var(--mc-green);
+
+    font-size: 13px;
+    font-weight: 750;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.mc-phase-nav__bracket:hover,
+.mc-phase-nav__bracket:focus {
+    color: var(--mc-text);
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================
+   2. 冠军摄影页头
+   ========================================== */
+
+.bracket-hero {
+    position: relative;
+
+    display: flex;
+
+    min-height: 420px;
+
+    align-items: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background: #087f94;
+}
+
+.bracket-hero__image {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: -2;
+
+    width: 66%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center 54%;
+}
+
+.bracket-hero::after {
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    background: linear-gradient(
+        90deg,
+        #087f94 0%,
+        #087f94 30%,
+        rgba(8, 127, 148, 0.9) 38%,
+        rgba(8, 127, 148, 0.18) 56%,
+        transparent 72%
+    );
+
+    content: "";
+}
+
+.bracket-hero__inner {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.bracket-hero__copy {
+    max-width: 54%;
+}
+
+.bracket-hero__eyebrow {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #ddf1f3;
+
+    font-size: 11px;
+    font-weight: 750;
+
+    letter-spacing: 0.14em;
+}
+
+.site-main .bracket-hero__title {
+    margin: 0 0 18px;
+
+    color: #ffffff;
+
+    font-size: clamp(42px, 4.8vw, 72px);
+    font-weight: 900;
+
+    line-height: 1.13;
+
+    letter-spacing: -0.04em;
+}
+
+.site-main .bracket-hero__title::after {
+    display: none;
+}
+
+.site-main .bracket-hero__description {
+    margin: 0 0 24px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================
+   3. 冠军信息
+   ========================================== */
+
+.bracket-champion {
+    display: flex;
+
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.bracket-champion__label {
+    color: #f9e6a6;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.bracket-champion__team {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.bracket-champion__team .bracket-flag {
+    width: 44px;
+    height: 33px;
+}
+
+.site-main .bracket-champion__team strong {
+    color: #ffffff;
+
+    font-size: 30px;
+    font-weight: 850;
+}
+
+.bracket-champion__link {
+    color: #ffffff;
+
+    font-size: 13px;
+
+    text-decoration: none;
+}
+
+.bracket-champion__link:hover,
+.bracket-champion__link:focus {
+    color: #f9e6a6;
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================
+   4. 晋级图主体
+   ========================================== */
+
+.bracket-content {
+    padding: 48px 0 80px;
+
+    background: var(--mc-paper);
+}
+
+.bracket-content__header {
+    display: flex;
+
+    margin-bottom: 32px;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.site-main .bracket-content__header h2 {
+    margin: 0 0 10px;
+
+    color: var(--mc-text);
+
+    font-size: 36px;
+    font-weight: 850;
+}
+
+.site-main .bracket-content__header p {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+.bracket-scroll-hint {
+    color: var(--mc-muted);
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   5. 横向滚动容器
+   ========================================== */
+
+.bracket-scroll {
+    max-width: 100%;
+
+    padding: 4px 4px 22px;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #84988b
+        #e2e5dc;
+}
+
+.bracket-scroll:focus-visible {
+    outline: 2px solid var(--mc-green);
+
+    outline-offset: 3px;
+}
+
+.bracket-scroll::-webkit-scrollbar {
+    height: 7px;
+}
+
+.bracket-scroll::-webkit-scrollbar-thumb {
+    background: #84988b;
+
+    border-radius: 6px;
+}
+
+.bracket-scroll::-webkit-scrollbar-track {
+    background: #e2e5dc;
+}
+
+
+/* ==========================================
+   6. 五轮赛事的整体布局
+   ========================================== */
+
+.bracket-board {
+    --bracket-gap: 40px;
+    --bracket-body-height: 1792px;
+    --bracket-connector: #9dad9f;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 224px);
+
+    column-gap: var(--bracket-gap);
+
+    width: max-content;
+
+    min-width: 100%;
+}
+
+.bracket-round {
+    min-width: 0;
+}
+
+
+/* 每轮标题 */
+
+.bracket-round__heading {
+    display: flex;
+
+    height: 82px;
+
+    padding-bottom: 16px;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    gap: 4px;
+
+    border-bottom: 1px solid var(--mc-line);
+}
+
+.bracket-round__heading > span {
+    color: var(--mc-muted);
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.08em;
+}
+
+.site-main .bracket-round__heading h3 {
+    margin: 0;
+
+    color: var(--mc-text);
+
+    font-size: 20px;
+    font-weight: 850;
+}
+
+.bracket-round__heading > small {
+    color: var(--mc-muted);
+
+    font-size: 11px;
+}
+
+
+/* 各轮使用相同高度，比赛节点等距分布。 */
+
+.bracket-round__body {
+    display: flex;
+
+    height: var(--bracket-body-height);
+
+    flex-direction: column;
+}
+
+.bracket-slot {
+    position: relative;
+
+    display: flex;
+
+    min-height: 0;
+
+    flex: 1;
+
+    align-items: center;
+}
+
+
+/* ==========================================
+   7. 单场比赛节点
+   ========================================== */
+
+.bracket-match {
+    position: relative;
+
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+
+    color: var(--mc-text);
+
+    border: 1px solid var(--mc-line);
+    border-radius: 2px;
+
+    background: var(--mc-paper-light);
+
+    text-decoration: none;
+
+    transition:
+        border-color 180ms ease,
+        background-color 180ms ease;
+}
+
+.bracket-match:hover,
+.bracket-match:focus {
+    color: var(--mc-text);
+
+    border-color: var(--mc-green);
+
+    background: #ffffff;
+
+    text-decoration: none;
+}
+
+.bracket-match__number {
+    padding: 6px 10px;
+
+    color: var(--mc-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.05em;
+}
+
+.bracket-match__team {
+    display: flex;
+
+    min-height: 30px;
+
+    padding: 5px 10px;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--mc-muted);
+}
+
+.bracket-match__team.is-winner {
+    color: var(--mc-green);
+
+    background: #e2eadc;
+
+    font-weight: 800;
+}
+
+.bracket-match__team-name {
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    font-size: 13px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bracket-flag {
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 24px;
+    height: 18px;
+
+    object-fit: cover;
+
+    border-radius: 1px;
+}
+
+.site-main .bracket-match__score {
+    color: inherit;
+
+    font-size: 16px;
+    font-weight: 850;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.bracket-match__note {
+    padding: 4px 10px;
+
+    color: var(--mc-muted);
+
+    font-size: 10px;
+}
+
+
+/* ==========================================
+   8. 晋级连接线
+   ========================================== */
+
+/* 从前一轮连接线中点进入当前节点。 */
+
+.bracket-slot.has-incoming::before {
+    position: absolute;
+
+    top: 50%;
+    right: 100%;
+
+    width: calc(var(--bracket-gap) / 2);
+
+    border-top: 1px solid var(--bracket-connector);
+
+    content: "";
+}
+
+
+/*
+ * 同一组的上方比赛：
+ * 先向右，再向下连接。
+ */
+
+.bracket-slot.has-outgoing.is-upper::after {
+    position: absolute;
+
+    top: 50%;
+    left: 100%;
+
+    width: calc(var(--bracket-gap) / 2);
+    height: 50%;
+
+    border-top: 1px solid var(--bracket-connector);
+    border-right: 1px solid var(--bracket-connector);
+
+    content: "";
+}
+
+
+/*
+ * 同一组的下方比赛：
+ * 先向右，再向上连接。
+ */
+
+.bracket-slot.has-outgoing.is-lower::after {
+    position: absolute;
+
+    bottom: 50%;
+    left: 100%;
+
+    width: calc(var(--bracket-gap) / 2);
+    height: 50%;
+
+    border-bottom: 1px solid var(--bracket-connector);
+    border-right: 1px solid var(--bracket-connector);
+
+    content: "";
+}
+
+
+/* ==========================================
+   9. 决赛节点
+   ========================================== */
+
+.bracket-slot.is-final .bracket-match {
+    border-color: #24543e;
+
+    background: #24543e;
+}
+
+.bracket-slot.is-final .bracket-match__number {
+    color: #d5e3d6;
+}
+
+.bracket-slot.is-final .bracket-match__team {
+    color: #ffffff;
+}
+
+.bracket-slot.is-final .bracket-match__team.is-winner {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.bracket-slot.is-final .bracket-match__note {
+    color: #d5e3d6;
+}
+
+.bracket-slot.is-final .bracket-match:hover,
+.bracket-slot.is-final .bracket-match:focus {
+    background: #193e2d;
+}
+
+
+/* ==========================================
+   10. 独立季军赛
+   ========================================== */
+
+.bracket-third-place {
+    display: grid;
+
+    margin-top: 40px;
+    padding-top: 36px;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+    align-items: center;
+
+    gap: 32px;
+
+    border-top: 2px solid var(--mc-green);
+}
+
+.bracket-third-place__eyebrow {
+    color: var(--mc-muted);
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.12em;
+}
+
+.site-main .bracket-third-place h3 {
+    margin: 10px 0;
+
+    color: var(--mc-text);
+
+    font-size: 30px;
+    font-weight: 850;
+}
+
+.site-main .bracket-third-place p {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   11. 移动端
+   ========================================== */
+
+@media (max-width: 767px) {
+
+    .mc-phase-nav__bracket {
+        margin-left: 0;
+    }
+
+    .match-centre .mc-navigation__links {
+        justify-content: flex-start;
+
+        gap: 24px;
+
+        overflow-x: auto;
+    }
+
+    .bracket-hero {
+        min-height: 380px;
+    }
+
+    .bracket-hero__copy {
+        max-width: 75%;
+    }
+
+    .bracket-hero__inner {
+        padding-top: 34px;
+        padding-bottom: 34px;
+    }
+
+    .bracket-hero__image {
+        width: 100%;
+
+        object-position: 70% center;
+    }
+
+    .bracket-hero::after {
+        background: linear-gradient(
+            90deg,
+            rgba(4, 79, 95, 0.96),
+            rgba(4, 79, 95, 0.76) 50%,
+            rgba(4, 79, 95, 0.12)
+        );
+    }
+
+    .site-main .bracket-hero__title {
+        font-size: 40px;
+    }
+
+    .site-main .bracket-hero__description {
+        font-size: 13px;
+    }
+
+    .bracket-content {
+        padding: 32px 0 56px;
+    }
+
+    .bracket-content__header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .site-main .bracket-content__header h2 {
+        font-size: 26px;
+    }
+
+    .bracket-board {
+        --bracket-gap: 32px;
+
+        grid-template-columns:
+            repeat(5, 200px);
+    }
+
+    .bracket-third-place {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap: 20px;
+    }
+
+}
+
+
+/* ==========================================
+   12. 减少动态效果
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bracket-match {
+        transition: none;
+    }
+
+}
+/* ==================================================
+   World Cup Match Detail
+   比赛详情：球场记分牌、进球时间线、比赛资料
+   ================================================== */
+
+
+/* ==========================================
+   1. 球场记分牌背景
+   ========================================== */
+
+.md-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    background: #173c27;
+}
+
+.md-hero__image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.md-hero__shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8, 25, 15, 0.75) 0%,
+            rgba(8, 25, 15, 0.34) 50%,
+            rgba(8, 25, 15, 0.76) 100%
+        ),
+        rgba(12, 38, 24, 0.18);
+}
+
+.md-hero__inner {
+    position: relative;
+
+    padding-top: 24px;
+    padding-bottom: 36px;
+}
+
+
+/* ==========================================
+   2. 顶部返回及比赛编号
+   ========================================== */
+
+.md-hero__top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.md-hero__back {
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.md-hero__back:hover,
+.md-hero__back:focus {
+    color: #ffffff;
+
+    text-decoration: underline;
+}
+
+.md-hero__number {
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 11px;
+    font-weight: 650;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* ==========================================
+   3. 比赛阶段与时间
+   ========================================== */
+
+.md-hero__heading {
+    padding: 24px 0 30px;
+
+    text-align: center;
+}
+
+.md-hero__eyebrow {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #dce8ce;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.16em;
+}
+
+.site-main .md-hero__title {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+.site-main .md-hero__title::after {
+    display: none;
+}
+
+.site-main .md-hero__kickoff {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 13px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==========================================
+   4. 核心比分布局
+   ========================================== */
+
+.md-scoreboard {
+    display: grid;
+
+    max-width: 960px;
+
+    margin: 0 auto;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(180px, 1fr)
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+/* 双方球队 */
+
+.md-team {
+    display: flex;
+
+    min-width: 0;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: center;
+}
+
+.md-team__flag {
+    display: block;
+
+    width: 100px;
+    height: 75px;
+
+    object-fit: cover;
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.16);
+}
+
+.md-flag-fallback {
+    display: inline-flex;
+
+    padding: 8px;
+
+    align-items: center;
+    justify-content: center;
+
+    color: inherit;
+
+    border: 1px solid currentColor;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.site-main .md-team__name {
+    color: #ffffff;
+
+    font-size: clamp(22px, 2.8vw, 40px);
+    font-weight: 850;
+
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+}
+
+.md-team__code {
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+}
+
+.md-team__link {
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 12px;
+
+    text-decoration: none;
+}
+
+.md-team__link:hover,
+.md-team__link:focus {
+    color: var(--wc-accent);
+
+    text-decoration: underline;
+}
+
+
+/* 中央比分 */
+
+.md-score {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: center;
+}
+
+.md-score__numbers {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    color: #ffffff;
+
+    font-size: clamp(56px, 7vw, 110px);
+    font-weight: 900;
+
+    line-height: 1;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.site-main .md-score__numbers strong {
+    color: #ffffff;
+
+    font-weight: 900;
+}
+
+.md-score__numbers > span {
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 0.65em;
+}
+
+.md-score__pending {
+    color: #ffffff;
+
+    font-size: 64px;
+    font-weight: 900;
+}
+
+.md-score__status {
+    color: var(--wc-accent);
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+.site-main .md-score__note {
+    max-width: 250px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* 底部场馆 */
+
+.md-hero__venue {
+    margin-top: 34px;
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   5. 暖白色主体布局
+   ========================================== */
+
+.md-content {
+    padding: 48px 0 64px;
+
+    background: var(--mc-paper);
+}
+
+.md-content__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+    align-items: start;
+
+    gap: 64px;
+}
+
+.md-events,
+.md-information {
+    min-width: 0;
+}
+
+.md-section-heading {
+    margin-bottom: 28px;
+}
+
+.site-main .md-section-heading h2 {
+    margin: 0 0 10px;
+
+    color: var(--mc-text);
+
+    font-size: 30px;
+    font-weight: 850;
+
+    line-height: 1.3;
+}
+
+.site-main .md-section-heading p {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   6. 时间线球队标题
+   ========================================== */
+
+.md-events__teams {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        72px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid var(--mc-line);
+
+    gap: 12px;
+}
+
+.md-events__teams > span {
+    color: var(--mc-muted);
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+.md-events__team {
+    display: flex;
+
+    min-width: 0;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--mc-green);
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.md-events__team:last-child {
+    justify-content: flex-end;
+
+    text-align: right;
+}
+
+.md-events__flag {
+    width: 28px;
+    height: 21px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+}
+
+
+/* ==========================================
+   7. 进球事件时间线
+   ========================================== */
+
+.md-timeline {
+    position: relative;
+
+    padding: 16px 0;
+}
+
+.md-timeline::before {
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 50%;
+
+    width: 1px;
+
+    background: var(--mc-line);
+
+    content: "";
+}
+
+.md-event {
+    position: relative;
+
+    display: grid;
+
+    min-height: 106px;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        72px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.md-event__marker {
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    grid-column: 2;
+    grid-row: 1;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.md-event__marker > span {
+    display: flex;
+
+    width: 34px;
+    height: 34px;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--mc-paper);
+
+    border: 1px solid var(--mc-line);
+    border-radius: 50%;
+
+    font-size: 16px;
+}
+
+.md-event__minute {
+    position: relative;
+    z-index: 2;
+
+    grid-column: 2;
+    grid-row: 1;
+
+    align-self: center;
+
+    margin: 0;
+    transform: translateY(30px);
+
+    color: var(--mc-green);
+    background: var(--mc-paper);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.md-event__body {
+    display: flex;
+
+    min-width: 0;
+
+    grid-row: 1;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 14px 0;
+}
+
+
+/* 第一支球队进球显示在左侧 */
+
+.md-event--home .md-event__body {
+    grid-column: 1;
+
+    align-items: flex-end;
+
+    text-align: right;
+}
+
+
+/* 第二支球队进球显示在右侧 */
+
+.md-event--away .md-event__body,
+.md-event--unknown .md-event__body {
+    grid-column: 3;
+
+    align-items: flex-start;
+
+    text-align: left;
+}
+
+.site-main .md-event__scorer {
+    color: var(--mc-text);
+
+    font-size: 17px;
+    font-weight: 800;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.md-event__type {
+    color: var(--mc-green);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.md-event__team {
+    color: var(--mc-muted);
+
+    font-size: 11px;
+}
+
+.md-event__body .md-source-link {
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   8. 时间线结束状态
+   ========================================== */
+
+.md-events__status {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    color: var(--mc-green);
+
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.md-events__status::before,
+.md-events__status::after {
+    height: 1px;
+
+    flex: 1;
+
+    background: var(--mc-line);
+
+    content: "";
+}
+
+.site-main .md-events__notice {
+    margin-top: 26px;
+
+    color: var(--mc-muted);
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   9. 无进球记录状态
+   ========================================== */
+
+.md-events-empty {
+    padding: 40px 20px 48px;
+
+    border-top: 1px solid var(--mc-line);
+    border-bottom: 1px solid var(--mc-line);
+
+    text-align: center;
+}
+
+.md-events-empty__symbol {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: var(--mc-green);
+
+    font-size: 38px;
+}
+
+.site-main .md-events-empty h3 {
+    margin: 0 0 10px;
+
+    color: var(--mc-text);
+
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.site-main .md-events-empty p {
+    margin: 0;
+
+    color: var(--mc-muted);
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   10. 比赛资料栏
+   ========================================== */
+
+.md-information {
+    padding-left: 28px;
+
+    border-left: 1px solid var(--mc-line);
+}
+
+.md-facts {
+    margin: 0;
+}
+
+.md-facts__item {
+    padding: 14px 0;
+
+    border-top: 1px solid var(--mc-line);
+}
+
+.site-main .md-facts__item dt {
+    margin-bottom: 7px;
+
+    color: var(--mc-muted);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.site-main .md-facts__item dd {
+    margin: 0;
+
+    color: var(--mc-text);
+
+    font-size: 15px;
+    font-weight: 750;
+
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+.md-facts__item dd > small {
+    display: block;
+
+    color: var(--mc-muted);
+
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.md-information__source {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--mc-line);
+}
+
+.md-source-link {
+    color: var(--mc-green);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    text-decoration: none;
+}
+
+.md-source-link:hover,
+.md-source-link:focus {
+    color: var(--mc-text);
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================
+   11. 页面底部导航
+   ========================================== */
+
+.md-bottom {
+    display: flex;
+
+    margin-top: 52px;
+    padding-top: 24px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    border-top: 1px solid var(--mc-line);
+}
+
+.md-bottom__link {
+    color: var(--mc-green);
+
+    font-size: 13px;
+    font-weight: 750;
+
+    text-decoration: none;
+}
+
+.md-bottom__link:hover,
+.md-bottom__link:focus {
+    color: var(--mc-text);
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================
+   12. 平板端
+   ========================================== */
+
+@media (max-width: 991px) {
+
+    .md-content__layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            240px;
+
+        gap: 30px;
+    }
+
+    .md-information {
+        padding-left: 20px;
+    }
+
+    .md-scoreboard {
+        gap: 20px;
+    }
+
+}
+
+
+/* ==========================================
+   13. 手机端
+   ========================================== */
+
+@media (max-width: 767px) {
+
+    .md-hero__inner {
+        padding-top: 18px;
+        padding-bottom: 28px;
+    }
+
+    .md-hero__heading {
+        padding: 22px 0 26px;
+    }
+
+    .site-main .md-hero__title {
+        font-size: 22px;
+    }
+
+    .site-main .md-hero__kickoff {
+        font-size: 11px;
+    }
+
+    .md-scoreboard {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(84px, 0.9fr)
+            minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    .md-team {
+        gap: 8px;
+    }
+
+    .md-team__flag {
+        width: 58px;
+        height: 43.5px;
+    }
+
+    .site-main .md-team__name {
+        font-size: 18px;
+    }
+
+    .md-team__code {
+        font-size: 10px;
+    }
+
+    .md-team__link {
+        font-size: 10px;
+    }
+
+    .md-score__numbers {
+        gap: 7px;
+
+        font-size: clamp(30px, 9vw, 58px);
+    }
+
+    .md-score__pending {
+        font-size: 36px;
+    }
+
+    .md-score__status {
+        font-size: 11px;
+    }
+
+    .site-main .md-score__note {
+        font-size: 11px;
+    }
+
+    .md-hero__venue {
+        margin-top: 26px;
+
+        font-size: 11px;
+    }
+
+    .md-content {
+        padding: 32px 0 48px;
+    }
+
+    .md-content__layout {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 38px;
+    }
+
+    .site-main .md-section-heading h2 {
+        font-size: 26px;
+    }
+
+    .md-information {
+        padding-left: 0;
+        padding-top: 28px;
+
+        border-left: 0;
+        border-top: 2px solid var(--mc-green);
+    }
+
+    .md-events__teams,
+    .md-event {
+        grid-template-columns:
+            minmax(0, 1fr)
+            48px
+            minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    .md-events__team {
+        font-size: 12px;
+
+        gap: 6px;
+    }
+
+    .md-events__flag {
+        width: 24px;
+        height: 18px;
+    }
+
+    .md-events__teams > span {
+        font-size: 10px;
+    }
+
+    .site-main .md-event__scorer {
+        font-size: 15px;
+    }
+
+    .md-bottom {
+        margin-top: 32px;
+    }
+
+}
+/* ==================================================
+   Match Centre - Stadium Filter
+   场馆关联与筛选提示
+   ================================================== */
+
+.mc-stadium-context {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin: 0 0 24px;
+    padding: 18px 0;
+
+    border-top: 1px solid #cfd6ce;
+    border-bottom: 1px solid #cfd6ce;
+}
+
+.mc-stadium-context__identity {
+    display: flex;
+
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px 18px;
+}
+
+.mc-stadium-context__identity > span {
+    color: #63716c;
+
+    font-size: 12px;
+}
+
+.site-main .mc-stadium-context__identity > strong {
+    color: #19332c;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.mc-stadium-context__links {
+    display: flex;
+
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px 24px;
+}
+
+.mc-stadium-context__links a {
+    color: #24543e;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.mc-stadium-context__links a:last-child {
+    color: #63716c;
+}
+
+.mc-stadium-context__links a:hover,
+.mc-stadium-context__links a:focus {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+
+/* 四项赛事筛选布局 */
+
+.mc-filters.mc-filters--refined {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(0, 1.15fr)
+        minmax(0, 0.85fr)
+        minmax(0, 0.85fr)
+        auto;
+
+    align-items: end;
+
+    gap: 16px;
+}
+
+.mc-filters--refined .mc-filters__field {
+    min-width: 0;
+}
+
+.mc-filters--refined .mc-filters__select {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* 平板端 */
+
+@media (max-width: 991px) {
+
+    .mc-filters.mc-filters--refined {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .mc-filters--refined .mc-filters__actions {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* 手机端 */
+
+@media (max-width: 767px) {
+
+    .mc-stadium-context {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .mc-stadium-context__identity {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+    .mc-filters.mc-filters--refined {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+}
+/* ==================================================
+   Match Detail - Stadium Links
+   比赛详情与场馆反向关联
+   ================================================== */
+
+
+/* 记分牌下方的场馆链接 */
+
+.site-main .md-hero__venue-link {
+    color: inherit;
+
+    text-decoration: none;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+    padding-bottom: 3px;
+
+    transition:
+        color 180ms ease,
+        border-color 180ms ease;
+}
+
+.site-main .md-hero__venue-link:hover,
+.site-main .md-hero__venue-link:focus {
+    color: #c7f36b;
+
+    border-bottom-color: #c7f36b;
+
+    text-decoration: none;
+}
+
+
+/* 右侧比赛资料中的场馆链接 */
+
+.site-main .md-facts__venue-link {
+    color: #24543e;
+
+    font-weight: 750;
+
+    text-decoration: none;
+}
+
+.site-main .md-facts__venue-link:hover,
+.site-main .md-facts__venue-link:focus {
+    color: #19332c;
+
+    text-decoration: underline;
+
+    text-underline-offset: 4px;
+}
+
+
+/* 比赛资料底部关联入口 */
+
+.md-information__source {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .site-main .md-hero__venue-link {
+        transition: none;
+    }
+
+}

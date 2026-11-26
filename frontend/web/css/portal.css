@@ -1,0 +1,1980 @@
+/**
+ * WorldCup2026 团队门户专属视觉体系。
+ *
+ * TEAM 404 / Behind the Project
+ * 作用域：.portal-page
+ */
+
+/* ========================================
+   01. 基础视觉变量
+   ======================================== */
+
+.portal-page {
+    --tp-dark: #111815;
+    --tp-paper: #F1F2EB;
+    --tp-accent: #C7F36B;
+    --tp-muted: #647069;
+    --tp-line: #D5DAD0;
+
+    background: var(--tp-paper);
+    color: var(--tp-dark);
+}
+
+.portal-page,
+.portal-page *,
+.portal-page *::before,
+.portal-page *::after {
+    box-sizing: border-box;
+}
+
+.site-main .portal-page h1,
+.site-main .portal-page h2,
+.site-main .portal-page h3,
+.site-main .portal-page p {
+    margin-top: 0;
+}
+
+.site-main .portal-page h1::after {
+    display: none;
+}
+
+.portal-page a {
+    text-decoration: none;
+}
+
+.portal-page a:focus-visible {
+    outline: 2px solid #71983C;
+    outline-offset: 5px;
+}
+
+.portal-page section[id] {
+    scroll-margin-top: 100px;
+}
+
+
+/* ========================================
+   02. 团队品牌主视觉
+   ======================================== */
+
+.portal-page .tp-hero {
+    position: relative;
+    overflow: hidden;
+
+    background: var(--tp-dark);
+    color: var(--tp-paper);
+}
+
+.portal-page .tp-hero__inner {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 620px;
+    padding-top: 46px;
+    padding-bottom: 40px;
+}
+
+
+/* 顶部辅助标识 */
+
+.portal-page .tp-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #35433A;
+}
+
+.portal-page .tp-hero__eyebrow {
+    color: var(--tp-accent);
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+}
+
+.portal-page .tp-hero__edition {
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+}
+
+
+/* 主视觉构图 */
+
+.portal-page .tp-hero__main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 64px;
+
+    flex: 1 1 auto;
+    padding: 64px 0;
+}
+
+.portal-page .tp-hero__identity {
+    min-width: 0;
+}
+
+.portal-page .tp-hero__kicker {
+    display: block;
+
+    margin-bottom: 16px;
+
+    color: #A0ADA1;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+}
+
+
+/* 404 核心数字 */
+
+.site-main .portal-page .tp-hero__number {
+    margin: 0 0 20px;
+
+    color: var(--tp-paper);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(120px, 22vw, 330px);
+    font-weight: 900;
+    line-height: 0.79;
+    letter-spacing: -0.095em;
+    font-variant-numeric: lining-nums;
+}
+
+.portal-page .tp-hero__number span {
+    color: var(--tp-accent);
+}
+
+.portal-page .tp-hero__number::after {
+    display: none;
+}
+
+.portal-page .tp-hero__signature {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-top: 32px;
+
+    color: var(--tp-paper);
+
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+}
+
+.portal-page .tp-hero__signature::before {
+    content: "";
+
+    width: 44px;
+    height: 3px;
+
+    background: var(--tp-accent);
+}
+
+
+/* 右侧几何图形 */
+
+.portal-page .tp-hero__graphic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 12px;
+}
+
+.portal-page .tp-hero__graphic svg {
+    display: block;
+
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+
+/* ========================================
+   03. 主视觉底部信息
+   ======================================== */
+
+.portal-page .tp-hero__bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) auto;
+    align-items: end;
+    gap: 36px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #35433A;
+}
+
+.site-main .portal-page .tp-hero__name {
+    margin: 0 0 12px;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 850;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+}
+
+.site-main .portal-page .tp-hero__description {
+    max-width: 680px;
+    margin: 0;
+
+    color: #AAB7AB;
+
+    font-size: 15px;
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 主视觉操作入口 */
+
+.portal-page .tp-hero__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.portal-page .tp-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    min-height: 48px;
+    padding: 12px 20px;
+
+    border: 1px solid transparent;
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.4;
+
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease;
+}
+
+.portal-page .tp-button--primary {
+    color: var(--tp-dark);
+    background: var(--tp-accent);
+}
+
+.portal-page .tp-button--primary:hover,
+.portal-page .tp-button--primary:focus {
+    color: var(--tp-dark);
+    background: #DBFF91;
+}
+
+.portal-page .tp-button--outline {
+    color: var(--tp-paper);
+    border-color: #536359;
+    background: transparent;
+}
+
+.portal-page .tp-button--outline:hover,
+.portal-page .tp-button--outline:focus {
+    color: var(--tp-accent);
+    border-color: var(--tp-accent);
+}
+
+
+/* ========================================
+   04. 浅色内容区基础
+   ======================================== */
+
+.portal-page .tp-content {
+    padding: 72px 0 88px;
+
+    background: var(--tp-paper);
+    color: var(--tp-dark);
+}
+
+.site-main .portal-page .tp-content h2,
+.site-main .portal-page .tp-content h3,
+.site-main .portal-page .tp-content strong,
+.site-main .portal-page .tp-content dt {
+    color: var(--tp-dark);
+}
+
+.site-main .portal-page .tp-content p,
+.site-main .portal-page .tp-content dd {
+    color: var(--tp-muted);
+}
+
+.portal-page .tp-section__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 24px;
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--tp-line);
+
+    color: var(--tp-muted);
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.site-main .portal-page .tp-section__title {
+    margin: 0 0 12px;
+
+    color: var(--tp-dark);
+
+    font-size: clamp(34px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+}
+.portal-page .tp-empty {
+    padding: 24px 0;
+
+    border-top: 1px solid var(--tp-line);
+    border-bottom: 1px solid var(--tp-line);
+
+    color: var(--tp-muted);
+}
+
+
+
+/* ========================================
+   05. 响应式布局
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .portal-page .tp-hero__inner {
+        min-height: 540px;
+        padding-top: 36px;
+    }
+
+    .portal-page .tp-hero__main {
+        gap: 32px;
+        padding: 50px 0;
+    }
+
+    .portal-page .tp-hero__bottom {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .portal-page .tp-hero__inner {
+        min-height: 0;
+        padding-top: 28px;
+        padding-bottom: 32px;
+    }
+
+    .portal-page .tp-hero__top {
+        gap: 12px;
+        padding-bottom: 16px;
+    }
+
+    .portal-page .tp-hero__eyebrow,
+    .portal-page .tp-hero__edition {
+        font-size: 10px;
+        letter-spacing: 0.06em;
+    }
+
+    .portal-page .tp-hero__main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+
+        padding: 56px 0 42px;
+    }
+
+    .site-main .portal-page .tp-hero__number {
+        font-size: clamp(96px, 29vw, 220px);
+        letter-spacing: -0.085em;
+    }
+
+    .portal-page .tp-hero__graphic {
+        display: none;
+    }
+
+    .portal-page .tp-hero__signature {
+        margin-top: 24px;
+        font-size: 14px;
+    }
+
+    .portal-page .tp-hero__bottom {
+        padding-top: 24px;
+    }
+
+    .portal-page .tp-hero__actions {
+        gap: 10px;
+    }
+
+    .portal-page .tp-button {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .portal-page .tp-content {
+        padding: 44px 0 56px;
+    }
+}
+/* ========================================
+   06. TEAM 404 交互式主视觉
+   ======================================== */
+
+/* 动态交互变量 */
+
+.portal-page .tp-hero {
+    --tp-number-x: 0px;
+    --tp-number-y: 0px;
+
+    --tp-graphic-x: 0px;
+    --tp-graphic-y: 0px;
+
+    --tp-light-x: 50%;
+    --tp-light-y: 50%;
+    --tp-light-opacity: 0;
+
+    isolation: isolate;
+}
+
+
+/* ========================================
+   06.1 鼠标跟随环境光
+   ======================================== */
+
+.portal-page .tp-hero__ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    pointer-events: none;
+
+    background: radial-gradient(
+        ellipse 420px 340px
+        at var(--tp-light-x) var(--tp-light-y),
+        rgba(199, 243, 107, 0.085) 0%,
+        rgba(199, 243, 107, 0.025) 45%,
+        transparent 100%
+    );
+
+    opacity: var(--tp-light-opacity);
+
+    transition: opacity 350ms ease;
+}
+
+.portal-page .tp-hero__inner {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ========================================
+   06.2 404 数字交互
+   ======================================== */
+
+.site-main .portal-page .tp-hero__number {
+    white-space: nowrap;
+
+    transform: translate3d(
+        var(--tp-number-x),
+        var(--tp-number-y),
+        0
+    );
+
+    transition: transform 280ms ease-out;
+}
+
+/*
+ * 原有 CSS 中：
+ * .portal-page .tp-hero__number span
+ * 会将所有 span 设置为荧光绿色。
+ *
+ * 这里重新明确三个数字的默认颜色。
+ */
+
+.portal-page .tp-hero__number .tp-digit {
+    display: inline-block;
+
+    color: var(--tp-paper);
+
+    transition:
+        color 220ms ease,
+        text-shadow 260ms ease;
+}
+
+.portal-page .tp-hero__number .tp-digit--accent {
+    color: var(--tp-accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .portal-page .tp-hero__number .tp-digit:hover {
+        color: var(--tp-accent);
+
+        text-shadow:
+            0 0 24px rgba(199, 243, 107, 0.18),
+            0 0 54px rgba(199, 243, 107, 0.08);
+    }
+}
+
+
+/* ========================================
+   06.3 几何图形反向视差
+   ======================================== */
+
+.portal-page .tp-hero__graphic {
+    transform: translate3d(
+        var(--tp-graphic-x),
+        var(--tp-graphic-y),
+        0
+    );
+
+    transition: transform 320ms ease-out;
+}
+
+
+/* ========================================
+   06.4 几何图形持续动画
+   ======================================== */
+
+/* 顺时针及逆时针圆环 */
+
+.portal-page .tp-orbit {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+}
+
+.portal-page .tp-orbit--outer {
+    animation: tp-orbit-clockwise 16s linear infinite;
+}
+
+.portal-page .tp-orbit--inner {
+    animation: tp-orbit-counterclockwise 27s linear infinite;
+}
+
+@keyframes tp-orbit-clockwise {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes tp-orbit-counterclockwise {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+
+/* 中心呼吸光环 */
+
+.portal-page .tp-center-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation: tp-center-pulse 3.5s ease-out infinite;
+}
+
+@keyframes tp-center-pulse {
+
+    0% {
+        transform: scale(0.65);
+        opacity: 0.65;
+    }
+
+    70%,
+    100% {
+        transform: scale(1.45);
+        opacity: 0;
+    }
+}
+
+
+/* 中心定位点 */
+
+.portal-page .tp-center-point {
+    animation: tp-point-breathe 3.5s ease-in-out infinite;
+}
+
+@keyframes tp-point-breathe {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.48;
+    }
+}
+
+
+/* 扫描线 */
+
+.portal-page .tp-scan-line {
+    animation: tp-scan-motion 7s linear infinite;
+}
+
+@keyframes tp-scan-motion {
+
+    0% {
+        transform: translateY(-155px);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 0.45;
+    }
+
+    85% {
+        opacity: 0.45;
+    }
+
+    100% {
+        transform: translateY(155px);
+        opacity: 0;
+    }
+}
+
+
+/* SYSTEM ONLINE 状态灯 */
+
+.portal-page .tp-online-indicator {
+    animation: tp-online-breathe 3.5s ease-in-out infinite;
+}
+
+@keyframes tp-online-breathe {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+
+/* ========================================
+   06.5 按钮交互细节
+   ======================================== */
+
+.portal-page .tp-hero__actions .tp-button span {
+    display: inline-block;
+
+    transition: transform 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .portal-page .tp-button--primary:hover span {
+        transform: translateY(3px);
+    }
+
+    .portal-page .tp-button--outline:hover span {
+        transform: translate(3px, -3px);
+    }
+}
+
+
+/* ========================================
+   06.6 离屏动画暂停
+   ======================================== */
+
+.portal-page .tp-hero.tp-motion-paused .tp-orbit,
+.portal-page .tp-hero.tp-motion-paused .tp-center-pulse,
+.portal-page .tp-hero.tp-motion-paused .tp-center-point,
+.portal-page .tp-hero.tp-motion-paused .tp-scan-line,
+.portal-page .tp-hero.tp-motion-paused .tp-online-indicator {
+    animation-play-state: paused;
+}
+
+
+/* ========================================
+   06.7 触屏设备适配
+   ======================================== */
+
+@media (hover: none), (pointer: coarse) {
+
+    .portal-page .tp-hero__ambient {
+        display: none;
+    }
+
+    .site-main .portal-page .tp-hero__number,
+    .portal-page .tp-hero__graphic {
+        transform: none;
+    }
+}
+
+
+/* ========================================
+   06.8 减少动态效果设置
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-page .tp-hero__ambient,
+    .portal-page .tp-scan-line,
+    .portal-page .tp-center-pulse {
+        display: none;
+    }
+
+    .portal-page .tp-hero__number,
+    .portal-page .tp-hero__graphic {
+        transform: none !important;
+    }
+
+    .portal-page .tp-hero *,
+    .portal-page .tp-hero *::before,
+    .portal-page .tp-hero *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+/* ========================================
+   07. 团队成员 / PEOPLE
+   ======================================== */
+
+.portal-page .tp-members {
+    padding-top: 72px;
+    padding-bottom: 88px;
+}
+
+
+/* ========================================
+   07.1 章节标题
+   ======================================== */
+
+.portal-page .tp-members__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+
+    margin-bottom: 40px;
+}
+
+.site-main .portal-page .tp-members__subtitle {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.portal-page .tp-members__edition {
+    padding-bottom: 4px;
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   07.2 开放式成员网格
+   ======================================== */
+
+.portal-page .tp-members__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    column-gap: 32px;
+    row-gap: 48px;
+
+    align-items: stretch;
+}
+
+.portal-page .tp-member {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    background: transparent;
+}
+
+
+/* ========================================
+   07.3 头像展示底板
+   ======================================== */
+
+.site-main .portal-page .tp-member__portrait {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    aspect-ratio: 5 / 4;
+
+    margin-bottom: 24px;
+    padding: 20px;
+
+    overflow: hidden;
+
+    background: #E2E7DC;
+    color: var(--tp-muted);
+
+    text-decoration: none;
+
+    transition: background-color 280ms ease;
+}
+
+
+/* 底板内辅助定位线 */
+
+.portal-page .tp-member__portrait::before,
+.portal-page .tp-member__portrait::after {
+    position: absolute;
+
+    content: "";
+
+    pointer-events: none;
+
+    background: #CDD7C8;
+}
+
+.portal-page .tp-member__portrait::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+
+    width: 1px;
+}
+
+.portal-page .tp-member__portrait::after {
+    top: 50%;
+    right: 0;
+    left: 0;
+
+    height: 1px;
+}
+
+
+/* 头像区域顶部编号 */
+
+.portal-page .tp-member__portrait-meta {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #657363;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+
+/* ========================================
+   07.4 统一圆形头像
+   ======================================== */
+
+.portal-page .tp-member__avatar-stage {
+    position: absolute;
+
+    inset: 38px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1;
+}
+
+.portal-page .tp-member__avatar-frame {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 53%;
+    max-width: 200px;
+    max-height: 90%;
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+
+    background: #CCD6C7;
+
+    transition: transform 320ms
+        cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+
+/* 头像外侧辅助圆环 */
+
+.portal-page .tp-member__avatar-frame::before {
+    position: absolute;
+
+    inset: -12px;
+
+    content: "";
+
+    border: 1px solid #B5C3B1;
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transition: border-color 280ms ease;
+}
+
+
+/* 数据库中的真实头像 */
+
+.portal-page .tp-member__avatar {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* 没有头像时的姓氏占位 */
+
+.portal-page .tp-member__initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: #788B75;
+
+    font-size: clamp(38px, 5vw, 72px);
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+/* ========================================
+   07.5 头像底板下方标识
+   ======================================== */
+
+.portal-page .tp-member__portrait-footer {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: auto;
+
+    color: #657363;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.portal-page .tp-member__portrait-arrow {
+    color: #35583A;
+
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1;
+
+    transition:
+        transform 240ms ease,
+        color 240ms ease;
+}
+
+
+/* ========================================
+   07.6 成员姓名及学号
+   ======================================== */
+
+.portal-page .tp-member__identity {
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--tp-line);
+}
+
+.site-main .portal-page .tp-member__name {
+    margin: 0 0 8px;
+
+    color: var(--tp-dark);
+
+    font-size: clamp(24px, 2.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .portal-page .tp-member__name a {
+    color: var(--tp-dark);
+
+    text-decoration: none;
+
+    transition: color 220ms ease;
+}
+
+.site-main .portal-page .tp-member__name a:hover,
+.site-main .portal-page .tp-member__name a:focus {
+    color: #35583A;
+}
+
+.portal-page .tp-member__student-no {
+    display: block;
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+}
+
+
+/* ========================================
+   07.7 项目职责
+   ======================================== */
+
+.portal-page .tp-member__role {
+    min-height: 120px;
+
+    padding-top: 22px;
+    padding-bottom: 14px;
+}
+
+.portal-page .tp-member__label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--tp-muted);
+
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.07em;
+}
+
+.site-main .portal-page .tp-member__role-text {
+    margin: 0;
+
+    color: #263B2D;
+
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.85;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   07.8 个人介绍
+   ======================================== */
+
+.portal-page .tp-member__bio {
+    flex: 1 1 auto;
+
+    min-height: 74px;
+
+    padding-bottom: 24px;
+}
+
+.site-main .portal-page .tp-member__bio p {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.85;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   07.9 个人主页入口
+   ======================================== */
+
+.site-main .portal-page .tp-member__profile-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-top: auto;
+    padding-top: 17px;
+    padding-bottom: 8px;
+
+    border-top: 1px solid var(--tp-line);
+
+    color: #35583A;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    text-decoration: none;
+
+    transition:
+        color 240ms ease,
+        border-color 240ms ease;
+}
+
+.portal-page .tp-member__profile-link span {
+    display: inline-block;
+
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+
+    transition: transform 240ms ease;
+}
+
+
+/* ========================================
+   07.10 鼠标悬停效果
+   ======================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-page .tp-member__portrait:hover {
+        background: #D6E0D0;
+    }
+
+    .portal-page .tp-member__portrait:hover
+    .tp-member__avatar-frame {
+        transform: scale(1.045);
+    }
+
+    .portal-page .tp-member__portrait:hover
+    .tp-member__avatar-frame::before {
+        border-color: #829A76;
+    }
+
+    .portal-page .tp-member__portrait:hover
+    .tp-member__portrait-arrow {
+        transform: translate(3px, -3px);
+
+        color: #203D2A;
+    }
+
+    .site-main .portal-page .tp-member__profile-link:hover {
+        border-color: #64825A;
+
+        color: #111815;
+    }
+
+    .portal-page .tp-member__profile-link:hover span {
+        transform: translate(3px, -3px);
+    }
+}
+
+
+/* ========================================
+   07.11 成员区域响应式适配
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .portal-page .tp-members {
+        padding-top: 56px;
+        padding-bottom: 64px;
+    }
+
+    .portal-page .tp-members__grid {
+        column-gap: 22px;
+        row-gap: 36px;
+    }
+
+    .site-main .portal-page .tp-member__portrait {
+        padding: 15px;
+    }
+
+    .portal-page .tp-member__avatar-frame {
+        max-width: 155px;
+    }
+
+    .portal-page .tp-member__avatar-frame::before {
+        inset: -8px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .portal-page .tp-members {
+        padding-top: 44px;
+        padding-bottom: 56px;
+    }
+
+    .portal-page .tp-members__heading {
+        gap: 12px;
+
+        margin-bottom: 28px;
+    }
+
+    .portal-page .tp-members__edition {
+        display: none;
+    }
+
+    .portal-page .tp-members__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        column-gap: 20px;
+        row-gap: 36px;
+    }
+
+    .site-main .portal-page .tp-member__portrait {
+        margin-bottom: 18px;
+    }
+
+    .portal-page .tp-member__role {
+        min-height: 100px;
+    }
+
+    .portal-page .tp-member__bio {
+        min-height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .portal-page .tp-members__grid {
+        grid-template-columns: minmax(0, 1fr);
+
+        row-gap: 40px;
+    }
+
+    .portal-page .tp-member__avatar-frame {
+        max-width: 180px;
+    }
+
+    .portal-page .tp-member__avatar-frame::before {
+        inset: -10px;
+    }
+
+    .portal-page .tp-member__role {
+        min-height: 0;
+    }
+
+    .portal-page .tp-member__bio {
+        min-height: 0;
+    }
+}
+
+
+/* 尊重系统减少动态效果设置 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-page .tp-member *,
+    .portal-page .tp-member *::before,
+    .portal-page .tp-member *::after {
+        transition: none !important;
+    }
+
+    .portal-page .tp-member__avatar-frame,
+    .portal-page .tp-member__portrait-arrow,
+    .portal-page .tp-member__profile-link span {
+        transform: none !important;
+    }
+}
+/* ========================================
+   08. 项目介绍 / THE PROJECT
+   ======================================== */
+
+.portal-page .tp-project {
+    padding-top: 32px;
+    padding-bottom: 96px;
+
+    background: var(--tp-paper);
+}
+
+
+/* ========================================
+   08.1 项目介绍标题与正文
+   ======================================== */
+
+.portal-page .tp-project__heading {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    align-items: start;
+    gap: 64px;
+
+    margin-bottom: 48px;
+}
+
+.site-main .portal-page .tp-project__subtitle {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.site-main .portal-page .tp-project__intro p {
+    margin: 0 0 14px;
+
+    color: #536258;
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.95;
+}
+
+.site-main .portal-page .tp-project__intro p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ========================================
+   08.2 ABC 业务模块列表
+   ======================================== */
+
+.portal-page .tp-project__modules {
+    border-top: 1px solid #C5CFC1;
+}
+
+.site-main .portal-page .tp-module {
+    display: grid;
+    grid-template-columns:
+        110px
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        40px;
+
+    align-items: center;
+    gap: 28px;
+
+    min-height: 150px;
+    padding: 24px 16px 24px 0;
+
+    border-bottom: 1px solid #C5CFC1;
+
+    background: transparent;
+    color: var(--tp-dark);
+
+    text-decoration: none;
+
+    transition:
+        background-color 240ms ease,
+        border-color 240ms ease;
+}
+
+
+/* 模块字母 */
+
+.portal-page .tp-module__number {
+    color: #35583A;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 88px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.065em;
+
+    transition:
+        color 240ms ease,
+        transform 240ms ease;
+}
+
+
+/* 模块名称 */
+
+.portal-page .tp-module__identity {
+    min-width: 0;
+}
+
+.portal-page .tp-module__english {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+}
+
+.site-main .portal-page .tp-module__title {
+    margin: 0;
+
+    color: var(--tp-dark);
+
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+}
+
+
+/* 模块业务说明 */
+
+.portal-page .tp-module__description {
+    color: var(--tp-muted);
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.85;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 跳转箭头 */
+
+.portal-page .tp-module__arrow {
+    color: #35583A;
+
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-align: right;
+
+    transition:
+        transform 240ms ease,
+        color 240ms ease;
+}
+
+
+/* ========================================
+   08.3 模块悬停反馈
+   ======================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-page .tp-module:hover {
+        border-bottom-color: #91A28A;
+
+        background: #E5EADE;
+    }
+
+    .portal-page .tp-module:hover
+    .tp-module__number {
+        color: #111815;
+
+        transform: translateX(6px);
+    }
+
+    .portal-page .tp-module:hover
+    .tp-module__arrow {
+        color: #111815;
+
+        transform: translate(4px, -4px);
+    }
+}
+
+
+/* ========================================
+   08.4 技术栈标识
+   ======================================== */
+
+.portal-page .tp-project__stack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    margin-top: 32px;
+}
+
+.portal-page .tp-project__stack-label {
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.portal-page .tp-project__stack-items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+}
+
+.portal-page .tp-project__stack-items span {
+    color: #536258;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   09. 项目成果 / EXPLORE OUR WORK
+   ======================================== */
+
+.portal-page .tp-work {
+    padding: 72px 0 44px;
+
+    background: var(--tp-dark);
+    color: var(--tp-paper);
+}
+
+
+/* ========================================
+   09.1 章节标识
+   ======================================== */
+
+.portal-page .tp-work__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #35433A;
+
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+}
+
+.portal-page .tp-work__meta span:first-child {
+    color: var(--tp-accent);
+}
+
+
+/* ========================================
+   09.2 成果区域标题
+   ======================================== */
+
+.portal-page .tp-work__heading {
+    margin: 38px 0 48px;
+}
+
+.site-main .portal-page .tp-work__title {
+    margin: 0 0 16px;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.045em;
+}
+
+.portal-page .tp-work__title span {
+    color: var(--tp-accent);
+}
+
+.site-main .portal-page .tp-work__subtitle {
+    margin: 0;
+
+    color: #AAB7AB;
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+
+/* ========================================
+   09.3 成果入口
+   ======================================== */
+
+.portal-page .tp-work__entries {
+    border-top: 1px solid #46564B;
+}
+
+.site-main .portal-page .tp-work-entry {
+    display: grid;
+    grid-template-columns:
+        48px
+        minmax(0, 1.25fr)
+        minmax(0, 1fr)
+        58px;
+
+    align-items: center;
+    gap: 28px;
+
+    min-height: 145px;
+    padding: 28px 16px 28px 0;
+
+    border-bottom: 1px solid #46564B;
+
+    background: transparent;
+    color: var(--tp-paper);
+
+    text-decoration: none;
+
+    transition:
+        background-color 260ms ease,
+        border-color 260ms ease;
+}
+
+
+/* 入口编号 */
+
+.portal-page .tp-work-entry__number {
+    align-self: start;
+
+    padding-top: 5px;
+
+    color: #819080;
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+
+/* 入口名称 */
+
+.portal-page .tp-work-entry__identity {
+    min-width: 0;
+}
+
+.portal-page .tp-work-entry__english {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #AAB7AB;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.12em;
+}
+
+.site-main .portal-page .tp-work-entry__title {
+    margin: 0;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+
+    transition: color 240ms ease;
+}
+
+
+/* 入口说明 */
+
+.portal-page .tp-work-entry__description {
+    color: #AAB7AB;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+
+/* 大型跳转箭头 */
+
+.portal-page .tp-work-entry__arrow {
+    color: var(--tp-accent);
+
+    font-family: Arial, sans-serif;
+    font-size: 46px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: right;
+
+    transition: transform 260ms ease;
+}
+
+
+/* ========================================
+   09.4 成果入口悬停反馈
+   ======================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-page .tp-work-entry:hover {
+        border-bottom-color: var(--tp-accent);
+
+        background: #19251D;
+    }
+
+    .site-main .portal-page .tp-work-entry:hover
+    .tp-work-entry__title {
+        color: var(--tp-accent);
+    }
+
+    .portal-page .tp-work-entry:hover
+    .tp-work-entry__arrow {
+        transform: translate(5px, -5px);
+    }
+}
+
+
+/* ========================================
+   09.5 团队收尾标识
+   ======================================== */
+
+.portal-page .tp-work__signature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    margin-top: 36px;
+
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+}
+
+
+/* ========================================
+   10. 项目及成果区域响应式适配
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .portal-page .tp-project {
+        padding-top: 20px;
+        padding-bottom: 72px;
+    }
+
+    .portal-page .tp-project__heading {
+        gap: 32px;
+
+        margin-bottom: 36px;
+    }
+
+    .site-main .portal-page .tp-module {
+        grid-template-columns:
+            80px
+            minmax(0, 1fr)
+            minmax(0, 1fr)
+            28px;
+
+        gap: 20px;
+
+        min-height: 130px;
+    }
+
+    .portal-page .tp-module__number {
+        font-size: 70px;
+    }
+
+    .portal-page .tp-work {
+        padding-top: 56px;
+        padding-bottom: 36px;
+    }
+
+    .site-main .portal-page .tp-work-entry {
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .portal-page .tp-project {
+        padding-top: 12px;
+        padding-bottom: 56px;
+    }
+
+    .portal-page .tp-project__heading {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 24px;
+
+        margin-bottom: 32px;
+    }
+
+    .site-main .portal-page .tp-module {
+        grid-template-columns:
+            64px
+            minmax(0, 1fr)
+            24px;
+
+        gap: 8px 16px;
+
+        min-height: 0;
+        padding: 22px 8px 22px 0;
+    }
+
+    .portal-page .tp-module__number {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+
+        font-size: 58px;
+    }
+
+    .portal-page .tp-module__identity {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .portal-page .tp-module__description {
+        grid-column: 2;
+        grid-row: 2;
+
+        font-size: 13px;
+    }
+
+    .portal-page .tp-module__arrow {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+
+        font-size: 25px;
+    }
+
+    .portal-page .tp-project__stack {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+
+        margin-top: 24px;
+    }
+
+    .portal-page .tp-project__stack-items {
+        gap: 8px 18px;
+    }
+
+    .portal-page .tp-work {
+        padding-top: 44px;
+        padding-bottom: 28px;
+    }
+
+    .portal-page .tp-work__meta {
+        font-size: 10px;
+    }
+
+    .portal-page .tp-work__heading {
+        margin: 28px 0 32px;
+    }
+
+    .site-main .portal-page .tp-work-entry {
+        grid-template-columns:
+            30px
+            minmax(0, 1fr)
+            32px;
+
+        gap: 8px 12px;
+
+        min-height: 0;
+        padding: 24px 8px 24px 0;
+    }
+
+    .portal-page .tp-work-entry__number {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .portal-page .tp-work-entry__identity {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .portal-page .tp-work-entry__description {
+        grid-column: 2;
+        grid-row: 2;
+
+        font-size: 13px;
+    }
+
+    .portal-page .tp-work-entry__arrow {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+
+        font-size: 32px;
+    }
+
+    .portal-page .tp-work__signature {
+        margin-top: 24px;
+
+        font-size: 10px;
+    }
+}
+
+
+/* 减少动态效果适配 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-page .tp-module,
+    .portal-page .tp-module *,
+    .portal-page .tp-work-entry,
+    .portal-page .tp-work-entry * {
+        transition: none !important;
+    }
+
+    .portal-page .tp-module__number,
+    .portal-page .tp-module__arrow,
+    .portal-page .tp-work-entry__arrow {
+        transform: none !important;
+    }
+}

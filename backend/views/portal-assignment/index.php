@@ -15,21 +15,67 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $category string */
 /* @var $status string|int */
+/* @var $memberId string|int */
+/* @var $memberOptions array */
 
 $this->title = '课程资料管理';
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJs(<<<'JS'
+var assignmentForm = $('#backend-assignment-filter-form');
+var assignmentCategory = $('#assignment-category');
+var assignmentMember = $('#assignment-member');
+var assignmentStatus = $('#assignment-status');
+
+assignmentCategory.on('change', function () {
+    if ($(this).val() !== 'personal') {
+        assignmentMember.val('');
+    }
+
+    assignmentForm.trigger('submit');
+});
+
+assignmentMember.on('change', function () {
+    if ($(this).val() !== '') {
+        assignmentCategory.val('personal');
+    }
+
+    assignmentForm.trigger('submit');
+});
+
+assignmentStatus.on('change', function () {
+    assignmentForm.trigger('submit');
+});
+JS
+);
 ?>
 <div class="portal-assignment-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?= Html::a('新增课程资料', ['create'], ['class' => 'btn btn-success']) ?></p>
 
-    <?= Html::beginForm(['index'], 'get', ['class' => 'form-inline', 'style' => 'margin-bottom: 15px;']) ?>
+   <?= Html::beginForm(
+    ['index'],
+    'get',
+    [
+        'id' => 'backend-assignment-filter-form',
+        'class' => 'form-inline',
+        'style' => 'margin-bottom: 15px;',
+    ]
+) ?>
     <div class="form-group">
         <?= Html::label('资料分类', 'assignment-category', ['class' => 'control-label']) ?>
         <?= Html::dropDownList('category', $category, PortalAssignment::getCategoryOptions(), [
             'id' => 'assignment-category',
             'prompt' => '全部分类',
+            'class' => 'form-control',
+        ]) ?>
+    </div>
+    <div class="form-group">
+        <?= Html::label('所属成员', 'assignment-member', ['class' => 'control-label']) ?>
+        <?= Html::dropDownList('member_id', $memberId, $memberOptions, [
+            'id' => 'assignment-member',
+            'prompt' => '全部成员',
             'class' => 'form-control',
         ]) ?>
     </div>
@@ -57,7 +103,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->getCategoryLabel();
                 },
             ],
-            'owner_label',
+            [
+                'label' => '所属成员',
+                'value' => function ($model) {
+                    if ($model->category === PortalAssignment::CATEGORY_TEAM) {
+                        return '团队作业';
+                    }
+                    if ($model->member !== null) {
+                        return $model->member->name;
+                    }
+                    return '历史记录：成员待补充';
+                },
+            ],
             'relative_path',
             [
                 'attribute' => 'status',
