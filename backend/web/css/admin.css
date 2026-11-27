@@ -1,0 +1,2411 @@
+/* ========================================
+   WorldCup2026 后台公共布局
+   ======================================== */
+
+
+/* 01. 公共设计变量 */
+
+.admin-body {
+    --admin-bg: #F4F6F8;
+    --admin-sidebar: #101923;
+    --admin-surface: #FFFFFF;
+
+    --admin-text: #172435;
+    --admin-muted: #64748B;
+    --admin-line: #D7DDE5;
+
+    --admin-accent: #C7F36B;
+    --admin-green: #35583A;
+
+    --admin-sidebar-width: 248px;
+    --admin-topbar-height: 68px;
+
+    margin: 0;
+
+    background: var(--admin-bg);
+    color: var(--admin-text);
+
+    font-family:
+        "Segoe UI",
+        "Microsoft YaHei",
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    line-height: 1.65;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+.admin-body *,
+.admin-body *::before,
+.admin-body *::after {
+    box-sizing: border-box;
+}
+
+.admin-body .admin-icon {
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 19px;
+    height: 19px;
+}
+
+
+/* 02. 公共框架 */
+
+.admin-shell {
+    display: grid;
+
+    grid-template-columns:
+        var(--admin-sidebar-width)
+        minmax(0, 1fr);
+
+    align-items: start;
+
+    min-height: 100vh;
+}
+
+.admin-workspace {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 100vh;
+}
+
+
+/* 03. 左侧导航 */
+
+.admin-sidebar {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+    min-width: 0;
+
+    background: var(--admin-sidebar);
+    color: #CBD5E1;
+
+    border-right: 1px solid #263445;
+}
+
+.admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    min-height: 88px;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #293644;
+
+    color: #F1F5F9;
+    text-decoration: none;
+}
+
+.admin-brand:hover,
+.admin-brand:focus {
+    color: #F1F5F9;
+    text-decoration: none;
+}
+
+.admin-brand__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: var(--admin-accent);
+    color: #080D16;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.admin-brand__text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    min-width: 0;
+}
+
+.admin-brand__text strong {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+.admin-brand__text small {
+    color: #91A1B6;
+
+    font-size: 11px;
+}
+
+
+/* 04. 导航链接及分组 */
+
+.admin-navigation {
+    flex: 1;
+
+    min-height: 0;
+    padding: 16px 12px;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #354254 transparent;
+}
+
+.admin-nav-link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-height: 42px;
+    padding: 10px 13px;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    color: #CBD5E1;
+
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    text-decoration: none;
+
+    transition:
+        background-color 160ms ease,
+        color 160ms ease;
+}
+
+.admin-nav-link .admin-icon {
+    width: 17px;
+    height: 17px;
+
+    color: #91A1B6;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link:focus {
+    background: #1D2A39;
+    color: #F1F5F9;
+
+    text-decoration: none;
+}
+
+.admin-nav-link.is-active {
+    border-color: #3D5238;
+
+    background: #26392C;
+    color: var(--admin-accent);
+
+    font-weight: 600;
+}
+
+.admin-nav-link.is-active .admin-icon {
+    color: var(--admin-accent);
+}
+
+.admin-nav-link.is-active::before {
+    position: absolute;
+
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+
+    width: 3px;
+
+    border-radius: 0 2px 2px 0;
+
+    background: var(--admin-accent);
+
+    content: "";
+}
+
+.admin-nav-group {
+    margin-top: 20px;
+}
+
+.admin-nav-group__title {
+    margin: 0 0 7px;
+    padding: 0 13px;
+
+    color: #91A1B6;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.admin-nav-group .admin-nav-link + .admin-nav-link {
+    margin-top: 2px;
+}
+
+
+/* 05. 侧边栏底部 */
+
+.admin-sidebar__footer {
+    flex-shrink: 0;
+
+    padding: 12px;
+
+    border-top: 1px solid #293644;
+}
+
+.admin-sidebar__footer .admin-nav-link {
+    color: #91A1B6;
+}
+
+
+/* 06. 顶部工具栏 */
+
+.admin-topbar {
+    position: sticky;
+    z-index: 100;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    min-height: var(--admin-topbar-height);
+
+    padding: 12px 28px;
+
+    border-bottom: 1px solid var(--admin-line);
+
+    background: var(--admin-surface);
+}
+
+.admin-topbar__left,
+.admin-topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    min-width: 0;
+}
+
+.admin-location {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--admin-muted);
+
+    font-size: 13px;
+}
+
+.admin-location strong {
+    color: var(--admin-text);
+
+    font-weight: 600;
+}
+
+.admin-location__separator {
+    color: #B0BAC7;
+}
+
+
+/* 07. 顶部账户信息 */
+
+.admin-account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.admin-account__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #CCD8C9;
+    border-radius: 50%;
+
+    background: #E5EBE5;
+    color: var(--admin-green);
+}
+
+.admin-account__avatar .admin-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-account__name {
+    max-width: 140px;
+
+    overflow: hidden;
+
+    color: var(--admin-text);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-account__divider {
+    width: 1px;
+    height: 25px;
+
+    background: var(--admin-line);
+}
+
+.admin-logout-form {
+    margin: 0;
+}
+
+.admin-logout {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px;
+
+    border: 0;
+    border-radius: 4px;
+
+    background: transparent;
+    color: var(--admin-muted);
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.admin-logout .admin-icon {
+    width: 17px;
+    height: 17px;
+}
+
+.admin-logout:hover {
+    background: #FBEDEE;
+    color: #A43B40;
+}
+
+
+/* 08. 主工作区 */
+
+.admin-main {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 28px;
+}
+
+.admin-main > :first-child {
+    margin-top: 0;
+}
+
+.admin-main h1 {
+    margin: 0 0 22px;
+
+    color: var(--admin-text);
+
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.admin-main h2 {
+    color: var(--admin-text);
+
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.admin-main h3 {
+    color: var(--admin-text);
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+/* 09. 面包屑 */
+
+.admin-main .breadcrumb {
+    margin: 0 0 18px;
+    padding: 0;
+
+    background: transparent;
+
+    font-size: 12px;
+}
+
+.admin-main .breadcrumb a {
+    color: var(--admin-muted);
+}
+
+.admin-main .breadcrumb a:hover {
+    color: var(--admin-green);
+}
+
+.admin-main .breadcrumb > .active {
+    color: var(--admin-text);
+}
+
+
+/* 10. 基础表格溢出保护
+       完整 CRUD 样式将在 9.3 实施 */
+
+.admin-main .grid-view,
+.admin-main .table-responsive {
+    max-width: 100%;
+
+    overflow-x: auto;
+}
+
+
+/* 11. 公共页脚 */
+
+.admin-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    padding: 18px 28px;
+
+    border-top: 1px solid var(--admin-line);
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+}
+
+
+/* 12. 移动端导航按钮 */
+
+.admin-menu-toggle {
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 4px;
+
+    background: var(--admin-surface);
+    color: var(--admin-text);
+
+    cursor: pointer;
+}
+
+.admin-menu-toggle[hidden] {
+    display: none;
+}
+
+
+/* 13. 键盘操作反馈 */
+
+.admin-shell a:focus-visible,
+.admin-shell button:focus-visible {
+    outline: 2px solid #62856E;
+    outline-offset: 3px;
+}
+
+
+/* 14. 中等屏幕 */
+
+@media (max-width: 1199px) {
+
+    .admin-body {
+        --admin-sidebar-width: 224px;
+    }
+
+    .admin-main {
+        padding: 22px;
+    }
+
+    .admin-topbar,
+    .admin-footer {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}
+
+
+/* 15. 平板及移动端 */
+
+@media (max-width: 991px) {
+
+    .admin-shell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        position: static;
+
+        width: 100%;
+        height: auto;
+    }
+
+    .admin-navigation {
+        overflow: visible;
+    }
+
+    .admin-brand {
+        min-height: 72px;
+    }
+
+    .admin-workspace {
+        width: 100%;
+    }
+
+    /*
+     * JavaScript 可用时，移动端导航默认折叠。
+     * 禁用 JavaScript 时仍保留正常导航入口。
+     */
+
+    .admin-body.admin-js .admin-sidebar {
+        display: none;
+    }
+
+    .admin-body.admin-js.admin-menu-open .admin-sidebar {
+        display: flex;
+    }
+
+    .admin-body.admin-js .admin-menu-toggle:not([hidden]) {
+        display: inline-flex;
+    }
+
+    .admin-topbar {
+        position: static;
+    }
+
+    .admin-main {
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 575px) {
+
+    .admin-topbar {
+        gap: 10px;
+
+        padding: 12px 16px;
+    }
+
+    .admin-topbar__left,
+    .admin-topbar__right {
+        gap: 10px;
+    }
+
+    .admin-location {
+        gap: 4px;
+
+        font-size: 12px;
+    }
+
+    .admin-account__name {
+        max-width: 75px;
+    }
+
+    .admin-account__divider {
+        display: none;
+    }
+
+    .admin-logout > span {
+        display: none;
+    }
+
+    .admin-main {
+        padding: 16px;
+    }
+
+    .admin-main h1 {
+        font-size: 24px;
+    }
+
+    .admin-footer {
+        padding: 16px;
+    }
+}
+
+
+/* 16. 减少动态效果 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-nav-link {
+        transition: none;
+    }
+}
+/* ========================================
+   17. 管理工作台
+   ======================================== */
+
+.admin-dashboard {
+    width: 100%;
+    max-width: 1440px;
+
+    margin: 0 auto;
+}
+
+
+/* 17.1 页面标题 */
+
+.admin-dashboard__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 32px;
+}
+
+.admin-dashboard__heading h1 {
+    margin: 0 0 9px;
+
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.admin-dashboard__heading p {
+    margin: 0;
+
+    color: var(--admin-muted);
+
+    font-size: 14px;
+}
+
+.admin-dashboard__role {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    flex-shrink: 0;
+
+    padding: 10px 14px;
+
+    border: 1px solid #CCD8C9;
+    border-radius: 5px;
+
+    background: #E5EBE5;
+    color: var(--admin-green);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-dashboard__role .admin-icon {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* 17.2 工作台章节 */
+
+.admin-dashboard__section {
+    margin-bottom: 32px;
+}
+
+.admin-dashboard__section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 16px;
+}
+
+.admin-dashboard__section-heading h2 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.admin-dashboard__section-heading > span {
+    color: var(--admin-muted);
+
+    font-size: 12px;
+}
+
+
+/* 17.3 数据概览布局 */
+
+.admin-dashboard__overview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.admin-stat-card {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 20px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: var(--admin-surface);
+    color: var(--admin-text);
+
+    text-decoration: none;
+
+    transition:
+        border-color 180ms ease,
+        background-color 180ms ease;
+}
+
+.admin-stat-card:hover,
+.admin-stat-card:focus {
+    border-color: #97AD91;
+
+    background: #FCFDFB;
+    color: var(--admin-text);
+
+    text-decoration: none;
+}
+
+.admin-stat-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-stat-card__label {
+    color: #526476;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.admin-stat-card__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 5px;
+
+    background: #E5EBE5;
+    color: var(--admin-green);
+}
+
+.admin-stat-card__icon .admin-icon {
+    width: 21px;
+    height: 21px;
+}
+
+.admin-stat-card__value {
+    display: block;
+
+    margin: 18px 0 20px;
+
+    color: var(--admin-text);
+
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-stat-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: auto;
+    padding-top: 13px;
+
+    border-top: 1px solid #E5E9EF;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+}
+
+.admin-stat-card__footer .admin-icon {
+    width: 16px;
+    height: 16px;
+
+    transition: transform 180ms ease;
+}
+
+.admin-stat-card:hover
+.admin-stat-card__footer .admin-icon {
+    transform: translateX(3px);
+
+    color: var(--admin-green);
+}
+
+
+/* 17.4 业务模块卡片 */
+
+.admin-dashboard__modules {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.admin-module-card {
+    min-width: 0;
+
+    padding: 22px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: var(--admin-surface);
+}
+
+.admin-module-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #E5E9EF;
+}
+
+.admin-module-card__code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 5px;
+
+    background: #131D2B;
+    color: var(--admin-accent);
+
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.admin-module-card__identity {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.admin-module-card__identity h3 {
+    margin: 0 0 6px;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.admin-module-card__identity p {
+    margin: 0;
+
+    color: var(--admin-muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.admin-module-card__enter {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    flex-shrink: 0;
+
+    padding: 9px 12px;
+
+    border: 1px solid #D7E2D5;
+    border-radius: 4px;
+
+    background: #F1F5EF;
+    color: var(--admin-green);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.admin-module-card__enter:hover,
+.admin-module-card__enter:focus {
+    background: #E5EBE5;
+    color: var(--admin-green);
+
+    text-decoration: none;
+}
+
+.admin-module-card__enter .admin-icon {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* 17.5 模块内部快捷入口 */
+
+.admin-module-card__items {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(140px, 1fr));
+
+    gap: 12px;
+}
+
+.admin-module-item {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 15px;
+
+    border: 1px solid #E0E5EA;
+    border-radius: 4px;
+
+    background: #F8FAFB;
+    color: var(--admin-text);
+
+    text-decoration: none;
+
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease;
+}
+
+.admin-module-item:hover,
+.admin-module-item:focus {
+    border-color: #97AD91;
+
+    background: #F1F5EF;
+    color: var(--admin-text);
+
+    text-decoration: none;
+}
+
+.admin-module-item__label {
+    color: #526476;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.admin-module-item__count {
+    margin: 12px 0 16px;
+
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-module-item__action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: auto;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+}
+
+.admin-module-item__action .admin-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 17.6 响应式适配 */
+
+@media (max-width: 1399px) {
+
+    .admin-dashboard__overview {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+
+    .admin-dashboard__heading h1 {
+        font-size: 26px;
+    }
+
+    .admin-dashboard__heading {
+        margin-bottom: 24px;
+    }
+
+    .admin-module-card {
+        padding: 16px;
+    }
+
+    .admin-module-card__heading {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .admin-module-card__enter {
+        margin-left: 63px;
+    }
+
+    .admin-stat-card {
+        padding: 15px;
+    }
+
+    .admin-stat-card__value {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 479px) {
+
+    .admin-dashboard__heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .admin-dashboard__overview {
+        gap: 10px;
+    }
+
+    .admin-stat-card__top {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .admin-stat-card__label {
+        font-size: 13px;
+    }
+
+    .admin-module-card__items {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .admin-module-item {
+        padding: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-stat-card,
+    .admin-module-item,
+    .admin-stat-card__footer .admin-icon {
+        transition: none;
+    }
+
+    .admin-stat-card:hover
+    .admin-stat-card__footer .admin-icon {
+        transform: none;
+    }
+}
+/* ========================================
+   18. 后台 CRUD 公共组件
+   ======================================== */
+
+
+/* ========================================
+   18.1 页面标题与基础链接
+   ======================================== */
+
+.admin-main h1 {
+    margin-bottom: 24px;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-main p {
+    line-height: 1.75;
+}
+
+.admin-main a:not(.btn) {
+    color: var(--admin-green);
+}
+
+.admin-main a:not(.btn):hover {
+    color: #263F2A;
+}
+
+
+/* ========================================
+   18.2 公共按钮
+   ======================================== */
+
+.admin-main .btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+
+    min-height: 36px;
+    padding: 8px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    white-space: normal;
+
+    box-shadow: none;
+
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease;
+}
+
+
+/* 主要操作 */
+
+.admin-main .btn-primary {
+    border-color: #131D2B;
+
+    background: #131D2B;
+    color: #FFFFFF;
+}
+
+.admin-main .btn-primary:hover,
+.admin-main .btn-primary:focus {
+    border-color: #26394A;
+
+    background: #26394A;
+    color: #FFFFFF;
+}
+
+
+/* 新增、保存、发布 */
+
+.admin-main .btn-success {
+    border-color: #35583A;
+
+    background: #35583A;
+    color: #FFFFFF;
+}
+
+.admin-main .btn-success:hover,
+.admin-main .btn-success:focus {
+    border-color: #29462D;
+
+    background: #29462D;
+    color: #FFFFFF;
+}
+
+
+/* 次级操作 */
+
+.admin-main .btn-default {
+    border-color: #CBD5E1;
+
+    background: #FFFFFF;
+    color: #526476;
+}
+
+.admin-main .btn-default:hover,
+.admin-main .btn-default:focus {
+    border-color: #A8B7C5;
+
+    background: #F1F4F7;
+    color: #172435;
+}
+
+
+/* 信息操作 */
+
+.admin-main .btn-info {
+    border-color: #B7D4DB;
+
+    background: #E8F3F5;
+    color: #326374;
+}
+
+.admin-main .btn-info:hover,
+.admin-main .btn-info:focus {
+    border-color: #8FBCC6;
+
+    background: #D9EBEF;
+    color: #284F5D;
+}
+
+
+/* 撤稿、取消发布等警告操作 */
+
+.admin-main .btn-warning {
+    border-color: #E4C78E;
+
+    background: #FFF5DF;
+    color: #946318;
+}
+
+.admin-main .btn-warning:hover,
+.admin-main .btn-warning:focus {
+    border-color: #D1AD67;
+
+    background: #FBEAC8;
+    color: #805412;
+}
+
+
+/* 删除等危险操作 */
+
+.admin-main .btn-danger {
+    border-color: #C7575D;
+
+    background: #B53D42;
+    color: #FFFFFF;
+}
+
+.admin-main .btn-danger:hover,
+.admin-main .btn-danger:focus {
+    border-color: #A33238;
+
+    background: #A33238;
+    color: #FFFFFF;
+}
+
+
+/* 小型按钮 */
+
+.admin-main .btn-sm {
+    min-height: 30px;
+    padding: 5px 10px;
+
+    font-size: 12px;
+}
+
+.admin-main .btn-xs {
+    min-height: 25px;
+    padding: 3px 7px;
+
+    font-size: 12px;
+}
+
+.admin-main .btn.disabled,
+.admin-main .btn:disabled,
+.admin-main .btn[disabled] {
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+
+/* 普通按钮行 */
+
+.admin-main p > .btn {
+    margin-right: 5px;
+    margin-bottom: 6px;
+}
+
+
+/* ========================================
+   18.3 模块内部快捷导航
+   ======================================== */
+
+.admin-main .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.admin-main .btn-group > .btn {
+    float: none;
+
+    margin: 0;
+
+    border-radius: 4px;
+}
+
+.admin-main .btn-group > .btn + .btn {
+    margin-left: 0;
+}
+
+.admin-main .btn-group > .btn.active {
+    border-color: #97AD91;
+
+    background: #E5EBE5;
+    color: var(--admin-green);
+
+    font-weight: 600;
+
+    box-shadow: none;
+}
+
+
+/* ========================================
+   18.4 搜索及筛选区域
+   ======================================== */
+
+.admin-main form.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
+
+    margin: 0 0 20px;
+    padding: 18px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: var(--admin-surface);
+}
+
+.admin-main .form-inline .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+
+    min-width: 0;
+
+    margin: 0;
+}
+
+.admin-main .form-inline label {
+    margin: 0;
+
+    color: #526476;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.admin-main .form-inline .form-control {
+    width: auto;
+    min-width: 140px;
+    max-width: 100%;
+}
+
+.admin-main .form-inline input[type="text"] {
+    min-width: 200px;
+}
+
+.admin-main .form-inline > .btn {
+    min-height: 40px;
+
+    margin: 0;
+}
+
+
+/* ========================================
+   18.5 GridView 列表容器
+   ======================================== */
+
+.admin-main .grid-view {
+    width: 100%;
+
+    margin: 18px 0 24px;
+    padding: 0;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: var(--admin-surface);
+
+    scrollbar-width: thin;
+    scrollbar-color: #CBD5E1 transparent;
+}
+
+
+/* 数据记录统计 */
+
+.admin-main .grid-view .summary {
+    padding: 15px 18px;
+
+    color: var(--admin-muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   18.6 数据表格
+   ======================================== */
+
+.admin-main .grid-view .table {
+    width: 100%;
+
+    margin: 0;
+
+    border: 0;
+    border-collapse: collapse;
+
+    background: #FFFFFF;
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+
+/* 表头 */
+
+.admin-main .grid-view .table > thead > tr > th {
+    padding: 13px 15px;
+
+    border: 0;
+    border-top: 1px solid #E0E5EA;
+    border-bottom: 1px solid #D7DDE5;
+
+    background: #F1F4F7;
+    color: #526476;
+
+    font-weight: 600;
+
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.admin-main .grid-view th a {
+    color: #526476;
+
+    text-decoration: none;
+}
+
+.admin-main .grid-view th a:hover {
+    color: var(--admin-green);
+}
+
+
+/* 数据单元格 */
+
+.admin-main .grid-view .table > tbody > tr > td {
+    padding: 13px 15px;
+
+    border: 0;
+    border-bottom: 1px solid #E5E9EF;
+
+    color: var(--admin-text);
+
+    vertical-align: middle;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-main .grid-view .table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+
+/* 交替行及悬停反馈 */
+
+.admin-main .grid-view .table-striped > tbody > tr:nth-of-type(odd) {
+    background: #FFFFFF;
+}
+
+.admin-main .grid-view .table-striped > tbody > tr:nth-of-type(even) {
+    background: #F8FAFB;
+}
+
+.admin-main .grid-view .table > tbody > tr:hover {
+    background: #F0F5EF;
+}
+
+
+/* 操作列保留完整宽度 */
+
+.admin-main .grid-view td:last-child {
+    white-space: nowrap;
+}
+
+
+/* GridView 自带筛选输入框 */
+
+.admin-main .grid-view .filters td {
+    padding: 10px;
+
+    background: #F8FAFB;
+
+    border-bottom: 1px solid var(--admin-line);
+}
+
+.admin-main .grid-view .filters .form-control {
+    min-width: 75px;
+    height: 34px;
+
+    padding: 6px 9px;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   18.7 表格操作图标
+   ======================================== */
+
+/*
+ * 保留 Yii ActionColumn 原有图标及操作链接。
+ * 不改变 href、data-method、data-confirm。
+ */
+
+.admin-main .grid-view td a:has(> .glyphicon) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin: 2px;
+
+    border: 1px solid #D7DDE5;
+    border-radius: 4px;
+
+    background: #FFFFFF;
+    color: #64748B;
+
+    text-decoration: none;
+}
+
+.admin-main .grid-view td a:has(> .glyphicon):hover {
+    border-color: #97AD91;
+
+    background: #E5EBE5;
+    color: var(--admin-green);
+}
+
+
+/* 图标本身 */
+
+.admin-main .grid-view .glyphicon {
+    font-size: 13px;
+}
+
+
+/* 编辑、发布、回复 */
+
+.admin-main .grid-view a:has(> .glyphicon-pencil),
+.admin-main .grid-view a:has(> .glyphicon-ok),
+.admin-main .grid-view a:has(> .glyphicon-comment) {
+    color: var(--admin-green);
+}
+
+
+/* 删除 */
+
+.admin-main .grid-view a:has(> .glyphicon-trash) {
+    border-color: #E8CDD0;
+
+    background: #FFF8F8;
+    color: #B53D42;
+}
+
+.admin-main .grid-view a:has(> .glyphicon-trash):hover {
+    border-color: #DCA4A9;
+
+    background: #FBE5E7;
+    color: #A33238;
+}
+
+
+/* 取消发布 */
+
+.admin-main .grid-view a:has(> .glyphicon-eye-close) {
+    color: #946318;
+}
+
+
+/* ========================================
+   18.8 空数据状态
+   ======================================== */
+
+.admin-main .grid-view .empty {
+    display: block;
+
+    padding: 40px 20px;
+
+    color: var(--admin-muted);
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+.admin-main .grid-view td:has(> .empty) {
+    background: #FFFFFF;
+}
+
+
+/* ========================================
+   18.9 分页器
+   ======================================== */
+
+.admin-main .pagination {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin: 0;
+    padding: 16px 18px;
+}
+
+.admin-main .pagination > li {
+    display: inline-block;
+}
+
+.admin-main .pagination > li > a,
+.admin-main .pagination > li > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    float: none;
+
+    min-width: 34px;
+    min-height: 34px;
+
+    margin: 0;
+    padding: 6px 10px;
+
+    border: 1px solid #D7DDE5;
+    border-radius: 4px;
+
+    background: #FFFFFF;
+    color: #526476;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.admin-main .pagination > li > a:hover {
+    border-color: #97AD91;
+
+    background: #E5EBE5;
+    color: var(--admin-green);
+}
+
+.admin-main .pagination > .active > a,
+.admin-main .pagination > .active > span,
+.admin-main .pagination > .active > a:hover {
+    border-color: #131D2B;
+
+    background: #131D2B;
+    color: #FFFFFF;
+}
+
+.admin-main .pagination > .disabled > span,
+.admin-main .pagination > .disabled > a {
+    background: #F8FAFB;
+    color: #A0ACB8;
+
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   18.10 新增与编辑表单
+   ======================================== */
+
+/*
+ * 仅将实际包含表单字段的编辑表单卡片化。
+ * 排除筛选表单以及隐藏的 POST 操作表单。
+ */
+
+.admin-main form:not(.form-inline):has(.form-group) {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 18px 0 26px;
+    padding: 26px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: var(--admin-surface);
+}
+
+.admin-main .form-group {
+    margin-bottom: 22px;
+}
+
+.admin-main .control-label,
+.admin-main form:not(.form-inline) .form-group > label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #172435;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* 输入框 */
+
+.admin-main .form-control {
+    width: 100%;
+    height: 40px;
+
+    padding: 9px 12px;
+
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+
+    background: #FFFFFF;
+    color: var(--admin-text);
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    box-shadow: none;
+
+    transition:
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+}
+
+.admin-main .form-control:focus {
+    border-color: #62856E;
+
+    outline: none;
+
+    box-shadow: 0 0 0 3px rgba(98, 133, 110, .12);
+}
+
+.admin-main .form-control::placeholder {
+    color: #8493A5;
+}
+
+.admin-main .form-control[readonly],
+.admin-main .form-control:disabled {
+    background: #F1F4F7;
+    color: #64748B;
+}
+
+
+/* 多行正文及介绍 */
+
+.admin-main textarea.form-control {
+    height: auto;
+    min-height: 110px;
+
+    line-height: 1.8;
+
+    resize: vertical;
+}
+
+
+/* 下拉框 */
+
+.admin-main select.form-control {
+    cursor: pointer;
+}
+
+.admin-main select.form-control[multiple],
+.admin-main select.form-control[size] {
+    height: auto;
+}
+
+
+/* 复选框及单选框 */
+
+.admin-main input[type="checkbox"],
+.admin-main input[type="radio"] {
+    accent-color: #35583A;
+}
+
+.admin-main .checkbox label,
+.admin-main .radio label,
+.admin-main .checkbox-inline,
+.admin-main .radio-inline {
+    color: #526476;
+
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+/* 表单辅助文字 */
+
+.admin-main .hint-block,
+.admin-main .help-block {
+    margin-top: 7px;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.admin-main .help-block:empty {
+    display: none;
+}
+
+
+/* ========================================
+   18.11 文件上传控件
+   ======================================== */
+
+.admin-main input[type="file"] {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    padding: 14px;
+
+    border: 1px dashed #AAB9C7;
+    border-radius: 5px;
+
+    background: #F8FAFB;
+    color: #526476;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.admin-main input[type="file"]:hover {
+    border-color: #62856E;
+
+    background: #F1F5EF;
+}
+
+.admin-main input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 12px;
+
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+
+    background: #FFFFFF;
+    color: #172435;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   18.12 表单验证反馈
+   ======================================== */
+
+.admin-main .has-error .control-label,
+.admin-main .has-error .help-block {
+    color: #B53D42;
+}
+
+.admin-main .has-error .form-control {
+    border-color: #C7575D;
+
+    box-shadow: none;
+}
+
+.admin-main .has-error .form-control:focus {
+    border-color: #B53D42;
+
+    box-shadow: 0 0 0 3px rgba(181, 61, 66, .1);
+}
+
+.admin-main .has-success .form-control {
+    border-color: #8BA792;
+
+    box-shadow: none;
+}
+
+.admin-main .has-success .control-label {
+    color: var(--admin-text);
+}
+
+.admin-main .error-summary {
+    margin-bottom: 22px;
+    padding: 16px 20px;
+
+    border: 1px solid #E7BFC3;
+    border-left: 3px solid #B53D42;
+    border-radius: 4px;
+
+    background: #FFF4F4;
+    color: #A33238;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.admin-main .error-summary ul {
+    margin-bottom: 0;
+}
+
+
+/* ========================================
+   18.13 DetailView 详情表格
+   ======================================== */
+
+.admin-main .detail-view {
+    width: 100%;
+
+    margin: 18px 0 24px;
+
+    border: 1px solid var(--admin-line);
+
+    background: #FFFFFF;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    table-layout: fixed;
+}
+
+.admin-main .detail-view > tbody > tr > th {
+    width: 22%;
+
+    padding: 14px 18px;
+
+    border-color: #E0E5EA;
+
+    background: #F1F4F7;
+    color: #526476;
+
+    font-weight: 600;
+
+    vertical-align: top;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-main .detail-view > tbody > tr > td {
+    padding: 14px 18px;
+
+    border-color: #E0E5EA;
+
+    background: #FFFFFF;
+    color: var(--admin-text);
+
+    vertical-align: top;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-main .detail-view img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ========================================
+   18.14 新闻自定义详情区域
+   ======================================== */
+
+.admin-main .dl-horizontal {
+    margin: 18px 0;
+    padding: 20px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: #FFFFFF;
+}
+
+.admin-main .dl-horizontal dt {
+    padding: 9px 0;
+
+    color: #526476;
+
+    font-weight: 600;
+}
+
+.admin-main .dl-horizontal dd {
+    padding: 9px 0;
+
+    color: var(--admin-text);
+
+    overflow-wrap: anywhere;
+}
+
+.admin-main .news-body {
+    margin: 20px 0;
+    padding: 26px;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: #FFFFFF;
+    color: #29394B;
+
+    font-size: 15px;
+    line-height: 1.95;
+
+    overflow-wrap: anywhere;
+}
+
+.admin-main .well {
+    padding: 20px;
+
+    border: 1px solid #D7DDE5;
+    border-radius: 5px;
+
+    background: #F8FAFB;
+    color: #526476;
+
+    line-height: 1.8;
+
+    box-shadow: none;
+}
+
+
+/* ========================================
+   18.15 公共 Panel 组件
+   ======================================== */
+
+.admin-main .panel {
+    margin: 20px 0;
+
+    border: 1px solid var(--admin-line);
+    border-radius: 6px;
+
+    background: #FFFFFF;
+
+    box-shadow: none;
+}
+
+.admin-main .panel-default > .panel-heading {
+    padding: 14px 18px;
+
+    border-bottom: 1px solid #D7DDE5;
+    border-radius: 6px 6px 0 0;
+
+    background: #F1F4F7;
+    color: #172435;
+
+    font-weight: 600;
+}
+
+.admin-main .panel-body {
+    padding: 20px;
+
+    color: var(--admin-text);
+
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   18.16 消息提示及状态标签
+   ======================================== */
+
+.admin-main .alert {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+
+    border: 1px solid;
+    border-left-width: 3px;
+    border-radius: 4px;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.admin-main .alert-success {
+    border-color: #B8D0B5;
+
+    background: #EEF5EB;
+    color: #35583A;
+}
+
+.admin-main .alert-info {
+    border-color: #BCD8E2;
+
+    background: #EDF5F8;
+    color: #326374;
+}
+
+.admin-main .alert-warning {
+    border-color: #E4C78E;
+
+    background: #FFF8E9;
+    color: #946318;
+}
+
+.admin-main .alert-danger {
+    border-color: #E7BFC3;
+
+    background: #FFF1F2;
+    color: #A33238;
+}
+
+
+/* 适配已经使用 Bootstrap label 的状态 */
+
+.admin-main .label {
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 3px;
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.admin-main .label-default {
+    background: #E5E9EF;
+    color: #64748B;
+}
+
+.admin-main .label-success {
+    background: #E5EBE5;
+    color: #35583A;
+}
+
+.admin-main .label-info {
+    background: #E8F3F5;
+    color: #326374;
+}
+
+.admin-main .label-warning {
+    background: #FFF0D3;
+    color: #946318;
+}
+
+.admin-main .label-danger {
+    background: #FBE5E7;
+    color: #A33238;
+}
+
+
+/* ========================================
+   18.17 保护工作台原有卡片样式
+   ======================================== */
+
+/*
+ * CRUD 公共链接样式不得覆盖 9.2 工作台。
+ */
+
+.admin-main .admin-stat-card,
+.admin-main .admin-module-item {
+    color: var(--admin-text);
+}
+
+.admin-main .admin-stat-card:hover,
+.admin-main .admin-module-item:hover {
+    color: var(--admin-text);
+}
+
+
+/* ========================================
+   18.18 响应式适配
+   ======================================== */
+
+@media (max-width: 767px) {
+
+    .admin-main form.form-inline {
+        align-items: stretch;
+
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .admin-main .form-inline .form-group {
+        flex: 1 1 160px;
+    }
+
+    .admin-main .form-inline .form-control,
+    .admin-main .form-inline input[type="text"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .admin-main form:not(.form-inline):has(.form-group) {
+        padding: 18px;
+    }
+
+    .admin-main .grid-view .table > thead > tr > th,
+    .admin-main .grid-view .table > tbody > tr > td {
+        padding: 11px 12px;
+    }
+
+    .admin-main .detail-view > tbody > tr > th {
+        width: 30%;
+    }
+
+    .admin-main .detail-view > tbody > tr > th,
+    .admin-main .detail-view > tbody > tr > td {
+        padding: 12px;
+    }
+
+    .admin-main .news-body,
+    .admin-main .panel-body {
+        padding: 18px;
+    }
+
+    .admin-main .form-control {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 479px) {
+
+    .admin-main form.form-inline .form-group {
+        flex-basis: 100%;
+    }
+
+    .admin-main .btn-group {
+        gap: 6px;
+    }
+
+    .admin-main .btn {
+        padding: 7px 11px;
+    }
+
+    .admin-main .detail-view > tbody > tr > th {
+        width: 34%;
+    }
+
+    .admin-main form:not(.form-inline):has(.form-group) {
+        padding: 14px;
+    }
+
+    .admin-main .grid-view .summary {
+        padding: 12px;
+    }
+
+    .admin-main .pagination {
+        padding: 12px;
+    }
+}
+
+
+/* ========================================
+   18.19 减少动态效果
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-main .btn,
+    .admin-main .form-control {
+        transition: none;
+    }
+}
+/* ========================================
+   19. 后台 CRUD 细节修正
+   ======================================== */
+
+
+/* 19.1 统一表格操作图标 */
+
+.admin-main .grid-view td:last-child a:has(.glyphicon) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+
+    margin: 2px;
+
+    border: 1px solid #D7DDE5;
+    border-radius: 4px;
+
+    background: #FFFFFF;
+    color: #526476;
+
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.admin-main .grid-view td:last-child a:has(.glyphicon):hover {
+    border-color: #97AD91;
+
+    background: #E5EBE5;
+    color: #35583A;
+}
+
+.admin-main .grid-view td:last-child a:has(.glyphicon-pencil) {
+    color: #35583A;
+}
+
+.admin-main .grid-view td:last-child a:has(.glyphicon-trash) {
+    border-color: #E8CDD0;
+
+    background: #FFF8F8;
+    color: #B53D42;
+}
+
+.admin-main .grid-view td:last-child a:has(.glyphicon-trash):hover {
+    border-color: #DCA4A9;
+
+    background: #FBE5E7;
+    color: #A33238;
+}
