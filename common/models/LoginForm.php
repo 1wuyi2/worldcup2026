@@ -20,16 +20,26 @@ class LoginForm extends Model
      * {@inheritdoc}
      */
     public function rules()
-    {
-        return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
-        ];
-    }
+{
+    return [
+        [
+            'username',
+            'required',
+            'message' => '请输入用户名。',
+        ],
+        [
+            'password',
+            'required',
+            'message' => '请输入密码。',
+        ],
+        [
+            'rememberMe',
+            'boolean',
+            'message' => '登录状态参数无效。',
+        ],
+        ['password', 'validatePassword'],
+    ];
+}
 
     /**
      * Validates the password.
@@ -43,7 +53,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, '用户名或密码错误。');
             }
         }
     }

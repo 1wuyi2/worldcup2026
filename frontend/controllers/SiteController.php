@@ -1,17 +1,12 @@
 <?php
 namespace frontend\controllers;
 
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
+
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\FootballMatch;
@@ -19,7 +14,7 @@ use common\models\FootballTeam;
 use common\models\FootballPlayer;
 use common\models\FootballStadium;
 use common\models\NewsArticle;
-
+use yii\web\NotFoundHttpException;
 /**
  * Site controller
  */
@@ -213,115 +208,70 @@ class SiteController extends Controller
     }
 
     /**
-     * Signs user up.
-     *
-     * @return mixed
-     */
-    public function actionSignup()
-    {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
-            return $this->goHome();
-        }
+ * 前台普通用户注册。
+ *
+ * 注册成功后账号直接激活，
+ * 跳转至登录页面，由用户主动登录。
+ */
+public function actionSignup()
+{
+    $model = new SignupForm();
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
+    if (
+        $model->load(Yii::$app->request->post())
+        && $model->signup()
+    ) {
+        Yii::$app->session->setFlash(
+            'success',
+            '注册成功，请使用新账号登录。'
+        );
+
+        return $this->redirect(['/site/login']);
     }
 
-    /**
-     * Requests password reset.
-     *
-     * @return mixed
+    return $this->render('signup', [
+        'model' => $model,
+    ]);
+}
+
+        /**
+     * 当前部署不提供邮件找回密码功能。
      */
     public function actionRequestPasswordReset()
     {
-        $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
-            }
-        }
-
-        return $this->render('requestPasswordResetToken', [
-            'model' => $model,
-        ]);
+        throw new NotFoundHttpException(
+            '当前站点暂不提供邮件找回密码功能。'
+        );
     }
 
     /**
-     * Resets password.
-     *
-     * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
+     * 停用原有密码重置链接。
      */
-    public function actionResetPassword($token)
+    public function actionResetPassword($token = null)
     {
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
-
-            return $this->goHome();
-        }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
+        throw new NotFoundHttpException(
+            '当前站点暂不提供密码重置功能。'
+        );
     }
 
     /**
-     * Verify email address
-     *
-     * @param string $token
-     * @throws BadRequestHttpException
-     * @return yii\web\Response
+     * 新注册用户直接激活，
+     * 不再通过邮件验证链接激活账号。
      */
-    public function actionVerifyEmail($token)
+    public function actionVerifyEmail($token = null)
     {
-        try {
-            $model = new VerifyEmailForm($token);
-        } catch (InvalidArgumentException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-        if ($user = $model->verifyEmail()) {
-            if (Yii::$app->user->login($user)) {
-                Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
-                return $this->goHome();
-            }
-        }
-
-        Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
-        return $this->goHome();
+        throw new NotFoundHttpException(
+            '当前站点已停用邮件验证功能。'
+        );
     }
 
     /**
-     * Resend verification email
-     *
-     * @return mixed
+     * 停用重新发送验证邮件功能。
      */
     public function actionResendVerificationEmail()
     {
-        $model = new ResendVerificationEmailForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-                return $this->goHome();
-            }
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
-        }
-
-        return $this->render('resendVerificationEmail', [
-            'model' => $model
-        ]);
+        throw new NotFoundHttpException(
+            '当前站点已停用验证邮件发送功能。'
+        );
     }
 }

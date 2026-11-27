@@ -1,0 +1,898 @@
+/* ========================================
+   WorldCup2026
+   Administration Authentication
+   ======================================== */
+
+.admin-auth-body {
+    --admin-dark: #080D16;
+    --admin-navy: #131D2B;
+    --admin-accent: #C7F36B;
+    --admin-cyan: #5AD9CF;
+    --admin-paper: #F4F6F8;
+    --admin-text: #172435;
+    --admin-muted: #64748B;
+    --admin-line: #D7DDE5;
+    --admin-danger: #B53D42;
+
+    margin: 0;
+
+    background: var(--admin-paper);
+    color: var(--admin-text);
+
+    font-family:
+        "Segoe UI",
+        "Microsoft YaHei",
+        Arial,
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+.admin-auth-main {
+    min-height: 100vh;
+}
+
+.admin-auth-main > .alert {
+    margin: 0;
+    border-radius: 0;
+}
+
+
+/* ========================================
+   01. 整体双栏布局
+   ======================================== */
+
+.admin-auth {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    min-height: 100vh;
+}
+
+.admin-auth-visual {
+    display: flex;
+    justify-content: flex-end;
+
+    min-width: 0;
+
+    padding: 36px clamp(36px, 5vw, 84px);
+
+    background: var(--admin-dark);
+    color: #F1F5F9;
+}
+
+.admin-auth-visual__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 570px;
+}
+
+
+/* ========================================
+   02. 左侧品牌
+   ======================================== */
+
+.admin-auth-brand {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 12px;
+
+    padding-bottom: 24px;
+
+    color: #F1F5F9;
+    text-decoration: none;
+}
+
+.admin-auth-brand:hover,
+.admin-auth-brand:focus {
+    color: #F1F5F9;
+    text-decoration: none;
+}
+
+.admin-auth-brand__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: var(--admin-accent);
+    color: var(--admin-dark);
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.admin-auth-brand__text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-auth-brand__text strong {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: .05em;
+}
+
+.admin-auth-brand__text small {
+    color: #91A1B6;
+
+    font-family: Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: .13em;
+}
+
+.admin-auth-visual__content {
+    padding: 30px 0;
+    border-top: 1px solid #293644;
+}
+
+.admin-auth-visual__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+    color: var(--admin-accent);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+}
+
+.admin-auth-visual__eyebrow > span {
+    width: 28px;
+    height: 2px;
+
+    background: var(--admin-accent);
+}
+
+.admin-auth-visual__headline {
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(36px, 4.5vw, 68px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -.06em;
+}
+
+.admin-auth-visual__headline span:last-child {
+    color: var(--admin-accent);
+}
+
+.admin-auth-visual__description {
+    margin: 18px 0 0;
+
+    color: #91A1B6;
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* ========================================
+   03. 管理系统线框图形
+   ======================================== */
+
+.admin-auth-graphic {
+    padding: 24px 0 18px;
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.admin-auth-graphic svg {
+    display: block;
+
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+
+    margin: 0 auto;
+}
+
+.admin-auth-graphic__pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation: admin-auth-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes admin-auth-pulse {
+    0%,
+    100% {
+        opacity: .2;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: .8;
+        transform: scale(1.25);
+    }
+}
+
+
+/* ========================================
+   04. 模块介绍
+   ======================================== */
+
+.admin-auth-modules {
+    border-top: 1px solid #293644;
+}
+
+.admin-auth-module {
+    display: grid;
+
+    grid-template-columns:
+        30px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+    gap: 12px;
+
+    min-height: 48px;
+    padding: 10px 0;
+
+    border-bottom: 1px solid #293644;
+}
+
+.admin-auth-module > span {
+    color: var(--admin-accent);
+
+    font-family: Consolas, monospace;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.admin-auth-module strong {
+    color: #CBD5E1;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.admin-auth-module small {
+    color: #8493A5;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+}
+
+.admin-auth-visual__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #293644;
+
+    color: #8493A5;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+}
+
+
+/* ========================================
+   05. 右侧认证区域
+   ======================================== */
+
+.admin-auth-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-width: 0;
+
+    padding: 36px clamp(36px, 5vw, 84px);
+
+    background: var(--admin-paper);
+}
+
+.admin-auth-panel__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--admin-line);
+
+    color: var(--admin-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+}
+
+.admin-auth-return {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #526476;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0;
+
+    text-decoration: none;
+}
+
+.admin-auth-return:hover {
+    color: var(--admin-text);
+    text-decoration: none;
+}
+
+.admin-auth-return span {
+    display: inline-block;
+
+    font-size: 20px;
+
+    transition: transform 180ms ease;
+}
+
+.admin-auth-return:hover span {
+    transform: translate(3px, -3px);
+}
+
+.admin-auth-panel__content {
+    width: 100%;
+    max-width: 410px;
+
+    margin: 0 auto;
+    padding: 46px 0;
+}
+
+
+/* ========================================
+   06. 登录标题
+   ======================================== */
+
+.admin-auth-shield {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 24px;
+
+    border: 1px solid #CCD8C9;
+    border-radius: 6px;
+
+    background: #E5EBE5;
+    color: #35583A;
+}
+
+.admin-auth-shield svg {
+    width: 26px;
+    height: 26px;
+}
+
+.admin-auth-panel__eyebrow {
+    margin-bottom: 14px;
+
+    color: #64748B;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+}
+
+.admin-auth-panel h1 {
+    margin: 0 0 14px;
+
+    color: var(--admin-text);
+
+    font-size: clamp(30px, 3vw, 44px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -.04em;
+}
+
+.admin-auth-panel h1 span {
+    color: #557A40;
+}
+
+.admin-auth-panel__description {
+    margin: 0 0 32px;
+
+    color: var(--admin-muted);
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* ========================================
+   07. 表单输入框
+   ======================================== */
+
+.admin-auth-form .form-group {
+    margin-bottom: 22px;
+}
+
+.admin-auth-form .control-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--admin-text);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-auth-input {
+    position: relative;
+}
+
+.admin-auth-input::before {
+    position: absolute;
+    z-index: 1;
+
+    top: 50%;
+    left: 15px;
+
+    width: 19px;
+    height: 19px;
+
+    transform: translateY(-50%);
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    content: "";
+
+    pointer-events: none;
+}
+
+.admin-auth-input--user::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21v-2a8 8 0 0 1 16 0v2'/%3E%3C/svg%3E");
+}
+
+.admin-auth-input--password::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='10' width='14' height='11' rx='2'/%3E%3Cpath d='M8 10V6a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E");
+}
+
+.admin-auth-form .form-control {
+    width: 100%;
+    height: 52px;
+
+    padding: 12px 16px 12px 46px;
+
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+
+    background: #FFFFFF;
+    color: var(--admin-text);
+
+    font-size: 15px;
+
+    box-shadow: none;
+
+    color-scheme: light;
+
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.admin-auth-input--password .form-control {
+    padding-right: 50px;
+}
+
+.admin-auth-form .form-control::placeholder {
+    color: #8493A5;
+}
+
+.admin-auth-form .form-control:focus {
+    border-color: #62856E;
+
+    outline: none;
+
+    box-shadow: 0 0 0 3px rgba(98, 133, 110, .12);
+}
+
+
+/* ========================================
+   08. 自动填充兼容性
+   ======================================== */
+
+/*
+ * 后台使用浅色输入框。
+ * 保证自动填充时背景及文字均清晰可读。
+ */
+
+.admin-auth-form .form-control:-webkit-autofill,
+.admin-auth-form .form-control:-webkit-autofill:hover,
+.admin-auth-form .form-control:-webkit-autofill:focus,
+.admin-auth-form .form-control:-webkit-autofill:active {
+    -webkit-text-fill-color: #172435 !important;
+
+    -webkit-box-shadow:
+        0 0 0 1000px #FFFFFF inset !important;
+
+    box-shadow:
+        0 0 0 1000px #FFFFFF inset !important;
+
+    caret-color: #172435;
+}
+
+.admin-auth-form .form-control:autofill {
+    color: #172435 !important;
+
+    box-shadow:
+        0 0 0 1000px #FFFFFF inset !important;
+}
+
+.admin-auth-form .form-control:-webkit-autofill:focus {
+    -webkit-box-shadow:
+        0 0 0 1000px #FFFFFF inset,
+        0 0 0 3px rgba(98, 133, 110, .12) !important;
+
+    box-shadow:
+        0 0 0 1000px #FFFFFF inset,
+        0 0 0 3px rgba(98, 133, 110, .12) !important;
+}
+
+
+/* ========================================
+   09. 表单验证反馈
+   ======================================== */
+
+.admin-auth-form .has-error .form-control {
+    border-color: var(--admin-danger);
+
+    box-shadow: none;
+}
+
+.admin-auth-form .has-error .form-control:focus {
+    box-shadow: 0 0 0 3px rgba(181, 61, 66, .09);
+}
+
+.admin-auth-form .has-error .control-label,
+.admin-auth-form .has-error .help-block {
+    color: var(--admin-danger);
+}
+
+.admin-auth-form .help-block {
+    margin: 7px 0 0;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.admin-auth-form .help-block:empty {
+    display: none;
+}
+
+.admin-auth-form .has-success .form-control {
+    border-color: #8BA792;
+
+    box-shadow: none;
+}
+
+
+/* ========================================
+   10. 密码显示按钮
+   ======================================== */
+
+.admin-auth-password-toggle {
+    position: absolute;
+
+    top: 50%;
+    right: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    transform: translateY(-50%);
+
+    border: 0;
+    border-radius: 4px;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.admin-auth-password-toggle[hidden] {
+    display: none;
+}
+
+.admin-auth-password-toggle:hover {
+    background: #EAF0ED;
+}
+
+.admin-auth-eye {
+    display: block;
+
+    width: 21px;
+    height: 21px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+}
+
+.admin-auth-password-toggle[aria-pressed="true"]
+.admin-auth-eye {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2335583A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3l18 18M9 5.5A11 11 0 0 1 12 5c6.5 0 10 7 10 7a16 16 0 0 1-3 3.7M6 6.7C3.4 8.7 2 12 2 12s3.5 7 10 7a10 10 0 0 0 5-1.3'/%3E%3C/svg%3E");
+}
+
+
+/* ========================================
+   11. 记住登录状态
+   ======================================== */
+
+.admin-auth-options {
+    margin: 4px 0 24px;
+}
+
+.admin-auth-options .form-group,
+.admin-auth-options .checkbox {
+    margin: 0;
+}
+
+.admin-auth-options .checkbox label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding-left: 0;
+
+    color: #526476;
+
+    font-size: 13px;
+}
+
+.admin-auth-options input[type="checkbox"] {
+    position: static;
+
+    width: 16px;
+    height: 16px;
+    margin: 0;
+
+    accent-color: #35583A;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   12. 登录按钮
+   ======================================== */
+
+.admin-auth-submit {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 52px;
+
+    padding: 14px 44px;
+
+    border: 1px solid var(--admin-navy);
+    border-radius: 4px;
+
+    background: var(--admin-navy);
+    color: #F1F5F9;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease;
+}
+
+.admin-auth-submit__arrow {
+    position: absolute;
+    right: 19px;
+
+    color: var(--admin-accent);
+
+    font-size: 23px;
+    line-height: 1;
+
+    transition: transform 180ms ease;
+}
+
+.admin-auth-submit:hover {
+    border-color: #26394A;
+    background: #26394A;
+}
+
+.admin-auth-submit:hover
+.admin-auth-submit__arrow {
+    transform: translateX(4px);
+}
+
+
+/* ========================================
+   13. 权限说明
+   ======================================== */
+
+.admin-auth-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin-top: 28px;
+    padding-top: 22px;
+
+    border-top: 1px solid var(--admin-line);
+
+    color: var(--admin-muted);
+}
+
+.admin-auth-notice svg {
+    flex-shrink: 0;
+
+    width: 17px;
+    height: 17px;
+}
+
+.admin-auth-notice p {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.admin-auth-panel__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    color: var(--admin-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+}
+
+
+/* ========================================
+   14. 键盘操作反馈
+   ======================================== */
+
+.admin-auth a:focus-visible,
+.admin-auth button:focus-visible,
+.admin-auth input[type="checkbox"]:focus-visible {
+    outline: 2px solid #62856E;
+    outline-offset: 3px;
+}
+
+
+/* ========================================
+   15. 平板适配
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .admin-auth-visual,
+    .admin-auth-panel {
+        padding: 28px;
+    }
+
+    .admin-auth-visual__headline {
+        font-size: clamp(32px, 5vw, 48px);
+    }
+
+    .admin-auth-module {
+        gap: 8px;
+    }
+
+    .admin-auth-module small {
+        font-size: 9px;
+    }
+}
+
+
+/* ========================================
+   16. 移动端适配
+   ======================================== */
+
+@media (max-width: 767px) {
+
+    .admin-auth {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admin-auth-visual {
+        padding: 24px;
+    }
+
+    .admin-auth-brand {
+        padding-bottom: 0;
+    }
+
+    .admin-auth-visual__content,
+    .admin-auth-visual__footer {
+        display: none;
+    }
+
+    .admin-auth-panel {
+        min-height: calc(100vh - 92px);
+
+        padding: 24px;
+    }
+
+    .admin-auth-panel__content {
+        padding: 36px 0;
+    }
+
+    .admin-auth-panel h1 {
+        font-size: 32px;
+    }
+
+    .admin-auth-form .form-control {
+        font-size: 16px;
+    }
+
+    .admin-auth-panel__footer {
+        font-size: 9px;
+    }
+}
+
+
+/* ========================================
+   17. 减少动态效果
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-auth-graphic__pulse {
+        animation: none !important;
+    }
+
+    .admin-auth-return span,
+    .admin-auth-submit,
+    .admin-auth-submit__arrow,
+    .admin-auth-form .form-control {
+        transition: none !important;
+    }
+
+    .admin-auth-return:hover span,
+    .admin-auth-submit:hover
+    .admin-auth-submit__arrow {
+        transform: none;
+    }
+}

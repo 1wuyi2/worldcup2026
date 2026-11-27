@@ -63,6 +63,11 @@ AppAsset::register($this);
             ],
         ];
     }
+    // 前后台入口统一使用公共配置。
+$menuItems[] = [
+    'label' => '返回前台 ↗',
+    'url' => Yii::$app->params['frontendBaseUrl'],
+];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {

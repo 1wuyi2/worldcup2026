@@ -1029,3 +1029,466 @@ textarea.form-control {
     }
 
 }
+/* ========================================
+   Account navigation
+   WorldCup2026 / Midnight Pitch
+   ======================================== */
+
+
+/* ========================================
+   01. 账户下拉菜单基础结构
+   ======================================== */
+
+.site-account__dropdown {
+    position: relative;
+
+    min-width: 0;
+}
+
+
+/* ========================================
+   02. 账户触发按钮
+   ======================================== */
+
+.site-account__trigger {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 42px;
+    max-width: 100%;
+    padding: 5px 10px 5px 6px;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    background: transparent;
+    color: #F1F5F9;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease;
+}
+
+.site-account__trigger:hover,
+.site-account__dropdown.is-open
+.site-account__trigger {
+    border-color: #354254;
+
+    background: #131D2B;
+}
+
+.site-account__dropdown--admin.is-open
+.site-account__trigger {
+    border-color: #536D64;
+}
+
+
+/* ========================================
+   03. 账户身份图标
+   ======================================== */
+
+.site-account__avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid #304744;
+    border-radius: 50%;
+
+    background: #1B302F;
+    color: #5AD9CF;
+}
+
+.site-account__avatar svg {
+    display: block;
+
+    width: 17px;
+    height: 17px;
+}
+
+
+/* 管理账户使用荧光绿身份图标 */
+
+.site-account__dropdown--admin
+.site-account__avatar {
+    border-color: #445934;
+
+    background: #293D2A;
+    color: #C7F36B;
+}
+
+
+/* 用户名 */
+
+.site-account__username {
+    display: block;
+
+    min-width: 0;
+    max-width: 110px;
+
+    overflow: hidden;
+
+    color: #F1F5F9;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* 下拉箭头 */
+
+.site-account__chevron {
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 15px;
+    height: 15px;
+
+    color: #91A1B6;
+
+    transition: transform 200ms ease;
+}
+
+.site-account__dropdown.is-open
+.site-account__chevron {
+    transform: rotate(180deg);
+
+    color: #C7F36B;
+}
+
+
+/* ========================================
+   04. 账户菜单面板
+   ======================================== */
+
+.site-account__menu {
+    position: absolute;
+
+    z-index: 30;
+
+    top: calc(100% + 12px);
+    right: 0;
+
+    display: none;
+
+    width: 248px;
+
+    overflow: hidden;
+
+    border: 1px solid #354254;
+    border-radius: 5px;
+
+    background: #131D2B;
+
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 复用 site.js 的 is-open 状态 */
+
+.site-account__dropdown.is-open
+> .site-account__menu {
+    display: block;
+}
+
+
+/* ========================================
+   05. 当前账户信息
+   ======================================== */
+
+.site-account__identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+
+    padding: 20px 18px 18px;
+
+    border-bottom: 1px solid #293644;
+}
+
+.site-account__identity-label {
+    color: #8493A5;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.site-account__identity-name {
+    max-width: 100%;
+
+    color: #F1F5F9;
+
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+.site-account__identity-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #91A1B6;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.site-account__status-dot {
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #5AD9CF;
+}
+
+.site-account__dropdown--admin
+.site-account__identity-role {
+    color: #C7F36B;
+}
+
+.site-account__dropdown--admin
+.site-account__status-dot {
+    background: #C7F36B;
+}
+
+
+/* ========================================
+   06. 账户操作区域
+   ======================================== */
+
+.site-account__actions {
+    padding: 8px;
+}
+
+.site-account .site-account__form {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+}
+
+.site-account .site-account__action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 10px;
+
+    border: 0;
+    border-radius: 3px;
+
+    background: transparent;
+    color: #CBD5E1;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+
+    text-align: left;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 180ms ease,
+        color 180ms ease;
+}
+
+.site-account .site-account__action:hover,
+.site-account .site-account__action:focus-visible {
+    background: #223140;
+    color: #F1F5F9;
+
+    text-decoration: none;
+}
+
+.site-account__action-icon {
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 17px;
+    height: 17px;
+
+    color: #91A1B6;
+}
+
+.site-account .site-account__action--admin {
+    margin-bottom: 4px;
+
+    color: #C7F36B;
+
+    font-weight: 600;
+}
+
+.site-account__action--admin
+.site-account__action-icon {
+    color: #C7F36B;
+}
+
+.site-account .site-account__action--admin:hover,
+.site-account .site-account__action--admin:focus-visible {
+    background: #26392C;
+    color: #C7F36B;
+}
+
+.site-account__action-arrow {
+    margin-left: auto;
+
+    color: #C7F36B;
+
+    font-size: 19px;
+    line-height: 1;
+
+    transition: transform 180ms ease;
+}
+
+.site-account__action--admin:hover
+.site-account__action-arrow {
+    transform: translate(2px, -2px);
+}
+
+
+/* ========================================
+   07. 菜单底部标识
+   ======================================== */
+
+.site-account__menu-footer {
+    padding: 12px 18px;
+
+    border-top: 1px solid #293644;
+
+    color: #8493A5;
+
+    font-family: Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+}
+
+
+/* ========================================
+   08. 键盘操作反馈
+   ======================================== */
+
+.site-account__trigger:focus-visible,
+.site-account__action:focus-visible {
+    outline: 2px solid #5AD9CF;
+    outline-offset: 2px;
+}
+
+
+/* ========================================
+   09. 中等桌面屏幕
+   ======================================== */
+
+@media (min-width: 992px)
+       and (max-width: 1199px) {
+
+    .site-account__trigger {
+        gap: 7px;
+        padding-right: 6px;
+    }
+
+    .site-account__username {
+        max-width: 85px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* ========================================
+   10. 移动端导航适配
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .site-account__dropdown {
+        width: 100%;
+    }
+
+    .site-account__trigger {
+        justify-content: flex-start;
+
+        width: 100%;
+        min-height: 48px;
+        padding: 8px 12px;
+
+        border-color: #293644;
+
+        background: #131D2B;
+    }
+
+    .site-account__username {
+        max-width: none;
+
+        flex: 1;
+
+        text-align: left;
+    }
+
+    .site-account__chevron {
+        margin-left: auto;
+    }
+
+    .site-account__menu {
+        position: static;
+
+        width: 100%;
+        margin-top: 8px;
+
+        box-shadow: none;
+    }
+
+    .site-account__identity {
+        padding: 16px;
+    }
+}
+
+
+/* ========================================
+   11. 减少动态效果适配
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .site-account__trigger,
+    .site-account__chevron,
+    .site-account__action,
+    .site-account__action-arrow {
+        transition: none !important;
+    }
+
+    .site-account__action--admin:hover
+    .site-account__action-arrow {
+        transform: none;
+    }
+}
