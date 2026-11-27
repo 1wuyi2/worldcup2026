@@ -142,6 +142,30 @@ class AssignmentController extends Controller
         ) {
             $memberOptions[$member->id] = $member->name;
         }
+        // 统计全部已发布的团队作业，不受当前筛选条件影响。
+$teamAssignmentCount = (int) PortalAssignment::find()
+    ->where([
+        'status' => PortalAssignment::STATUS_PUBLISHED,
+        'category' => PortalAssignment::CATEGORY_TEAM,
+        'member_id' => null,
+    ])
+    ->count();
+
+// 统计关联有效成员的已发布个人作业。
+$personalAssignmentCount = (int) PortalAssignment::find()
+    ->alias('a')
+    ->innerJoinWith('member', false)
+    ->where([
+        'a.status' => PortalAssignment::STATUS_PUBLISHED,
+        'a.category' => PortalAssignment::CATEGORY_PERSONAL,
+    ])
+    ->count('a.id');
+
+$assignmentStats = [
+    'team' => $teamAssignmentCount,
+    'personal' => $personalAssignmentCount,
+    'total' => $teamAssignmentCount + $personalAssignmentCount,
+];
 
         return $this->render('index', [
             'teamAssignments' => $teamAssignments,
@@ -149,6 +173,7 @@ class AssignmentController extends Controller
             'category' => $category,
             'memberId' => $memberId,
             'memberOptions' => $memberOptions,
+            'assignmentStats' => $assignmentStats,
         ]);
     }
 

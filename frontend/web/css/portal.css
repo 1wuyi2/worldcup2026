@@ -1978,3 +1978,3506 @@
         transform: none !important;
     }
 }
+/* ========================================
+   11. 个人主页 / MEMBER PROFILE
+   ======================================== */
+
+
+/* ========================================
+   11.1 个人主视觉
+   ======================================== */
+
+.portal-page .tp-profile-hero {
+    padding: 36px 0 40px;
+
+    background: var(--tp-dark);
+    color: var(--tp-paper);
+}
+
+
+/* 顶部导航 */
+
+.portal-page .tp-profile-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #35433A;
+}
+
+.portal-page .tp-profile-hero__eyebrow {
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.site-main .portal-page .tp-profile-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--tp-accent);
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.portal-page .tp-profile-back span {
+    display: inline-block;
+
+    font-size: 19px;
+
+    transition: transform 200ms ease;
+}
+
+.portal-page .tp-profile-back:hover span {
+    transform: translateX(-4px);
+}
+
+
+/* ========================================
+   11.2 个人主视觉构图
+   ======================================== */
+
+.portal-page .tp-profile-hero__main {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.8fr)
+        minmax(0, 1.6fr);
+
+    align-items: center;
+    gap: clamp(36px, 6vw, 90px);
+
+    padding: 48px 0;
+}
+
+
+/* ========================================
+   11.3 个人头像展示
+   ======================================== */
+
+.portal-page .tp-profile-portrait {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 360px;
+
+    aspect-ratio: 1 / 1;
+
+    padding: 22px;
+
+    overflow: hidden;
+
+    background: #223128;
+}
+
+
+/* 十字定位线 */
+
+.portal-page .tp-profile-portrait::before,
+.portal-page .tp-profile-portrait::after {
+    position: absolute;
+
+    content: "";
+
+    background: #394C3D;
+
+    pointer-events: none;
+}
+
+.portal-page .tp-profile-portrait::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+
+    width: 1px;
+}
+
+.portal-page .tp-profile-portrait::after {
+    top: 50%;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+}
+
+
+/* 顶部及底部辅助标识 */
+
+.portal-page .tp-profile-portrait__meta,
+.portal-page .tp-profile-portrait__footer {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    color: #98AB98;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+}
+
+.portal-page .tp-profile-portrait__footer {
+    margin-top: auto;
+}
+
+
+/* 头像居中区域 */
+
+.portal-page .tp-profile-portrait__stage {
+    position: absolute;
+    z-index: 1;
+
+    inset: 44px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portal-page .tp-profile-portrait__frame {
+    position: relative;
+
+    width: 64%;
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+
+    background: #405640;
+
+    transition: transform 320ms ease;
+}
+
+
+/* 头像外围圆环 */
+
+.portal-page .tp-profile-portrait__frame::before {
+    position: absolute;
+
+    inset: -13px;
+
+    content: "";
+
+    border: 1px solid #71866C;
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.portal-page .tp-profile-portrait__image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* 缺失头像时的姓氏占位 */
+
+.portal-page .tp-profile-portrait__initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: #B3C6A8;
+
+    font-size: clamp(46px, 7vw, 88px);
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+/* ========================================
+   11.4 成员身份信息
+   ======================================== */
+
+.portal-page .tp-profile-identity {
+    min-width: 0;
+}
+
+.portal-page .tp-profile-identity__kicker {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: var(--tp-accent);
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+}
+
+
+/* 成员姓名 */
+
+.site-main .portal-page .tp-profile-identity__name {
+    margin: 0 0 20px;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(44px, 6vw, 86px);
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -0.045em;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .portal-page .tp-profile-identity__name::after {
+    display: none;
+}
+
+
+/* 学号与所属团队 */
+
+.portal-page .tp-profile-identity__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.portal-page .tp-profile-identity__dot {
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #819080;
+}
+
+.site-main .portal-page .tp-profile-identity__meta a {
+    color: #B9C8B6;
+
+    text-decoration: none;
+}
+
+.site-main .portal-page .tp-profile-identity__meta a:hover {
+    color: var(--tp-accent);
+}
+
+
+/* 项目职责 */
+
+.portal-page .tp-profile-identity__role {
+    max-width: 680px;
+
+    margin-top: 28px;
+    padding-top: 24px;
+
+    border-top: 1px solid #35433A;
+}
+
+.portal-page .tp-profile-identity__label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #98AB98;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.site-main .portal-page .tp-profile-identity__role p {
+    margin: 0;
+
+    color: #D9E1D7;
+
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 400;
+    line-height: 1.85;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   11.5 个人数据概览
+   ======================================== */
+
+.portal-page .tp-profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    border-top: 1px solid #46564B;
+    border-bottom: 1px solid #46564B;
+}
+
+.site-main .portal-page .tp-profile-stat {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 24px 28px;
+
+    border-right: 1px solid #46564B;
+
+    background: transparent;
+    color: var(--tp-paper);
+
+    text-decoration: none;
+
+    transition: background-color 240ms ease;
+}
+
+.site-main .portal-page .tp-profile-stat:first-child {
+    padding-left: 0;
+}
+
+.site-main .portal-page .tp-profile-stat:last-child {
+    border-right: 0;
+}
+
+.portal-page .tp-profile-stat__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+
+/* 真实统计数字 */
+
+.portal-page .tp-profile-stat__value {
+    color: var(--tp-accent);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+}
+
+.portal-page .tp-profile-stat--team
+.tp-profile-stat__value {
+    color: var(--tp-paper);
+
+    font-size: clamp(26px, 3.5vw, 44px);
+}
+
+.portal-page .tp-profile-stat__arrow {
+    flex-shrink: 0;
+
+    color: var(--tp-accent);
+
+    font-size: 23px;
+    line-height: 1;
+
+    transition: transform 200ms ease;
+}
+
+
+/* 统计说明 */
+
+.portal-page .tp-profile-stat__label {
+    margin-bottom: 5px;
+
+    color: #CBD5C9;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.portal-page .tp-profile-stat__english {
+    color: #98AB98;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+
+/* 轻量悬停反馈 */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .portal-page .tp-profile-portrait:hover
+    .tp-profile-portrait__frame {
+        transform: scale(1.035);
+    }
+
+    .site-main .portal-page .tp-profile-stat:hover {
+        background: #19251D;
+    }
+
+    .portal-page .tp-profile-stat:hover
+    .tp-profile-stat__arrow {
+        transform: translateY(4px);
+    }
+
+    .portal-page .tp-profile-stat--team:hover
+    .tp-profile-stat__arrow {
+        transform: translate(3px, -3px);
+    }
+}
+
+
+/* ========================================
+   11.6 个人介绍
+   ======================================== */
+
+.portal-page .tp-profile-about {
+    padding-top: 64px;
+    padding-bottom: 72px;
+}
+
+.portal-page .tp-profile-about__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1.6fr);
+
+    align-items: start;
+    gap: 64px;
+}
+
+.site-main .portal-page .tp-profile-about__subtitle {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.portal-page .tp-profile-about__body {
+    min-width: 0;
+}
+
+.site-main .portal-page .tp-profile-about__body p {
+    max-width: 720px;
+    margin: 0;
+
+    color: #45564A;
+
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 2;
+
+    overflow-wrap: anywhere;
+}
+
+
+
+
+/* ========================================
+   11.8 响应式适配
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .portal-page .tp-profile-hero__main {
+        gap: 32px;
+
+        padding: 36px 0;
+    }
+
+    .portal-page .tp-profile-portrait {
+        padding: 16px;
+    }
+
+    .portal-page .tp-profile-portrait__meta,
+    .portal-page .tp-profile-portrait__footer {
+        font-size: 9px;
+    }
+
+    .portal-page .tp-profile-about__layout {
+        gap: 32px;
+    }
+
+    .site-main .portal-page .tp-profile-stat {
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .portal-page .tp-profile-hero {
+        padding-top: 24px;
+        padding-bottom: 28px;
+    }
+
+    .portal-page .tp-profile-hero__top {
+        gap: 12px;
+    }
+
+    .portal-page .tp-profile-hero__eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.05em;
+    }
+
+    .site-main .portal-page .tp-profile-back {
+        font-size: 12px;
+    }
+
+    .portal-page .tp-profile-hero__main {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 32px;
+
+        padding: 32px 0;
+    }
+
+    .portal-page .tp-profile-portrait {
+        max-width: 300px;
+    }
+
+    .site-main .portal-page .tp-profile-identity__name {
+        font-size: clamp(44px, 10vw, 64px);
+    }
+
+    .portal-page .tp-profile-identity__role {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .site-main .portal-page .tp-profile-stat {
+        padding: 16px 12px;
+    }
+
+    .portal-page .tp-profile-stat__top {
+        gap: 4px;
+    }
+
+    .portal-page .tp-profile-stat__value {
+        font-size: 34px;
+    }
+
+    .portal-page .tp-profile-stat--team
+    .tp-profile-stat__value {
+        font-size: 24px;
+    }
+
+    .portal-page .tp-profile-stat__arrow {
+        font-size: 15px;
+    }
+
+    .portal-page .tp-profile-stat__label {
+        font-size: 12px;
+    }
+
+    .portal-page .tp-profile-stat__english {
+        font-size: 8px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .portal-page .tp-profile-about {
+        padding-top: 44px;
+        padding-bottom: 48px;
+    }
+
+    .portal-page .tp-profile-about__layout {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 24px;
+    }
+
+    .site-main .portal-page .tp-profile-about__body p {
+        font-size: 16px;
+    }
+
+}
+
+
+/* 减少动态效果适配 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-page .tp-profile-hero *,
+    .portal-page .tp-profile-hero *::before,
+    .portal-page .tp-profile-hero *::after {
+        transition: none !important;
+    }
+
+    .portal-page .tp-profile-portrait__frame,
+    .portal-page .tp-profile-stat__arrow,
+    .portal-page .tp-profile-back span {
+        transform: none !important;
+    }
+}
+/* ========================================
+   12. 课程作业 / DOCUMENT LIBRARY
+   ======================================== */
+
+
+/* ========================================
+   12.1 个人主页内容区域
+   ======================================== */
+
+.portal-page .tp-profile-assignments {
+    padding-top: 16px;
+    padding-bottom: 72px;
+}
+
+.portal-page .tp-profile-section-heading {
+    margin-bottom: 36px;
+}
+
+.site-main .portal-page .tp-profile-section-subtitle {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   12.2 可复用文档列表
+   ======================================== */
+
+.portal-page .tp-documents {
+    width: 100%;
+
+    border-bottom: 1px solid #C5CFC1;
+}
+
+
+/* 文档列表表头 */
+
+.portal-page .tp-documents__header {
+    display: grid;
+
+    grid-template-columns:
+        56px
+        minmax(0, 1fr)
+        110px
+        112px;
+
+    align-items: center;
+    gap: 24px;
+
+    padding: 14px 0;
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+}
+
+.portal-page .tp-documents__header span:last-child {
+    text-align: right;
+}
+
+
+/* 单个文档条目 */
+
+.portal-page .tp-document {
+    display: grid;
+
+    grid-template-columns:
+        56px
+        minmax(0, 1fr)
+        110px
+        112px;
+
+    align-items: center;
+    gap: 24px;
+
+    min-height: 112px;
+    padding: 20px 0;
+
+    border-top: 1px solid #C5CFC1;
+
+    transition: background-color 220ms ease;
+}
+
+
+/* ========================================
+   12.3 文档编号及主体信息
+   ======================================== */
+
+.portal-page .tp-document__number {
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.portal-page .tp-document__main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    min-width: 0;
+}
+
+
+/* 文件图标 */
+
+.portal-page .tp-document__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex: 0 0 58px;
+
+    width: 58px;
+    height: 64px;
+
+    background: #E2E7DC;
+    color: #35583A;
+
+    transition:
+        background-color 220ms ease,
+        color 220ms ease;
+}
+
+
+/* 文档名称 */
+
+.portal-page .tp-document__identity {
+    min-width: 0;
+}
+
+.site-main .portal-page .tp-document__title {
+    margin: 0 0 8px;
+
+    color: var(--tp-dark);
+
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.015em;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* 作业说明 */
+
+.site-main .portal-page .tp-document__description {
+    margin: 0;
+
+    color: #536258;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+}
+
+.portal-page .tp-document__category {
+    display: block;
+
+    color: var(--tp-muted);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   12.4 文件格式
+   ======================================== */
+
+.portal-page .tp-document__format {
+    color: #536258;
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   12.5 下载按钮
+   ======================================== */
+
+.site-main .portal-page .tp-document__download {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    justify-self: end;
+
+    min-height: 44px;
+    padding: 11px 16px;
+
+    border: 1px solid #35583A;
+
+    background: #35583A;
+    color: var(--tp-paper);
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background-color 220ms ease,
+        color 220ms ease,
+        border-color 220ms ease;
+}
+
+.portal-page .tp-document__download svg {
+    flex-shrink: 0;
+
+    transition: transform 200ms ease;
+}
+
+
+/* ========================================
+   12.6 文档列表交互反馈
+   ======================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .portal-page .tp-document:hover {
+        background: #E9EDE4;
+    }
+
+    .portal-page .tp-document:hover
+    .tp-document__icon {
+        background: #D4DECD;
+    }
+
+    .site-main .portal-page .tp-document__download:hover {
+        border-color: var(--tp-dark);
+
+        background: var(--tp-dark);
+        color: var(--tp-accent);
+    }
+
+    .portal-page .tp-document__download:hover svg {
+        transform: translateY(2px);
+    }
+}
+
+
+/* ========================================
+   12.7 章节底部统一导航
+   ======================================== */
+
+.portal-page .tp-profile-section-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    margin-top: 28px;
+}
+
+.portal-page .tp-profile-section-footer__meta {
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.1em;
+}
+
+.site-main .portal-page .tp-profile-section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 8px 0;
+
+    color: #35583A;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+
+    text-decoration: none;
+
+    transition: color 220ms ease;
+}
+
+.portal-page .tp-profile-section-link span {
+    display: inline-block;
+
+    font-size: 23px;
+    line-height: 1;
+
+    transition: transform 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-page .tp-profile-section-link:hover {
+        color: var(--tp-dark);
+    }
+
+    .portal-page .tp-profile-section-link:hover span {
+        transform: translate(3px, -3px);
+    }
+}
+
+
+/* ========================================
+   13. 学习心得 / REFLECTIONS
+   ======================================== */
+
+.portal-page .tp-profile-reflections {
+    padding-top: 16px;
+    padding-bottom: 88px;
+}
+
+
+/* ========================================
+   13.1 编辑式阅读布局
+   ======================================== */
+
+.portal-page .tp-reflections {
+    border-bottom: 1px solid #C5CFC1;
+}
+
+.portal-page .tp-reflection {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 220px)
+        minmax(0, 1fr);
+
+    align-items: start;
+    gap: clamp(32px, 6vw, 90px);
+
+    padding: 42px 0 48px;
+
+    border-top: 1px solid #C5CFC1;
+}
+
+
+/* ========================================
+   13.2 日期及作者区域
+   ======================================== */
+
+.portal-page .tp-reflection__meta {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+/* 装饰引号 */
+
+.portal-page .tp-reflection__quote {
+    height: 82px;
+
+    color: #A7B79F;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 140px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+
+/* 年份与月日 */
+
+.portal-page .tp-reflection__date {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    margin-top: 4px;
+
+    color: #35583A;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+
+.portal-page .tp-reflection__year {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.portal-page .tp-reflection__month-day {
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+}
+
+
+/* 作者信息 */
+
+.portal-page .tp-reflection__author {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    margin-top: 24px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--tp-line);
+}
+
+.portal-page .tp-reflection__number {
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+}
+
+.portal-page .tp-reflection__author-name {
+    color: var(--tp-dark);
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   13.3 留言正文阅读区
+   ======================================== */
+
+.portal-page .tp-reflection__body {
+    min-width: 0;
+
+    max-width: 780px;
+    padding-top: 6px;
+}
+
+.site-main .portal-page .tp-reflection__text {
+    color: #35453A;
+
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 2.05;
+
+    /*
+     * 保留数据库正文中的换行和空行。
+     * 不需要再使用 nl2br()。
+     */
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   14. 个人主页收尾
+   ======================================== */
+
+.portal-page .tp-profile-closing {
+    padding: 48px 0 54px;
+
+    background: var(--tp-dark);
+    color: var(--tp-paper);
+}
+
+.portal-page .tp-profile-closing__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #35433A;
+
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+}
+
+
+/* 收尾链接 */
+
+.site-main .portal-page .tp-profile-closing__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+
+    padding: 34px 0 8px;
+
+    color: var(--tp-paper);
+
+    text-decoration: none;
+}
+
+.site-main .portal-page .tp-profile-closing__title {
+    margin: 0 0 14px;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.035em;
+}
+
+.portal-page .tp-profile-closing__title span {
+    color: var(--tp-accent);
+}
+
+.site-main .portal-page .tp-profile-closing__subtitle {
+    margin: 0;
+
+    color: #AAB7AB;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.portal-page .tp-profile-closing__arrow {
+    flex-shrink: 0;
+
+    color: var(--tp-accent);
+
+    font-family: Arial, sans-serif;
+    font-size: 52px;
+    line-height: 1;
+
+    transition: transform 250ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .portal-page .tp-profile-closing__link:hover
+    .tp-profile-closing__arrow {
+        transform: translate(5px, -5px);
+    }
+}
+
+
+/* ========================================
+   14.1 平板端适配
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .portal-page .tp-documents__header,
+    .portal-page .tp-document {
+        grid-template-columns:
+            36px
+            minmax(0, 1fr)
+            76px
+            100px;
+
+        gap: 18px;
+    }
+
+    .portal-page .tp-document__main {
+        gap: 14px;
+    }
+
+    .portal-page .tp-document__icon {
+        flex-basis: 48px;
+
+        width: 48px;
+        height: 56px;
+    }
+
+    .portal-page .tp-reflection {
+        grid-template-columns:
+            155px
+            minmax(0, 1fr);
+
+        gap: 36px;
+    }
+
+    .portal-page .tp-profile-reflections {
+        padding-bottom: 64px;
+    }
+}
+
+
+/* ========================================
+   14.2 移动端适配
+   ======================================== */
+
+@media (max-width: 767px) {
+
+    .portal-page .tp-profile-assignments,
+    .portal-page .tp-profile-reflections {
+        padding-top: 12px;
+        padding-bottom: 48px;
+    }
+
+    .portal-page .tp-profile-section-heading {
+        margin-bottom: 26px;
+    }
+
+    .portal-page .tp-documents__header {
+        display: none;
+    }
+
+    .portal-page .tp-document {
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto;
+
+        gap: 12px 16px;
+
+        min-height: 0;
+        padding: 22px 0;
+    }
+
+    .portal-page .tp-document__number {
+        display: none;
+    }
+
+    .portal-page .tp-document__main {
+        grid-column: 1 / -1;
+
+        align-items: flex-start;
+    }
+
+    .portal-page .tp-document__format {
+        grid-column: 1;
+
+        padding-left: 62px;
+    }
+
+    .site-main .portal-page .tp-document__download {
+        grid-column: 2;
+
+        min-height: 40px;
+        padding: 8px 12px;
+    }
+
+    .portal-page .tp-profile-section-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+
+        margin-top: 18px;
+    }
+
+    .portal-page .tp-reflection {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 24px;
+
+        padding: 28px 0 32px;
+    }
+
+    .portal-page .tp-reflection__meta {
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        align-items: end;
+        gap: 20px;
+    }
+
+    .portal-page .tp-reflection__quote {
+        display: none;
+    }
+
+    .portal-page .tp-reflection__date {
+        margin-top: 0;
+    }
+
+    .portal-page .tp-reflection__author {
+        align-items: flex-end;
+
+        margin: 0;
+        padding: 0;
+
+        border: 0;
+    }
+
+    .portal-page .tp-reflection__month-day {
+        font-size: 36px;
+    }
+
+    .portal-page .tp-reflection__body {
+        padding-top: 0;
+    }
+
+    .site-main .portal-page .tp-reflection__text {
+        font-size: 16px;
+        line-height: 1.95;
+    }
+
+    .portal-page .tp-profile-closing {
+        padding: 32px 0 36px;
+    }
+
+    .portal-page .tp-profile-closing__meta {
+        font-size: 10px;
+        letter-spacing: 0.04em;
+    }
+
+    .site-main .portal-page .tp-profile-closing__link {
+        gap: 18px;
+
+        padding-top: 26px;
+    }
+
+    .portal-page .tp-profile-closing__arrow {
+        font-size: 36px;
+    }
+}
+
+
+/* ========================================
+   14.3 减少动态效果适配
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-page .tp-document,
+    .portal-page .tp-document *,
+    .portal-page .tp-profile-section-link,
+    .portal-page .tp-profile-section-link *,
+    .portal-page .tp-profile-closing * {
+        transition: none !important;
+    }
+
+    .portal-page .tp-document__download svg,
+    .portal-page .tp-profile-section-link span,
+    .portal-page .tp-profile-closing__arrow {
+        transform: none !important;
+    }
+}
+/* ========================================
+   15. 课程资料中心 / COURSEWORK ARCHIVE
+   ======================================== */
+
+
+/* ========================================
+   15.1 资料中心主视觉
+   ======================================== */
+
+.portal-archive .tp-archive-hero {
+    padding: 36px 0 40px;
+
+    background: var(--tp-dark);
+    color: var(--tp-paper);
+}
+
+.portal-archive .tp-archive-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #35433A;
+}
+
+.portal-archive .tp-archive-hero__eyebrow,
+.portal-archive .tp-archive-hero__edition {
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.portal-archive .tp-archive-hero__eyebrow {
+    color: var(--tp-accent);
+}
+
+.portal-archive .tp-archive-hero__edition {
+    color: #A0ADA1;
+}
+
+
+/* ========================================
+   15.2 主视觉主体
+   ======================================== */
+
+.portal-archive .tp-archive-hero__main {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(0, 1fr);
+
+    align-items: center;
+    gap: 48px;
+
+    min-height: 350px;
+    padding: 46px 0;
+}
+
+.portal-archive .tp-archive-hero__identity {
+    min-width: 0;
+}
+
+.portal-archive .tp-archive-hero__kicker {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+}
+
+.site-main .portal-archive .tp-archive-hero__title {
+    margin: 0 0 22px;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(42px, 5.2vw, 76px);
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: -0.045em;
+}
+
+.portal-archive .tp-archive-hero__title span {
+    color: var(--tp-accent);
+}
+
+.site-main .portal-archive .tp-archive-hero__subtitle {
+    margin: 0 0 20px;
+
+    color: #D9E1D7;
+
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.site-main .portal-archive .tp-archive-hero__description {
+    max-width: 560px;
+    margin: 0;
+
+    color: #AAB7AB;
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.95;
+}
+
+
+/* 文档主题 SVG */
+
+.portal-archive .tp-archive-hero__graphic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 0;
+
+    padding: 10px;
+}
+
+.portal-archive .tp-archive-hero__graphic svg {
+    display: block;
+
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+
+/* ========================================
+   15.3 全局资料统计
+   ======================================== */
+
+.portal-archive .tp-archive-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    border-top: 1px solid #46564B;
+    border-bottom: 1px solid #46564B;
+}
+
+.site-main .portal-archive .tp-archive-stat {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 22px 28px;
+
+    border-right: 1px solid #46564B;
+
+    color: var(--tp-paper);
+
+    text-decoration: none;
+
+    transition: background-color 220ms ease;
+}
+
+.site-main .portal-archive .tp-archive-stat:first-child {
+    padding-left: 0;
+}
+
+.site-main .portal-archive .tp-archive-stat:last-child {
+    border-right: 0;
+}
+
+.portal-archive .tp-archive-stat__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.portal-archive .tp-archive-stat__value {
+    color: var(--tp-accent);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+    font-variant-numeric: tabular-nums;
+}
+
+.portal-archive .tp-archive-stat__arrow {
+    color: var(--tp-accent);
+
+    font-size: 23px;
+    line-height: 1;
+
+    transition: transform 220ms ease;
+}
+
+.portal-archive .tp-archive-stat__label {
+    margin-bottom: 5px;
+
+    color: #CBD5C9;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.portal-archive .tp-archive-stat__english {
+    color: #98AB98;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-archive .tp-archive-stat:hover {
+        background: #19251D;
+    }
+
+    .portal-archive .tp-archive-stat:hover
+    .tp-archive-stat__arrow {
+        transform: translateY(4px);
+    }
+}
+
+
+/* ========================================
+   16. 课程成果档案库
+   ======================================== */
+
+.portal-archive .tp-archive-library {
+    padding-top: 64px;
+    padding-bottom: 88px;
+}
+
+.portal-archive .tp-archive-library__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+
+    margin-bottom: 36px;
+}
+
+.site-main .portal-archive .tp-archive-library__subtitle {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   16.1 分类导航
+   ======================================== */
+
+.portal-archive .tp-archive-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+
+    border-bottom: 1px solid #C5CFC1;
+}
+
+.site-main .portal-archive .tp-archive-tab {
+    position: relative;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 18px;
+    min-height: 62px;
+    padding: 16px 28px;
+
+    border-bottom: 3px solid transparent;
+
+    background: transparent;
+    color: #536258;
+
+    text-decoration: none;
+
+    transition:
+        background-color 200ms ease,
+        border-color 200ms ease,
+        color 200ms ease;
+}
+
+.portal-archive .tp-archive-tab__title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.portal-archive .tp-archive-tab__count {
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.site-main .portal-archive .tp-archive-tab.is-active {
+    border-bottom-color: #35583A;
+
+    background: #35583A;
+    color: var(--tp-paper);
+}
+
+.portal-archive .tp-archive-tab.is-active
+.tp-archive-tab__count {
+    color: #D0DDCA;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-archive
+    .tp-archive-tab:not(.is-active):hover {
+        background: #E2E7DC;
+        color: var(--tp-dark);
+    }
+}
+
+
+/* ========================================
+   16.2 成员筛选工具栏
+   ======================================== */
+
+.portal-archive .tp-archive-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    padding: 24px 0;
+
+    border-bottom: 1px solid var(--tp-line);
+}
+
+.portal-archive .tp-archive-filters__field {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.portal-archive .tp-archive-filters__label {
+    margin: 0;
+
+    color: #536258;
+
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* 独立下拉框 */
+
+.site-main .portal-archive .tp-archive-select {
+    min-width: 190px;
+    max-width: 100%;
+    min-height: 44px;
+
+    padding: 10px 32px 10px 14px;
+
+    border: 1px solid #BBC5B8;
+    border-radius: 0;
+
+    background: #F1F2EB;
+    color: var(--tp-dark);
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    box-shadow: none;
+}
+
+.portal-archive .tp-archive-select option {
+    background: var(--tp-paper);
+    color: var(--tp-dark);
+}
+
+.site-main .portal-archive .tp-archive-select:focus {
+    border-color: #71936D;
+
+    outline: 1px solid #71936D;
+    outline-offset: 2px;
+}
+
+
+/* 筛选按钮：同时作为无 JavaScript 时的后备操作 */
+
+.site-main .portal-archive .tp-archive-filter-submit {
+    min-height: 44px;
+    padding: 10px 18px;
+
+    border: 1px solid #35583A;
+    border-radius: 0;
+
+    background: #35583A;
+    color: var(--tp-paper);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: background-color 200ms ease;
+}
+
+.site-main .portal-archive
+.tp-archive-filter-submit:hover {
+    background: var(--tp-dark);
+}
+
+.portal-archive .tp-archive-filters__actions {
+    margin-left: auto;
+}
+
+.site-main .portal-archive .tp-archive-reset {
+    color: #536258;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.site-main .portal-archive .tp-archive-reset:hover {
+    color: var(--tp-dark);
+}
+
+
+/* 团队分类状态 */
+
+.portal-archive .tp-archive-team-note {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 26px 0;
+
+    border-bottom: 1px solid var(--tp-line);
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+}
+
+
+/* ========================================
+   16.3 当前成员筛选提示
+   ======================================== */
+
+.portal-archive .tp-archive-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-top: 24px;
+    padding: 15px 20px;
+
+    border-left: 3px solid #829A76;
+
+    background: #E2E7DC;
+}
+
+.portal-archive .tp-archive-selection__label {
+    margin-right: 12px;
+
+    color: var(--tp-muted);
+
+    font-size: 12px;
+}
+
+.site-main .portal-archive .tp-archive-selection strong {
+    color: var(--tp-dark);
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.site-main .portal-archive
+.tp-archive-selection .tp-profile-section-link {
+    padding: 0;
+}
+
+
+/* ========================================
+   16.4 文档列表补充样式
+   其余样式复用第12部分
+   ======================================== */
+
+.portal-archive .tp-documents {
+    margin-top: 30px;
+}
+
+.portal-archive .tp-archive-document-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    color: var(--tp-muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.portal-archive .tp-archive-document-meta__dot {
+    flex-shrink: 0;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #91A28A;
+}
+
+.site-main .portal-archive .tp-archive-document-meta a {
+    color: #35583A;
+
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.site-main .portal-archive
+.tp-archive-document-meta a:hover {
+    color: var(--tp-dark);
+
+    text-decoration: underline;
+}
+
+.site-main .portal-archive .tp-document__description {
+    margin-top: 8px;
+}
+
+.portal-archive .tp-archive-download-note {
+    color: var(--tp-muted);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   17. 资料库空状态
+   ======================================== */
+
+.portal-archive .tp-archive-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 300px;
+
+    margin-top: 30px;
+    padding: 40px 20px;
+
+    border-top: 1px solid #C5CFC1;
+    border-bottom: 1px solid #C5CFC1;
+
+    text-align: center;
+}
+
+.portal-archive .tp-archive-empty svg {
+    margin-bottom: 20px;
+
+    color: #829A76;
+}
+
+.site-main .portal-archive .tp-archive-empty h3 {
+    margin: 0 0 12px;
+
+    color: var(--tp-dark);
+
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.site-main .portal-archive .tp-archive-empty p {
+    max-width: 420px;
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.site-main .portal-archive .tp-archive-empty__link {
+    display: inline-block;
+
+    margin-top: 24px;
+
+    color: #35583A;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   18. 课程资料中心响应式布局
+   ======================================== */
+
+@media (max-width: 991px) {
+
+    .portal-archive .tp-archive-hero__main {
+        gap: 28px;
+
+        min-height: 300px;
+        padding: 36px 0;
+    }
+
+    .portal-archive .tp-archive-hero__graphic svg {
+        max-width: 280px;
+    }
+
+    .site-main .portal-archive .tp-archive-stat {
+        padding: 20px;
+    }
+
+    .portal-archive .tp-archive-library {
+        padding-top: 56px;
+        padding-bottom: 64px;
+    }
+
+    .site-main .portal-archive .tp-archive-tab {
+        gap: 12px;
+
+        padding: 14px 22px;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .portal-archive .tp-archive-hero {
+        padding-top: 24px;
+        padding-bottom: 28px;
+    }
+
+    .portal-archive .tp-archive-hero__top {
+        gap: 10px;
+    }
+
+    .portal-archive .tp-archive-hero__eyebrow,
+    .portal-archive .tp-archive-hero__edition {
+        font-size: 10px;
+        letter-spacing: 0.05em;
+    }
+
+    .portal-archive .tp-archive-hero__main {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 20px;
+        min-height: 0;
+        padding: 36px 0;
+    }
+
+    .portal-archive .tp-archive-hero__graphic {
+        display: none;
+    }
+
+    .site-main .portal-archive .tp-archive-hero__title {
+        font-size: clamp(36px, 9vw, 56px);
+    }
+
+    .site-main .portal-archive .tp-archive-hero__subtitle {
+        font-size: 17px;
+    }
+
+    .site-main .portal-archive .tp-archive-hero__description {
+        font-size: 14px;
+    }
+
+    .site-main .portal-archive .tp-archive-stat {
+        padding: 16px 12px;
+    }
+
+    .portal-archive .tp-archive-stat__value {
+        font-size: 34px;
+    }
+
+    .portal-archive .tp-archive-stat__arrow {
+        font-size: 16px;
+    }
+
+    .portal-archive .tp-archive-stat__label {
+        font-size: 12px;
+    }
+
+    .portal-archive .tp-archive-library {
+        padding-top: 44px;
+        padding-bottom: 48px;
+    }
+
+    .portal-archive .tp-archive-library__heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+
+        margin-bottom: 24px;
+    }
+
+    .portal-archive .tp-archive-tabs {
+        gap: 0;
+    }
+
+    .site-main .portal-archive .tp-archive-tab {
+        flex: 1 1 0;
+
+        min-width: 0;
+        min-height: 54px;
+        padding: 12px 8px;
+
+        gap: 6px;
+    }
+
+    .portal-archive .tp-archive-tab__title {
+        font-size: 13px;
+    }
+
+    .portal-archive .tp-archive-tab__count {
+        font-size: 11px;
+    }
+
+    .portal-archive .tp-archive-filters {
+        padding: 18px 0;
+    }
+
+    .portal-archive .tp-archive-filters__field {
+        width: 100%;
+
+        gap: 10px;
+    }
+
+    .site-main .portal-archive .tp-archive-select {
+        flex: 1 1 140px;
+
+        min-width: 0;
+    }
+
+    .portal-archive .tp-archive-selection {
+        padding: 12px 16px;
+    }
+
+    .portal-archive .tp-archive-empty {
+        min-height: 240px;
+    }
+
+    .portal-archive .tp-documents {
+        margin-top: 22px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .site-main .portal-archive .tp-archive-tab {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .portal-archive .tp-archive-stat__arrow {
+        display: none;
+    }
+}
+
+
+/* 减少动态效果适配 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-archive .tp-archive-stat,
+    .portal-archive .tp-archive-stat__arrow,
+    .portal-archive .tp-archive-tab,
+    .portal-archive .tp-archive-filter-submit {
+        transition: none !important;
+        transform: none !important;
+    }
+}
+
+/* ========================================
+   19. 留言板 / VOICES & REFLECTIONS
+   ======================================== */
+
+.portal-voices .tp-voices-hero {
+    padding: 40px 0 44px;
+
+    background: var(--tp-paper);
+    color: var(--tp-dark);
+}
+
+
+/* ========================================
+   19.1 顶部辅助标识
+   ======================================== */
+
+.portal-voices .tp-voices-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--tp-line);
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+
+/* ========================================
+   19.2 大型英文排版
+   ======================================== */
+
+.portal-voices .tp-voices-hero__typography {
+    position: relative;
+
+    margin: 48px 0 32px;
+}
+
+.portal-voices .tp-voices-hero__english {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    color: var(--tp-dark);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(48px, 8vw, 128px);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+}
+
+.portal-voices .tp-voices-hero__english > span {
+    display: block;
+}
+
+.portal-voices .tp-voices-hero__accent {
+    color: #35583A;
+}
+
+.portal-voices .tp-voices-hero__accent span {
+    color: #829A76;
+}
+
+
+/* 大型装饰引号 */
+
+.portal-voices .tp-voices-hero__quote {
+    position: absolute;
+
+    top: -36px;
+    right: 12px;
+
+    color: #C6D1BD;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(140px, 22vw, 320px);
+    font-weight: 400;
+    line-height: 1;
+
+    pointer-events: none;
+    -webkit-user-select: none;
+user-select: none;
+}
+
+
+/* ========================================
+   19.3 中文标题与页面介绍
+   ======================================== */
+
+.portal-voices .tp-voices-hero__intro {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(0, 1fr);
+
+    align-items: end;
+    gap: 48px;
+
+    padding-bottom: 48px;
+}
+
+.portal-voices .tp-voices-hero__kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 18px;
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.portal-voices .tp-voices-hero__kicker span {
+    display: block;
+
+    width: 32px;
+    height: 3px;
+
+    background: #35583A;
+}
+
+.site-main .portal-voices .tp-voices-hero__title {
+    margin: 0;
+
+    color: var(--tp-dark);
+
+    font-size: clamp(36px, 4.5vw, 58px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+}
+
+.site-main .portal-voices .tp-voices-hero__title::after {
+    display: none;
+}
+
+.site-main .portal-voices
+.tp-voices-hero__description p {
+    margin: 0 0 10px;
+
+    color: #536258;
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.9;
+}
+
+.site-main .portal-voices
+.tp-voices-hero__description p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ========================================
+   19.4 留言全局统计
+   ======================================== */
+
+.portal-voices .tp-voices-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    border-top: 1px solid #C5CFC1;
+    border-bottom: 1px solid #C5CFC1;
+}
+
+.site-main .portal-voices .tp-voices-stat {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 24px 28px;
+
+    border-right: 1px solid #C5CFC1;
+
+    color: var(--tp-dark);
+    text-decoration: none;
+
+    transition: background-color 220ms ease;
+}
+
+.site-main .portal-voices .tp-voices-stat:first-child {
+    padding-left: 0;
+}
+
+.site-main .portal-voices .tp-voices-stat:last-child {
+    border-right: 0;
+}
+
+.portal-voices .tp-voices-stat__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+.portal-voices .tp-voices-stat__value {
+    color: #35583A;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+    font-variant-numeric: tabular-nums;
+}
+
+.portal-voices .tp-voices-stat__arrow {
+    color: #35583A;
+
+    font-size: 23px;
+    line-height: 1;
+
+    transition: transform 220ms ease;
+}
+
+.portal-voices .tp-voices-stat__label {
+    margin-bottom: 5px;
+
+    color: #45564A;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.portal-voices .tp-voices-stat__english {
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-voices .tp-voices-stat:hover {
+        background: #E2E7DC;
+    }
+
+    .portal-voices .tp-voices-stat:hover
+    .tp-voices-stat__arrow {
+        transform: translateY(4px);
+    }
+}
+
+
+/* ========================================
+   20. 深色留言筛选工具栏
+   ======================================== */
+
+.portal-voices .tp-voices-toolbar {
+    padding: 48px 0 30px;
+
+    background: var(--tp-dark);
+    color: var(--tp-paper);
+}
+
+.portal-voices .tp-voices-toolbar__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #35433A;
+
+    color: #A0ADA1;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.portal-voices .tp-voices-toolbar__meta span:first-child {
+    color: var(--tp-accent);
+}
+
+
+/* ========================================
+   20.1 工具栏标题
+   ======================================== */
+
+.portal-voices .tp-voices-toolbar__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+
+    margin: 30px 0;
+}
+
+.site-main .portal-voices .tp-voices-toolbar__title {
+    margin: 0 0 12px;
+
+    color: var(--tp-paper);
+
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.035em;
+}
+
+.site-main .portal-voices .tp-voices-toolbar__subtitle {
+    margin: 0;
+
+    color: #AAB7AB;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.site-main .portal-voices .tp-voices-toolbar__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    color: var(--tp-accent);
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.portal-voices .tp-voices-toolbar__back span {
+    display: inline-block;
+
+    font-size: 22px;
+    line-height: 1;
+
+    transition: transform 200ms ease;
+}
+
+.portal-voices .tp-voices-toolbar__back:hover span {
+    transform: translate(3px, -3px);
+}
+
+
+/* ========================================
+   20.2 身份分类导航
+   ======================================== */
+
+.portal-voices .tp-voices-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+
+    border-bottom: 1px solid #46564B;
+}
+
+.site-main .portal-voices .tp-voices-tab {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    min-height: 60px;
+    padding: 16px 28px;
+
+    border-bottom: 3px solid transparent;
+
+    background: transparent;
+    color: #AAB7AB;
+
+    text-decoration: none;
+
+    transition:
+        background-color 220ms ease,
+        color 220ms ease;
+}
+
+.portal-voices .tp-voices-tab__title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.portal-voices .tp-voices-tab__count {
+    color: #98AB98;
+
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+.site-main .portal-voices .tp-voices-tab.is-active {
+    border-bottom-color: var(--tp-accent);
+
+    background: var(--tp-accent);
+    color: var(--tp-dark);
+}
+
+.portal-voices .tp-voices-tab.is-active
+.tp-voices-tab__count {
+    color: #35583A;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .site-main .portal-voices
+    .tp-voices-tab:not(.is-active):hover {
+        background: #223128;
+        color: var(--tp-paper);
+    }
+}
+
+
+/* ========================================
+   20.3 成员筛选
+   ======================================== */
+
+.portal-voices .tp-voices-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    padding: 24px 0 4px;
+}
+
+.portal-voices .tp-voices-filters__field {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.portal-voices .tp-voices-filters__label {
+    margin: 0;
+
+    color: #CBD5C9;
+
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.site-main .portal-voices .tp-voices-select {
+    min-width: 190px;
+    max-width: 100%;
+    min-height: 44px;
+    padding: 10px 32px 10px 14px;
+
+    border: 1px solid #536359;
+    border-radius: 0;
+
+    background: #19251D;
+    color: var(--tp-paper);
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    color-scheme: dark;
+}
+
+.portal-voices .tp-voices-select option {
+    background: #19251D;
+    color: var(--tp-paper);
+}
+
+.site-main .portal-voices .tp-voices-select:focus {
+    border-color: var(--tp-accent);
+
+    outline: 1px solid var(--tp-accent);
+    outline-offset: 2px;
+}
+
+.site-main .portal-voices .tp-voices-filter-submit {
+    min-height: 44px;
+    padding: 10px 20px;
+
+    border: 1px solid var(--tp-accent);
+    border-radius: 0;
+
+    background: var(--tp-accent);
+    color: var(--tp-dark);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: background-color 220ms ease;
+}
+
+.site-main .portal-voices
+.tp-voices-filter-submit:hover {
+    background: #D8FA9D;
+}
+
+.site-main .portal-voices .tp-voices-reset {
+    color: #AAB7AB;
+
+    font-size: 13px;
+
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.site-main .portal-voices .tp-voices-reset:hover {
+    color: var(--tp-accent);
+}
+
+
+/* 团队留言筛选状态 */
+
+.portal-voices .tp-voices-team-note {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+
+    padding-top: 24px;
+
+    color: #AAB7AB;
+
+    font-family: Consolas, monospace;
+    font-size: 12px;
+}
+
+
+/* 当前成员 */
+
+.portal-voices .tp-voices-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-top: 22px;
+    padding: 16px 20px;
+
+    border-left: 3px solid var(--tp-accent);
+
+    background: #223128;
+}
+
+.portal-voices .tp-voices-selection > div > span {
+    margin-right: 12px;
+
+    color: #AAB7AB;
+
+    font-size: 12px;
+}
+
+.site-main .portal-voices .tp-voices-selection strong {
+    color: var(--tp-paper);
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   21. 留言阅读区域
+   ======================================== */
+
+.portal-voices .tp-voices-reading {
+    padding-top: 64px;
+    padding-bottom: 80px;
+
+    background: var(--tp-paper);
+}
+
+.portal-voices .tp-voices-messages {
+    border-bottom: 1px solid #C5CFC1;
+}
+
+.portal-voices .tp-voice {
+    padding-bottom: 48px;
+
+    border-top: 1px solid #C5CFC1;
+}
+
+
+/* ========================================
+   21.1 留言编号及发布身份
+   ======================================== */
+
+.portal-voices .tp-voice__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--tp-line);
+
+    color: var(--tp-muted);
+
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.12em;
+}
+
+.portal-voices .tp-voice__type {
+    color: #35583A;
+}
+
+
+/* ========================================
+   21.2 留言双列布局
+   ======================================== */
+
+.portal-voices .tp-voice__layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 220px)
+        minmax(0, 1fr);
+
+    align-items: start;
+    gap: clamp(32px, 6vw, 90px);
+
+    padding-top: 40px;
+}
+
+.portal-voices .tp-voice__author {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-width: 0;
+}
+
+
+/* ========================================
+   21.3 发布者头像
+   ======================================== */
+
+.portal-voices .tp-voice__avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 90px;
+    height: 90px;
+
+    margin-bottom: 20px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #CCD6C7;
+    color: #788B75;
+}
+
+.portal-voices .tp-voice__avatar img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.portal-voices .tp-voice__avatar > span {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+/* 团队留言使用独立品牌标识 */
+
+.portal-voices .tp-voice--team .tp-voice__avatar {
+    border-radius: 0;
+
+    background: var(--tp-dark);
+    color: var(--tp-accent);
+}
+
+.portal-voices .tp-voice--team
+.tp-voice__avatar img {
+    object-fit: contain;
+}
+
+.portal-voices .tp-voice__team-mark {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 34px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.06em;
+}
+
+
+/* ========================================
+   21.4 作者姓名与主页入口
+   ======================================== */
+
+.site-main .portal-voices .tp-voice__name {
+    margin: 0 0 8px;
+
+    color: var(--tp-dark);
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+}
+
+.site-main .portal-voices .tp-voice__name a {
+    color: var(--tp-dark);
+
+    text-decoration: none;
+}
+
+.site-main .portal-voices .tp-voice__name a:hover {
+    color: #35583A;
+}
+
+.portal-voices .tp-voice__role {
+    color: var(--tp-muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.site-main .portal-voices .tp-voice__profile-link {
+    display: inline-block;
+
+    margin-top: 14px;
+
+    color: #35583A;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.site-main .portal-voices
+.tp-voice__profile-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+
+/* ========================================
+   21.5 日期
+   ======================================== */
+
+.portal-voices .tp-voice__date {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    width: 100%;
+    margin-top: 28px;
+    padding-top: 24px;
+
+    border-top: 1px solid var(--tp-line);
+
+    color: #35583A;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+
+.portal-voices .tp-voice__year {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.portal-voices .tp-voice__month-day {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+
+/* ========================================
+   21.6 留言正文
+   ======================================== */
+
+.portal-voices .tp-voice__body {
+    min-width: 0;
+    max-width: 780px;
+}
+
+.portal-voices .tp-voice__quote {
+    height: 76px;
+
+    color: #A7B79F;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 128px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.site-main .portal-voices .tp-voice__text {
+    color: #35453A;
+
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 2.05;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   22. 分页及空状态
+   ======================================== */
+
+.portal-voices .tp-voices-pagination {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 40px;
+}
+
+.portal-voices .tp-voices-pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+
+    margin: 0;
+}
+
+.site-main .portal-voices
+.tp-voices-pager > li > a,
+.site-main .portal-voices
+.tp-voices-pager > li > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 42px;
+    min-height: 42px;
+
+    margin: 0;
+    padding: 10px 14px;
+
+    border: 1px solid #BBC5B8;
+    border-radius: 0;
+
+    background: transparent;
+    color: #35583A;
+
+    font-family: Consolas, monospace;
+    font-size: 14px;
+
+    text-decoration: none;
+}
+
+.site-main .portal-voices
+.tp-voices-pager > li.active > a,
+.site-main .portal-voices
+.tp-voices-pager > li.active > span {
+    border-color: #35583A;
+
+    background: #35583A;
+    color: var(--tp-paper);
+}
+
+.site-main .portal-voices
+.tp-voices-pager > li:not(.active):not(.disabled) > a:hover {
+    background: #E2E7DC;
+}
+
+.site-main .portal-voices
+.tp-voices-pager > li.disabled > span,
+.site-main .portal-voices
+.tp-voices-pager > li.disabled > a {
+    color: #99A597;
+
+    cursor: default;
+}
+
+
+/* 空状态 */
+
+.portal-voices .tp-voices-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 300px;
+    padding: 40px 20px;
+
+    border-top: 1px solid #C5CFC1;
+    border-bottom: 1px solid #C5CFC1;
+
+    text-align: center;
+}
+
+.portal-voices .tp-voices-empty svg {
+    margin-bottom: 22px;
+
+    color: #829A76;
+}
+
+.site-main .portal-voices .tp-voices-empty h2 {
+    margin: 0 0 12px;
+
+    color: var(--tp-dark);
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.site-main .portal-voices .tp-voices-empty p {
+    margin: 0;
+
+    color: var(--tp-muted);
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.site-main .portal-voices .tp-voices-empty__link {
+    display: inline-block;
+
+    margin-top: 24px;
+
+    color: #35583A;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.portal-voices .tp-voices-reading__note {
+    color: var(--tp-muted);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   23. 留言板响应式适配
+   ======================================== */
+
+@media (max-width: 1199px) {
+
+    .portal-voices .tp-voices-hero__english {
+        font-size: clamp(48px, 8.3vw, 105px);
+    }
+
+    .portal-voices .tp-voices-hero__quote {
+        right: 0;
+
+        font-size: 230px;
+    }
+}
+
+
+@media (max-width: 991px) {
+
+    .portal-voices .tp-voices-hero__typography {
+        margin-top: 36px;
+    }
+
+    .portal-voices .tp-voices-hero__intro {
+        gap: 32px;
+
+        padding-bottom: 36px;
+    }
+
+    .site-main .portal-voices .tp-voices-stat {
+        padding: 20px;
+    }
+
+    .portal-voices .tp-voice__layout {
+        grid-template-columns:
+            minmax(0, 160px)
+            minmax(0, 1fr);
+
+        gap: 36px;
+    }
+
+    .portal-voices .tp-voices-reading {
+        padding-top: 48px;
+        padding-bottom: 64px;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .portal-voices .tp-voices-hero {
+        padding: 24px 0 28px;
+    }
+
+    .portal-voices .tp-voices-hero__top {
+        font-size: 10px;
+    }
+
+    .portal-voices .tp-voices-hero__typography {
+        margin: 30px 0 24px;
+    }
+
+    .portal-voices .tp-voices-hero__english {
+        font-size: clamp(30px, 9.5vw, 70px);
+        line-height: 1.05;
+        letter-spacing: -0.06em;
+    }
+
+    .portal-voices .tp-voices-hero__quote {
+        display: none;
+    }
+
+    .portal-voices .tp-voices-hero__intro {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 20px;
+        padding-bottom: 28px;
+    }
+
+    .portal-voices .tp-voices-hero__kicker {
+        font-size: 10px;
+    }
+
+    .site-main .portal-voices .tp-voices-hero__title {
+        font-size: 36px;
+    }
+
+    .site-main .portal-voices .tp-voices-stat {
+        padding: 16px 12px;
+    }
+
+    .portal-voices .tp-voices-stat__value {
+        font-size: 34px;
+    }
+
+    .portal-voices .tp-voices-stat__arrow {
+        font-size: 16px;
+    }
+
+    .portal-voices .tp-voices-stat__label {
+        font-size: 12px;
+    }
+
+    .portal-voices .tp-voices-stat__english {
+        font-size: 9px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .portal-voices .tp-voices-toolbar {
+        padding: 32px 0 24px;
+    }
+
+    .portal-voices .tp-voices-toolbar__meta {
+        font-size: 10px;
+    }
+
+    .portal-voices .tp-voices-toolbar__heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+
+        margin: 24px 0;
+    }
+
+    .portal-voices .tp-voices-tabs {
+        gap: 0;
+    }
+
+    .site-main .portal-voices .tp-voices-tab {
+        flex: 1 1 0;
+
+        min-width: 0;
+        min-height: 54px;
+        padding: 12px 8px;
+
+        gap: 8px;
+    }
+
+    .portal-voices .tp-voices-tab__title {
+        font-size: 13px;
+    }
+
+    .portal-voices .tp-voices-tab__count {
+        font-size: 11px;
+    }
+
+    .portal-voices .tp-voices-filters__field {
+        width: 100%;
+
+        gap: 10px;
+    }
+
+    .site-main .portal-voices .tp-voices-select {
+        flex: 1 1 140px;
+
+        min-width: 0;
+    }
+
+    .portal-voices .tp-voices-reading {
+        padding-top: 36px;
+        padding-bottom: 48px;
+    }
+
+    .portal-voices .tp-voice {
+        padding-bottom: 32px;
+    }
+
+    .portal-voices .tp-voice__layout {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 24px;
+        padding-top: 24px;
+    }
+
+    .portal-voices .tp-voice__author {
+        display: grid;
+        grid-template-columns:
+            64px
+            minmax(0, 1fr)
+            auto;
+
+        align-items: center;
+        column-gap: 14px;
+        row-gap: 4px;
+    }
+
+    .portal-voices .tp-voice__avatar {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+
+        width: 64px;
+        height: 64px;
+        margin: 0;
+    }
+
+    .site-main .portal-voices .tp-voice__name {
+        grid-column: 2;
+        grid-row: 1;
+
+        margin: 0;
+
+        font-size: 19px;
+    }
+
+    .portal-voices .tp-voice__role {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .site-main .portal-voices .tp-voice__profile-link {
+        grid-column: 2;
+        grid-row: 3;
+
+        margin: 0;
+
+        font-size: 12px;
+    }
+
+    .portal-voices .tp-voice__date {
+        grid-column: 3;
+        grid-row: 1 / span 3;
+
+        width: auto;
+        margin: 0;
+        padding: 0;
+
+        border: 0;
+
+        text-align: right;
+    }
+
+    .portal-voices .tp-voice__year {
+        font-size: 13px;
+    }
+
+    .portal-voices .tp-voice__month-day {
+        font-size: 26px;
+    }
+
+    .portal-voices .tp-voice__quote {
+        height: 48px;
+
+        font-size: 85px;
+    }
+
+    .site-main .portal-voices .tp-voice__text {
+        font-size: 16px;
+        line-height: 1.95;
+    }
+
+    .portal-voices .tp-voices-empty {
+        min-height: 240px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .site-main .portal-voices .tp-voices-tab {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .portal-voices .tp-voices-stat__arrow {
+        display: none;
+    }
+
+    .portal-voices .tp-voice__header {
+        font-size: 10px;
+        letter-spacing: 0.05em;
+    }
+
+    .portal-voices .tp-voice__author {
+        grid-template-columns:
+            52px
+            minmax(0, 1fr)
+            auto;
+
+        column-gap: 10px;
+    }
+
+    .portal-voices .tp-voice__avatar {
+        width: 52px;
+        height: 52px;
+    }
+
+    .portal-voices .tp-voice__month-day {
+        font-size: 23px;
+    }
+}
+
+
+/* 键盘操作反馈 */
+
+.site-main .portal-voices a:focus-visible,
+.site-main .portal-voices button:focus-visible {
+    outline: 2px solid #829A76;
+    outline-offset: 4px;
+}
+
+
+/* 减少动态效果适配 */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .portal-voices .tp-voices-stat,
+    .portal-voices .tp-voices-stat__arrow,
+    .portal-voices .tp-voices-tab,
+    .portal-voices .tp-voices-filter-submit,
+    .portal-voices .tp-voices-toolbar__back span {
+        transition: none !important;
+        transform: none !important;
+    }
+}

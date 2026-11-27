@@ -97,6 +97,20 @@ if ($memberId !== '') {
             $memberOptions[$member->id] = $member->name;
             $memberAvatarUrls[(string) $member->id] = $this->resolveLocalImageUrl($member->avatar_path);
         }
+        // 统计全部后台已发布留言，不受当前筛选和分页影响。
+$teamMessageCount = (int) PortalMessage::findPublishedAdmin()
+    ->andWhere(['member_id' => null])
+    ->count();
+
+$personalMessageCount = (int) PortalMessage::findPublishedAdmin()
+    ->andWhere(['not', ['member_id' => null]])
+    ->count();
+
+$messageStats = [
+    'team' => $teamMessageCount,
+    'personal' => $personalMessageCount,
+    'total' => $teamMessageCount + $personalMessageCount,
+];
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -106,6 +120,7 @@ if ($memberId !== '') {
             'identity' => $identity,
             'memberId' => $memberId,
             'memberOptions' => $memberOptions,
+            'messageStats' => $messageStats,
         ]);
     }
 
